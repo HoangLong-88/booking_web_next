@@ -1,22 +1,22 @@
 import Link from "next/link";
 
-export function Footer(){
-    return (
-        <footer className="bg-gray-900 text-white">
+export function Footer() {
+  return (
+    <footer className="bg-blue-600 text-white">
       <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8 lg:py-16">
         <div className="xl:grid xl:grid-cols-3 xl:gap-8">
           <div className="space-y-8 xl:col-span-1">
             <div>
-              <Link href="/" className="text-2xl font-bold text-white">
-                JobPortal
+              <Link href="/" className="text-3xl font-bold text-white">
+                NEXTME
               </Link>
-              <p className="mt-4 text-base text-gray-300">
-                Connecting talented professionals with amazing opportunities.
-                Build your career with us.
+              <p className="mt-4 text-base">
+                Beyond searching, find peace of mind.
+                Your authentic vacation and your perfect moments, start right here.
               </p>
             </div>
             <div className="flex space-x-6">
-              <a href="#" className="text-gray-400 hover:text-gray-300">
+              <a href="#" className="hover">
                 <span className="sr-only">Facebook</span>
                 <svg
                   className="h-6 w-6"
@@ -30,7 +30,7 @@ export function Footer(){
                   />
                 </svg>
               </a>
-              <a href="#" className="text-gray-400 hover:text-gray-300">
+              <a href="#" className="hover">
                 <span className="sr-only">Twitter</span>
                 <svg
                   className="h-6 w-6"
@@ -40,7 +40,7 @@ export function Footer(){
                   <path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84" />
                 </svg>
               </a>
-              <a href="#" className="text-gray-400 hover:text-gray-300">
+              <a href="#" className="hover">
                 <span className="sr-only">LinkedIn</span>
                 <svg
                   className="h-6 w-6"
@@ -60,13 +60,13 @@ export function Footer(){
             <div className="md:grid md:grid-cols-2 md:gap-8">
               <div>
                 <h3 className="text-sm font-semibold tracking-wider text-white uppercase">
-                  For Job Seekers
+                  Our products
                 </h3>
                 <ul className="mt-4 space-y-4">
                   <li>
                     <Link
                       href="/jobs"
-                      className="text-base text-gray-300 hover:text-white"
+                      className="text-base hover:text-white"
                     >
                       Browse Jobs
                     </Link>
@@ -74,7 +74,7 @@ export function Footer(){
                   <li>
                     <Link
                       href="/companies"
-                      className="text-base text-gray-300 hover:text-white"
+                      className="text-base hover:text-white"
                     >
                       Companies
                     </Link>
@@ -82,7 +82,7 @@ export function Footer(){
                   <li>
                     <Link
                       href="/profile"
-                      className="text-base text-gray-300 hover:text-white"
+                      className="text-base hover:text-white"
                     >
                       Create Profile
                     </Link>
@@ -90,7 +90,7 @@ export function Footer(){
                   <li>
                     <Link
                       href="/career-advice"
-                      className="text-base text-gray-300 hover:text-white"
+                      className="text-base hover:text-white"
                     >
                       Career Advice
                     </Link>
@@ -99,13 +99,13 @@ export function Footer(){
               </div>
               <div className="mt-12 md:mt-0">
                 <h3 className="text-sm font-semibold tracking-wider text-white uppercase">
-                  For Employers
+                  DISCOVERIES
                 </h3>
                 <ul className="mt-4 space-y-4">
                   <li>
                     <Link
                       href="/post-job"
-                      className="text-base text-gray-300 hover:text-white"
+                      className="text-base hover:text-white"
                     >
                       Post a Job
                     </Link>
@@ -113,7 +113,7 @@ export function Footer(){
                   <li>
                     <Link
                       href="/talent-search"
-                      className="text-base text-gray-300 hover:text-white"
+                      className="text-base hover:text-white"
                     >
                       Search Talent
                     </Link>
@@ -121,7 +121,7 @@ export function Footer(){
                   <li>
                     <Link
                       href="/pricing"
-                      className="text-base text-gray-300 hover:text-white"
+                      className="text-base hover:text-white"
                     >
                       Pricing
                     </Link>
@@ -129,7 +129,7 @@ export function Footer(){
                   <li>
                     <Link
                       href="/enterprise"
-                      className="text-base text-gray-300 hover:text-white"
+                      className="text-base hover:text-white"
                     >
                       Enterprise
                     </Link>
@@ -140,21 +140,21 @@ export function Footer(){
             <div className="md:grid md:grid-cols-2 md:gap-8">
               <div>
                 <h3 className="text-sm font-semibold tracking-wider text-white uppercase">
-                  Company
+                  ABOUT US
                 </h3>
                 <ul className="mt-4 space-y-4">
                   <li>
                     <Link
                       href="/about"
-                      className="text-base text-gray-300 hover:text-white"
+                      className="text-base hover:text-white"
                     >
-                      About
+                      Our Story
                     </Link>
                   </li>
                   <li>
                     <Link
                       href="/blog"
-                      className="text-base text-gray-300 hover:text-white"
+                      className="text-base hover:text-white"
                     >
                       Blog
                     </Link>
@@ -162,7 +162,7 @@ export function Footer(){
                   <li>
                     <Link
                       href="/careers"
-                      className="text-base text-gray-300 hover:text-white"
+                      className="text-base hover:text-white"
                     >
                       Careers
                     </Link>
@@ -170,7 +170,7 @@ export function Footer(){
                   <li>
                     <Link
                       href="/contact"
-                      className="text-base text-gray-300 hover:text-white"
+                      className="text-base hover:text-white"
                     >
                       Contact
                     </Link>
@@ -185,7 +185,7 @@ export function Footer(){
                   <li>
                     <Link
                       href="/privacy"
-                      className="text-base text-gray-300 hover:text-white"
+                      className="text-base hover:text-white"
                     >
                       Privacy
                     </Link>
@@ -193,7 +193,7 @@ export function Footer(){
                   <li>
                     <Link
                       href="/terms"
-                      className="text-base text-gray-300 hover:text-white"
+                      className="text-base hover:text-white"
                     >
                       Terms
                     </Link>
@@ -201,7 +201,7 @@ export function Footer(){
                   <li>
                     <Link
                       href="/cookies"
-                      className="text-base text-gray-300 hover:text-white"
+                      className="text-base hover:text-white"
                     >
                       Cookies
                     </Link>
@@ -212,11 +212,11 @@ export function Footer(){
           </div>
         </div>
         <div className="mt-12 border-t border-gray-700 pt-8">
-          <p className="text-base text-gray-400 xl:text-center">
-            &copy; 2025 JobPortal, Inc. All rights reserved.
+          <p className="text-base xl:text-center">
+            &copy; 2025 NEXTME, Inc. All rights reserved.
           </p>
         </div>
       </div>
     </footer>
-    )
+  )
 } 
