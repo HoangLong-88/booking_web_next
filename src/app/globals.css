@@ -3,6 +3,8 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  /* --navbar-background: linear-gradient(90deg, #C9AE85 00%,  #eed3ab 100%) */
+  --navbar-background: linear-gradient(90deg, #96b8d9 0%, #eed3ab 100%);
 }
 
 @theme inline {
