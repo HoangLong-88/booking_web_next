@@ -3,17 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "npm-run-all -p start:server start:browser",
-    "start:server": "next dev",
-    "start:browser": "open-cli http://localhost:3000",
-    "build": "next build",
+    "dev": "concurrently \"next dev\" \"sleep 3 && xdg-open http://localhost:3000\"",
     "start": "next start",
     "lint": "eslint"
   },
   "dependencies": {
-    "@radix-ui/react-slot": "^1.2.3",
-    "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
+    "concurrently": "^9.2.1",
     "next": "15.5.4",
     "react": "19.1.0",
     "react-dom": "19.1.0",
@@ -25,13 +21,11 @@
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
-    "concurrently": "^9.2.1",
     "eslint": "^9",
     "eslint-config-next": "15.5.4",
-    "npm-run-all": "^4.1.5",
+    "open": "^10.2.0",
     "open-cli": "^8.0.0",
     "tailwindcss": "^4",
-    "typescript": "^5",
-    "wait-on": "^9.0.1"
+    "typescript": "5.9.2"
   }
 }
