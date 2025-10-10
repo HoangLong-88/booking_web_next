@@ -15,11 +15,10 @@ export function NavBar() {
     // const [mounted, setMounted] = useState(false)
 
     return (
-        <nav className="bg-blue-600 text-white px-4 py-3 flex justify-between
-         items-center">
+        <nav className="bg-blue-300 text-black px-10 py-3 flex justify-between items-center">
             {/* Logo */}
             <div className="font-bold text-3xl mr-7">
-                <Link href="/">NEXTME</Link>
+                <Link href="/">SKYLINK</Link>
             </div> 
 
             {/* Menu button (mobile) */}

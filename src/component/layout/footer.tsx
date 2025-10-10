@@ -2,13 +2,13 @@ import Link from "next/link";
 
 export function Footer() {
   return (
-    <footer className="bg-blue-600 text-white">
+    <footer className="bg-blue-300 text-black">
       <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8 lg:py-16">
         <div className="xl:grid xl:grid-cols-3 xl:gap-8">
           <div className="space-y-8 xl:col-span-1">
             <div>
-              <Link href="/" className="text-3xl font-bold text-white">
-                NEXTME
+              <Link href="/" className="text-3xl font-bold">
+                SKYLINK
               </Link>
               <p className="mt-4 text-base">
                 Beyond searching, find peace of mind.
@@ -59,14 +59,14 @@ export function Footer() {
           <div className="mt-12 grid grid-cols-2 gap-8 xl:col-span-2 xl:mt-0">
             <div className="md:grid md:grid-cols-2 md:gap-8">
               <div>
-                <h3 className="text-sm font-semibold tracking-wider text-white uppercase">
+                <h3 className="text-sm font-semibold tracking-wider uppercase">
                   Our products
                 </h3>
                 <ul className="mt-4 space-y-4">
                   <li>
                     <Link
                       href="/jobs"
-                      className="text-base hover:text-white"
+                      className="text-base hover"
                     >
                       Browse Jobs
                     </Link>
@@ -74,7 +74,7 @@ export function Footer() {
                   <li>
                     <Link
                       href="/companies"
-                      className="text-base hover:text-white"
+                      className="text-base hover"
                     >
                       Companies
                     </Link>
@@ -82,7 +82,7 @@ export function Footer() {
                   <li>
                     <Link
                       href="/profile"
-                      className="text-base hover:text-white"
+                      className="text-base hover"
                     >
                       Create Profile
                     </Link>
@@ -90,7 +90,7 @@ export function Footer() {
                   <li>
                     <Link
                       href="/career-advice"
-                      className="text-base hover:text-white"
+                      className="text-base hover"
                     >
                       Career Advice
                     </Link>
@@ -98,14 +98,14 @@ export function Footer() {
                 </ul>
               </div>
               <div className="mt-12 md:mt-0">
-                <h3 className="text-sm font-semibold tracking-wider text-white uppercase">
+                <h3 className="text-sm font-semibold tracking-wider uppercase">
                   DISCOVERIES
                 </h3>
                 <ul className="mt-4 space-y-4">
                   <li>
                     <Link
                       href="/post-job"
-                      className="text-base hover:text-white"
+                      className="text-base hover"
                     >
                       Post a Job
                     </Link>
@@ -113,7 +113,7 @@ export function Footer() {
                   <li>
                     <Link
                       href="/talent-search"
-                      className="text-base hover:text-white"
+                      className="text-base hover"
                     >
                       Search Talent
                     </Link>
@@ -121,7 +121,7 @@ export function Footer() {
                   <li>
                     <Link
                       href="/pricing"
-                      className="text-base hover:text-white"
+                      className="text-base hover"
                     >
                       Pricing
                     </Link>
@@ -129,7 +129,7 @@ export function Footer() {
                   <li>
                     <Link
                       href="/enterprise"
-                      className="text-base hover:text-white"
+                      className="text-base hover"
                     >
                       Enterprise
                     </Link>
@@ -139,14 +139,14 @@ export function Footer() {
             </div>
             <div className="md:grid md:grid-cols-2 md:gap-8">
               <div>
-                <h3 className="text-sm font-semibold tracking-wider text-white uppercase">
+                <h3 className="text-sm font-semibold tracking-wider uppercase">
                   ABOUT US
                 </h3>
                 <ul className="mt-4 space-y-4">
                   <li>
                     <Link
                       href="/about"
-                      className="text-base hover:text-white"
+                      className="text-base hover"
                     >
                       Our Story
                     </Link>
@@ -154,7 +154,7 @@ export function Footer() {
                   <li>
                     <Link
                       href="/blog"
-                      className="text-base hover:text-white"
+                      className="text-base hover"
                     >
                       Blog
                     </Link>
@@ -162,7 +162,7 @@ export function Footer() {
                   <li>
                     <Link
                       href="/careers"
-                      className="text-base hover:text-white"
+                      className="text-base hover"
                     >
                       Careers
                     </Link>
@@ -170,7 +170,7 @@ export function Footer() {
                   <li>
                     <Link
                       href="/contact"
-                      className="text-base hover:text-white"
+                      className="text-base hover"
                     >
                       Contact
                     </Link>
@@ -178,14 +178,14 @@ export function Footer() {
                 </ul>
               </div>
               <div className="mt-12 md:mt-0">
-                <h3 className="text-sm font-semibold tracking-wider text-white uppercase">
+                <h3 className="text-sm font-semibold tracking-wider uppercase">
                   Legal
                 </h3>
                 <ul className="mt-4 space-y-4">
                   <li>
                     <Link
                       href="/privacy"
-                      className="text-base hover:text-white"
+                      className="text-base hover"
                     >
                       Privacy
                     </Link>
@@ -193,7 +193,7 @@ export function Footer() {
                   <li>
                     <Link
                       href="/terms"
-                      className="text-base hover:text-white"
+                      className="text-base hover"
                     >
                       Terms
                     </Link>
@@ -201,7 +201,7 @@ export function Footer() {
                   <li>
                     <Link
                       href="/cookies"
-                      className="text-base hover:text-white"
+                      className="text-base hover"
                     >
                       Cookies
                     </Link>
