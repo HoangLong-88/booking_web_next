@@ -1,27 +1,34 @@
 "use client"
-import { useEffect, useRef, useState } from "react";
+import { use, useEffect, useRef, useState } from "react";
+import { getLanguageFromCookie, changeLanguage } from "@/lib/language";
 
 type Lang = {
   code: string;
   label: string;
   flag: string;
-  currency?: string;
+  locale?: string;
 };
 
 function LanguageSelector() {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedLanguage, setSelectedLanguage] = useState<string>("EN");
   const modalRef = useRef<HTMLDivElement | null>(null);
+  const [lang, setLang] = useState("en");
 
   const languages: Lang[] = [
-    { code: "EN", label: "English", flag: "icon/flags/united-states.png", currency: "USD" },
-    { code: "VI", label: "Việt Nam", flag: "icon/flags/vietnam.png", currency: "VND" },
-    { code: "CN", label: "汉语(中国)", flag: "icon/flags/china.png", currency: "CNY" },
-    { code: "HK", label: "漢族(香港)", flag: "icon/flags/hong-kong.png", currency: "HKD" },
-    { code: "KR", label: "한국어", flag: "icon/flags/south-korea.png", currency: "KRW" },
-    { code: "KM", label: "ខ្មែរ", flag: "icon/flags/cambodia.png", currency: "KHR" },
-
+    { code: "EN", label: "English", flag: "icon/flags/united-states.png", locale: "en" },
+    { code: "VI", label: "Việt Nam", flag: "icon/flags/vietnam.png", locale: "vi" },
+    { code: "CN", label: "汉语(中国)", flag: "icon/flags/china.png", locale: "zh-CN" },
+    { code: "HK", label: "漢族(香港)", flag: "icon/flags/hong-kong.png",  locale: "zh-HK" },
+    { code: "KR", label: "한국어", flag: "icon/flags/south-korea.png",  locale: "ko" },
+    { code: "KM", label: "ខ្មែរ", flag: "icon/flags/cambodia.png", locale: "km" },
   ];
+  useEffect(() => {
+    const saved = getLanguageFromCookie();
+    setLang(saved);
+    const langObj = languages.find((l) => l.locale === saved);
+    if (langObj) setSelectedLanguage(langObj.code);
+  }, []);
 
   useEffect(() => {
     function onKey(e: KeyboardEvent) {
@@ -44,10 +51,6 @@ function LanguageSelector() {
 
   const open = () => setIsOpen(true);
   const close = () => setIsOpen(false);
-
-  const selectLanguage = (code: string) => {
-    setSelectedLanguage(code);
-  };
 
   const selected = languages.find((l) => l.code === selectedLanguage) ?? languages[0];
 
@@ -73,18 +76,20 @@ function LanguageSelector() {
 
       {isOpen && (
         <>
-          <div className="fixed inset-0 bg-black/25 backdrop-blur-sm z-40" aria-hidden />
           <div
+           className="fixed inset-0 bg-black/25 backdrop-blur-sm z-40"            aria-hidden
+           onClick={close}/>          
+           <div
             ref={modalRef}
-            role="dialog"
-            aria-modal="true"
+           role="dialog"  
             className="fixed inset-0 z-50 flex items-center justify-center p-6"
+           onClick={(e) => e.stopPropagation()} // prevent overlay close when clicking inside modal
           >
             <div className="relative flex flex-col w-full max-w-4xl bg-white rounded-xl shadow-2xl ring-1 ring-black/5 overflow-hidden">
               {/* Header */}
               <div className="px-6 py-5 border-b">
                 <div className="flex items-center justify-between">
-                  <div className="text-lg font-medium text-gray-400">Select language</div>
+                  <div className="text-lg font-medium text-black">Select language</div>
                   <button
                     aria-label="Close"
                     onClick={close}
@@ -116,7 +121,10 @@ function LanguageSelector() {
                     return (
                       <button
                         key={lang.code}
-                        onClick={() => selectLanguage(lang.code)}
+                        onClick={() => {
+                          setSelectedLanguage(lang.code);
+                          changeLanguage(lang);
+                        }}
                         className={
                           `flex items-center 
                           gap-3 
@@ -153,25 +161,7 @@ function LanguageSelector() {
                 </div>
               </div>
 
-              {/* Footer */}
-              <div className="px-6 py-4 border-t flex items-center justify-end gap-4">
-                <button
-                  onClick={close}
-                  className= {`px-4 py-2 rounded-md text-sm bg-gray-500 hover:bg-gray-600`}
-                >
-                  Cancel
-                </button>
-                <button
-                  onClick={() => { /* integrate language change here */ close(); }}
-                  className="px-5 py-2 rounded-full text-sm
-                   text-white bg-gradient-to-r
-                    from-purple-500
-                     to-blue-500
-                      shadow-md"
-                >
-                  Continue
-                </button>
-              </div>
+            
             </div>
           </div>
         </>
