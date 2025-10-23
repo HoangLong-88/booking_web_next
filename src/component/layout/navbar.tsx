@@ -22,7 +22,7 @@ function NavBar() {
     // const [mounted, setMounted] = useState(false)
 
     return (
-        <nav className="h-[6.5rem] px-4 py-3 px-[2.5rem] flex justify-between
+        <nav className="h-[6.5rem] px-4 py-3 px-[2.5em] flex justify-between
          items-center" style={{ background: "var(--navbar-background)" }}>
             {/* Logo */}
             <div>

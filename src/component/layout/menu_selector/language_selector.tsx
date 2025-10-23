@@ -1,6 +1,6 @@
 "use client"
 import { use, useEffect, useRef, useState } from "react";
-import { getLanguageFromCookie, changeLanguage } from "@/lib/language";
+import { getLanguageFromCookie, changeLanguage } from "@/libs/language";
 
 type Lang = {
   code: string;

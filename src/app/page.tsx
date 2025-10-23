@@ -6,20 +6,18 @@ import {
   DisabledDiscount
 } from "@/component/ui/Image";
 import Link from "next/link";
+import { HomeSearchBar } from "@/component/ui/SearchBar";
+import { HeroHomePage } from "@/component/ui/Hero";
 
 export default function HomePage() {
   return (
     <>
-      <div className="overflow-hidden bg-blue-300 text-black">
-        <div className="p-10">
-          <div className="font-bold text-5xl py-5">
-            WELCOME TO MY WEBSITE!
-          </div>
-          <div className="font-bold text-2xl">
-            Search low prices on hotels, homes and much more...
-          </div>
-        </div>
-      </div>
+        {/* HERO */}
+      <header className="relative">
+        {/* background image + dark vignette */}
+        <HeroHomePage />
+        <HomeSearchBar />
+      </header>
       <div className="min-h-screen p-10 bg-white text-black overflow-hidden ">
         <p className="text-4xl font-bold mb-5 mt-10">
           Hot trending destination
