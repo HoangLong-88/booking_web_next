@@ -5,23 +5,21 @@ import { CustomButton } from "./Button";
 
 const HeroHomePage: React.FC = () => {
     return (<div
-          className="h-[420px] md:h-[520px] w-full bg-cover bg-center relative"
+          className="h-[420px] md:h-[584px] w-full bg-cover bg-center "
           style={{ backgroundImage: "url('https://www.nissanusa.com/content/dam/Nissan/us/rental-cars/nissan-rental-car-lineup-hero-v3.jpg.ximg.l_full_m.smart.jpg')" }}
         >
           <div className="absolute 
           inset-0 
           bg-gradient-to-r 
-          from-black/70 
-          via-black/30
-          to-black/70 
+          from-black/60 
+          via-black/5
+          to-black/60 
           
           " />
 
           <div className="relative 
           z-10 
-          max-w-7xl
-           mx-auto 
-           px-[2.5rem]
+           mx-[2.5rem]
             h-full
              flex 
              flex-col
@@ -45,7 +43,7 @@ const HeroHomePage: React.FC = () => {
             </p>
 
             <div className="mt-8">
-              <CustomButton asChild variant="default" size="lg" className="shadow-lg">
+              <CustomButton asChild variant="default" size="lg" className="shadow-lg mr-[0.5rem]">
                <Link href="/book" className="px-6 py-2">
                  Đặt xe ngay bây giờ
                </Link>

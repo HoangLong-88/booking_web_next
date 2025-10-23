@@ -13,12 +13,12 @@ export default function HomePage() {
   return (
     <>
         {/* HERO */}
-      <header className="relative">
+      <header className="relative mt-[var(--spacing-top)]">
         {/* background image + dark vignette */}
         <HeroHomePage />
         <HomeSearchBar />
       </header>
-      <div className="min-h-screen p-10 bg-white text-black overflow-hidden ">
+      <div className="min-h-screen p-10 bg-white text-black overflow-hidden">
         <p className="text-4xl font-bold mb-5 mt-10">
           Hot trending destination
         </p>

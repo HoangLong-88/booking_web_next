@@ -1,12 +1,9 @@
 'use client'
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { LanguageSelector } from "./menu_selector/language_selector";
-
-const Nav = [
-    {name: 'Stays',href: '/stays', }
-]
+import { SetUpNavbarScroll } from "@/utils/dom/NavbarScroll";
 
 const navItems = [
   { name: "Stays", href: "/stays" },
@@ -18,12 +15,20 @@ const navItems = [
 function NavBar() {
     const pathname = usePathname()
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+    const navbarRef =  useRef<HTMLElement>(null)
     // const [isAuthenticated, user, logout, fetchCurrentUser] = useAuthStore()
     // const [mounted, setMounted] = useState(false)
+    useEffect(() => {
+        if (navbarRef.current) {
+            const cleanup = SetUpNavbarScroll(navbarRef.current)
+            return cleanup
+        }
+    }, [])
 
     return (
-        <nav className="h-[6.5rem] px-4 py-3 px-[2.5em] flex justify-between
-         items-center" style={{ background: "var(--navbar-background)" }}>
+        <nav ref={navbarRef} className="h-[6.5rem] 
+        fixed px-4 py-3 px-[2.5rem] flex justify-between z-100 w-full transition-transform duration-300 
+         items-center shadow-sm" style={{ background: "var(--navbar-background)" }}>
             {/* Logo */}
             <div>
                 <div className="font-bold text-5xl text-amber-50">
