@@ -7,13 +7,13 @@ import {
 } from "@/component/ui/Image";
 import Link from "next/link";
 import { HomeSearchBar } from "@/component/ui/SearchBar";
-import { HeroHomePage } from "@/component/ui/Hero";
+import { HeroHomePage } from "@/component/layout/Hero";
 
 export default function HomePage() {
   return (
     <>
         {/* HERO */}
-      <header className="relative mt-[var(--spacing-top)]">
+      <header className="mt-[var(--spacing-top)]">
         {/* background image + dark vignette */}
         <HeroHomePage />
         <HomeSearchBar />
