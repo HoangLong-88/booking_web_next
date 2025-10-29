@@ -1,69 +1,52 @@
 "use client"
-import { useEffect, useRef, useState } from "react";
+import { use, useEffect, useRef, useState } from "react";
+import { getLanguageFromCookie, changeLanguage } from "@/libs/language";
+import { Overlay } from "@/component/ui/Overlay";
+import { useModal } from "@/utils/dom/useModal";
+import { createPortal } from "react-dom";
 
 type Lang = {
   code: string;
   label: string;
   flag: string;
-  currency?: string;
+  locale?: string;
 };
 
 function LanguageSelector() {
-  const [isOpen, setIsOpen] = useState(false);
+  const { isOpen, open, close, modalRef } = useModal(); 
   const [selectedLanguage, setSelectedLanguage] = useState<string>("EN");
-  const modalRef = useRef<HTMLDivElement | null>(null);
-
+  const [lang, setLang] = useState("en");
+  const [isLanguageModalOpen, setIsModalOpen] = useState(false);   
   const languages: Lang[] = [
-    { code: "EN", label: "English", flag: "icon/flags/united-states.png", currency: "USD" },
-    { code: "VI", label: "Việt Nam", flag: "icon/flags/vietnam.png", currency: "VND" },
-    { code: "CN", label: "汉语(中国)", flag: "icon/flags/china.png", currency: "CNY" },
-    { code: "HK", label: "漢族(香港)", flag: "icon/flags/hong-kong.png", currency: "HKD" },
-    { code: "KR", label: "한국어", flag: "icon/flags/south-korea.png", currency: "KRW" },
-    { code: "KM", label: "ខ្មែរ", flag: "icon/flags/cambodia.png", currency: "KHR" },
-
+    { code: "EN", label: "English", flag: "icon/flags/united-states.png", locale: "en" },
+    { code: "VI", label: "Việt Nam", flag: "icon/flags/vietnam.png", locale: "vi" },
+    { code: "CN", label: "汉语(中国)", flag: "icon/flags/china.png", locale: "zh-CN" },
+    { code: "HK", label: "漢族(香港)", flag: "icon/flags/hong-kong.png",  locale: "zh-HK" },
+    { code: "KR", label: "한국어", flag: "icon/flags/south-korea.png",  locale: "ko" },
+    { code: "KM", label: "ខ្មែរ", flag: "icon/flags/cambodia.png", locale: "km" },
   ];
 
   useEffect(() => {
-    function onKey(e: KeyboardEvent) {
-      if (e.key === "Escape") setIsOpen(false);
-    }
-    document.addEventListener("keydown", onKey);
-    return () => document.removeEventListener("keydown", onKey);
+    const saved = getLanguageFromCookie();
+    setLang(saved);
+    const langObj = languages.find((l) => l.locale === saved);
+    if (langObj) setSelectedLanguage(langObj.code);
   }, []);
-
-  useEffect(() => {
-    function onClick(e: MouseEvent) {
-      if (!modalRef.current) return;
-      if (isOpen && !modalRef.current.contains(e.target as Node)) {
-        setIsOpen(false);
-      }
-    }
-    document.addEventListener("mousedown", onClick);
-    return () => document.removeEventListener("mousedown", onClick);
-  }, [isOpen]);
-
-  const open = () => setIsOpen(true);
-  const close = () => setIsOpen(false);
-
-  const selectLanguage = (code: string) => {
-    setSelectedLanguage(code);
-  };
 
   const selected = languages.find((l) => l.code === selectedLanguage) ?? languages[0];
 
   return (
     <div className="relative inline-block text-left">
       <button
-        type="button"
+        type="button" 
         aria-haspopup="dialog"
-        aria-expanded={isOpen}
-        onClick={open}
+        onClick={() => open()}
         className="flex items-center gap-2 px-3 py-2 rounded-md bg-white/30 backdrop-blur-sm text-sm font-medium text-gray-800 hover:bg-white/40 border"
       >
         <img
           src={"/" + selected.flag}
           alt={selected.label}
-          className="w-5 h-5 rounded-sm"
+          className="w-5 h-5 rounded-sm shadow-sm"
         />
         <span className="hidden md:inline">{selectedLanguage}</span>
         <svg className="w-4 h-4 opacity-70" viewBox="0 0 20 20" fill="currentColor" aria-hidden>
@@ -71,23 +54,25 @@ function LanguageSelector() {
         </svg>
       </button>
 
-      {isOpen && (
+      {isOpen && createPortal(
         <>
-          <div className="fixed inset-0 bg-black/25 backdrop-blur-sm z-40" aria-hidden />
-          <div
-            ref={modalRef}
-            role="dialog"
-            aria-modal="true"
-            className="fixed inset-0 z-50 flex items-center justify-center p-6"
+          {/*Overlay*/}
+          <Overlay onClick={close}/>  
+           {/* Modal container*/}
+           <div
+            className="inset-0 fixed z-50 flex items-center justify-center p-6 pointer-events-none"
+            // prevent overlay close when clicking inside modal
           >
-            <div className="relative flex flex-col w-full max-w-4xl bg-white rounded-xl shadow-2xl ring-1 ring-black/5 overflow-hidden">
+            <div ref={modalRef} role="dialog" className="flex flex-col w-full max-w-4xl bg-white overflow-hidden rounded-xl shadow-2xl ring-1 ring-black/5 pointer-events-auto"
+            onClick={(e) => e.stopPropagation()} aria-modal="true" 
+            > 
               {/* Header */}
               <div className="px-6 py-5 border-b">
                 <div className="flex items-center justify-between">
-                  <div className="text-lg font-medium text-gray-400">Select language</div>
+                  <div className="text-lg font-medium text-black">Select language</div>
                   <button
                     aria-label="Close"
-                    onClick={close}
+                    onClick={() => close()}
                     className="p-2 rounded-md hover:bg-gray-100 text-gray-400"
                   >
                     <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor">
@@ -116,7 +101,10 @@ function LanguageSelector() {
                     return (
                       <button
                         key={lang.code}
-                        onClick={() => selectLanguage(lang.code)}
+                        onClick={() => {
+                          setSelectedLanguage(lang.code);
+                          changeLanguage(lang);
+                        }}
                         className={
                           `flex items-center 
                           gap-3 
@@ -152,29 +140,10 @@ function LanguageSelector() {
                   })}
                 </div>
               </div>
-
-              {/* Footer */}
-              <div className="px-6 py-4 border-t flex items-center justify-end gap-4">
-                <button
-                  onClick={close}
-                  className= {`px-4 py-2 rounded-md text-sm bg-gray-500 hover:bg-gray-600`}
-                >
-                  Cancel
-                </button>
-                <button
-                  onClick={() => { /* integrate language change here */ close(); }}
-                  className="px-5 py-2 rounded-full text-sm
-                   text-white bg-gradient-to-r
-                    from-purple-500
-                     to-blue-500
-                      shadow-md"
-                >
-                  Continue
-                </button>
-              </div>
             </div>
           </div>
-        </>
+        </>,
+        document.body
       )}
     </div>
   );
