@@ -7,7 +7,7 @@ import {
 } from "@/component/ui/Image";
 import Link from "next/link";
 import { HomeSearchBar } from "@/component/ui/SearchBar";
-import { HeroHomePage } from "@/component/ui/Hero";
+import { HeroHomePage } from "@/component/layout/Hero";
 import {HotelTagsArrowScroll} from "@/component/ui/TagScroll";
 
 export default function HomePage() {
