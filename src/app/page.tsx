@@ -22,7 +22,7 @@ export default function HomePage() {
       </header>
       <div className="min-h-screen p-10 bg-white text-black overflow-hidden">
         <p className="text-4xl font-bold mb-5 mt-10">
-          Hot trending destination
+          Hot trending destinations
         </p>
         <div className="pb-10">
           <div className="grid grid-cols-2 gap-3 py-3">
@@ -64,7 +64,7 @@ export default function HomePage() {
           <Card>
             <img src="https://img.freepik.com/premium-photo/young-woman-wearing-denim-jacket-hat-stands-city-street-with-her-backpack-phone-her-hand-sun-is-setting-background_14117-717019.jpg"
               alt="Trang An sailing" className="h-50 w-full object-cover" />
-            <div className="py-3 px-3">
+            <div className="py-2 px-3">
               <CardSubTitle>
                 ACTIVITIES FOR LOVERS
               </CardSubTitle>
@@ -82,7 +82,7 @@ export default function HomePage() {
           <Card>
             <img src="https://wallup.net/wp-content/uploads/2016/05/13/348370-relaxation-couple-men-women-landscape-nature-beach-sea-relaxing-tropical-vacation.jpg"
               alt="a-relaxtion-couple" className="h-50 w-full object-cover" />
-            <div className="py-3 px-3">
+            <div className="py-2 px-3">
               <CardSubTitle>
                 ACTIVITIES FOR LOVERS
               </CardSubTitle>
@@ -100,7 +100,7 @@ export default function HomePage() {
           <Card>
             <img src="https://indochinatreks.com/wp-content/uploads/2022/11/Ninh_binh_-boat-along-Ngo-Dong-River.jpg"
               alt="Trang An sailing" className="h-50 w-full object-cover" />
-            <div className="py-3 px-3">
+            <div className="py-2 px-3">
               <CardSubTitle>
                 ACTIVITIES FOR LOVERS
               </CardSubTitle>

@@ -112,7 +112,7 @@ function HotelTagsArrowScroll() {
       {canScrollLeft && (
         <button
           onClick={() => scroll("left")}
-          className="absolute left-0 top-1/3 -translate-y-1/2 bg-white shadow rounded-full p-2 z-10 hover:bg-gray-100 transition"
+          className="absolute left-0 top-1/4 -translate-y-1/2 bg-white shadow rounded-full p-2 z-10 hover:bg-gray-100 transition"
         >
           <ChevronLeft className="w-5 h-5" />
         </button>
@@ -171,7 +171,7 @@ function HotelTagsArrowScroll() {
       {canScrollRight && (
         <button
           onClick={() => scroll("right")}
-          className="absolute right-0 top-1/3 -translate-y-1/2 bg-white shadow rounded-full p-2 z-10 hover:bg-gray-100 transition"
+          className="absolute right-0 top-1/4 -translate-y-1/2 bg-white shadow rounded-full p-2 z-10 hover:bg-gray-100 transition"
         >
           <ChevronRight className="w-5 h-5" />
         </button>
