@@ -1,6 +1,9 @@
 "use client"
 import { use, useEffect, useRef, useState } from "react";
 import { getLanguageFromCookie, changeLanguage } from "@/libs/language";
+import { Overlay } from "@/component/ui/Overlay";
+import { useModal } from "@/utils/dom/useModal";
+import { createPortal } from "react-dom";
 
 type Lang = {
   code: string;
@@ -10,11 +13,10 @@ type Lang = {
 };
 
 function LanguageSelector() {
-  const [isOpen, setIsOpen] = useState(false);
+  const { isOpen, open, close, modalRef } = useModal(); 
   const [selectedLanguage, setSelectedLanguage] = useState<string>("EN");
-  const modalRef = useRef<HTMLDivElement | null>(null);
   const [lang, setLang] = useState("en");
-
+  const [isLanguageModalOpen, setIsModalOpen] = useState(false);   
   const languages: Lang[] = [
     { code: "EN", label: "English", flag: "icon/flags/united-states.png", locale: "en" },
     { code: "VI", label: "Việt Nam", flag: "icon/flags/vietnam.png", locale: "vi" },
@@ -23,6 +25,7 @@ function LanguageSelector() {
     { code: "KR", label: "한국어", flag: "icon/flags/south-korea.png",  locale: "ko" },
     { code: "KM", label: "ខ្មែរ", flag: "icon/flags/cambodia.png", locale: "km" },
   ];
+
   useEffect(() => {
     const saved = getLanguageFromCookie();
     setLang(saved);
@@ -30,43 +33,20 @@ function LanguageSelector() {
     if (langObj) setSelectedLanguage(langObj.code);
   }, []);
 
-  useEffect(() => {
-    function onKey(e: KeyboardEvent) {
-      if (e.key === "Escape") setIsOpen(false);
-    }
-    document.addEventListener("keydown", onKey);
-    return () => document.removeEventListener("keydown", onKey);
-  }, []);
-
-  useEffect(() => {
-    function onClick(e: MouseEvent) {
-      if (!modalRef.current) return;
-      if (isOpen && !modalRef.current.contains(e.target as Node)) {
-        setIsOpen(false);
-      }
-    }
-    document.addEventListener("mousedown", onClick);
-    return () => document.removeEventListener("mousedown", onClick);
-  }, [isOpen]);
-
-  const open = () => setIsOpen(true);
-  const close = () => setIsOpen(false);
-
   const selected = languages.find((l) => l.code === selectedLanguage) ?? languages[0];
 
   return (
     <div className="relative inline-block text-left">
       <button
-        type="button"
+        type="button" 
         aria-haspopup="dialog"
-        aria-expanded={isOpen}
-        onClick={open}
+        onClick={() => open()}
         className="flex items-center gap-2 px-3 py-2 rounded-md bg-white/30 backdrop-blur-sm text-sm font-medium text-gray-800 hover:bg-white/40 border"
       >
         <img
           src={"/" + selected.flag}
           alt={selected.label}
-          className="w-5 h-5 rounded-sm"
+          className="w-5 h-5 rounded-sm shadow-sm"
         />
         <span className="hidden md:inline">{selectedLanguage}</span>
         <svg className="w-4 h-4 opacity-70" viewBox="0 0 20 20" fill="currentColor" aria-hidden>
@@ -74,25 +54,25 @@ function LanguageSelector() {
         </svg>
       </button>
 
-      {isOpen && (
+      {isOpen && createPortal(
         <>
-          <div
-           className="fixed inset-0 bg-black/25 backdrop-blur-sm z-40"            aria-hidden
-           onClick={close}/>          
+          {/*Overlay*/}
+          <Overlay onClick={close}/>  
+           {/* Modal container*/}
            <div
-            ref={modalRef}
-           role="dialog"  
-            className="fixed inset-0 z-50 flex items-center justify-center p-6"
-           onClick={(e) => e.stopPropagation()} // prevent overlay close when clicking inside modal
+            className="inset-0 fixed z-50 flex items-center justify-center p-6 pointer-events-none"
+            // prevent overlay close when clicking inside modal
           >
-            <div className="relative flex flex-col w-full max-w-4xl bg-white rounded-xl shadow-2xl ring-1 ring-black/5 overflow-hidden">
+            <div ref={modalRef} role="dialog" className="flex flex-col w-full max-w-4xl bg-white overflow-hidden rounded-xl shadow-2xl ring-1 ring-black/5 pointer-events-auto"
+            onClick={(e) => e.stopPropagation()} aria-modal="true" 
+            > 
               {/* Header */}
               <div className="px-6 py-5 border-b">
                 <div className="flex items-center justify-between">
                   <div className="text-lg font-medium text-black">Select language</div>
                   <button
                     aria-label="Close"
-                    onClick={close}
+                    onClick={() => close()}
                     className="p-2 rounded-md hover:bg-gray-100 text-gray-400"
                   >
                     <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor">
@@ -160,11 +140,10 @@ function LanguageSelector() {
                   })}
                 </div>
               </div>
-
-            
             </div>
           </div>
-        </>
+        </>,
+        document.body
       )}
     </div>
   );

@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+
 let lastScrollY = 0
 
 function navbarScroll(navbar: HTMLElement) {
@@ -35,4 +37,38 @@ function SetUpNavbarScroll(navbar: HTMLElement) {
     }
     return navbarScroll(navbar)
 }
-export { SetUpNavbarScroll };
+
+function useLockBodyScroll(lock: boolean, onUnlock?: () => void ) {
+  useEffect(() => {
+    if (!lock) return;
+
+    const scrollY = window.scrollY;
+    const originalOverflow = document.body.style.overflow;
+    const originalPosition = document.body.style.position;
+    const originalTop = document.body.style.top;
+    const originalWidth = document.body.style.width;
+
+    document.body.style.position = 'fixed';
+    document.body.style.top = `-${scrollY}px`;
+    document.body.style.width = '100%';
+    document.body.style.overflow = 'hidden';
+
+
+    return () => {
+      const top = document.body.style.top
+      const scrollToY = -parseInt(top || '0', 10); 
+    
+      document.body.style.position = originalPosition;
+      document.body.style.top = originalTop;
+      document.body.style.width = originalWidth;
+      document.body.style.overflow = originalOverflow;
+
+
+      window.scrollTo(0, scrollToY);
+
+      onUnlock?.();
+    };
+  }, [lock, onUnlock]);
+}
+
+export { SetUpNavbarScroll, useLockBodyScroll };

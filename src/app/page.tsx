@@ -10,11 +10,12 @@ import { HomeSearchBar } from "@/component/ui/SearchBar";
 import { HeroHomePage } from "@/component/layout/Hero";
 import {HotelTagsArrowScroll} from "@/component/ui/TagScroll";
 
+
 export default function HomePage() {
   return (
     <>
         {/* HERO */}
-      <header className="relative mt-[var(--spacing-top)]">
+      <header className="mt-[var(--spacing-top)]">
         {/* background image + dark vignette */}
         <HeroHomePage />
         <HomeSearchBar />
