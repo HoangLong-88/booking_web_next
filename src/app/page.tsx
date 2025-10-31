@@ -8,6 +8,8 @@ import {
 import Link from "next/link";
 import { HomeSearchBar } from "@/component/ui/SearchBar";
 import { HeroHomePage } from "@/component/layout/Hero";
+import {HotelTagsArrowScroll} from "@/component/ui/TagScroll";
+
 
 export default function HomePage() {
   return (
@@ -55,14 +57,14 @@ export default function HomePage() {
                 <DisabledDiscount />
             </div>
         </div>
-        <p className="text-4xl font-bold mb-7 mt-10">
+        <p className="text-3xl font-bold mb-7 mt-10">
           Spotlight this month
         </p>
         <div className="grid grid-cols-3 gap-x-9 gap-y-3">
           <Card>
-            <img src="https://th.bing.com/th?id=OIF.pTmjQ%2f%2bqj7%2bcAp9pNjClDw&cb=12&rs=1&pid=ImgDetMain&o=7&rm=3"
+            <img src="https://img.freepik.com/premium-photo/young-woman-wearing-denim-jacket-hat-stands-city-street-with-her-backpack-phone-her-hand-sun-is-setting-background_14117-717019.jpg"
               alt="Trang An sailing" className="h-50 w-full object-cover" />
-            <div className="py-2 px-3">
+            <div className="py-3 px-3">
               <CardSubTitle>
                 ACTIVITIES FOR LOVERS
               </CardSubTitle>
@@ -80,7 +82,7 @@ export default function HomePage() {
           <Card>
             <img src="https://wallup.net/wp-content/uploads/2016/05/13/348370-relaxation-couple-men-women-landscape-nature-beach-sea-relaxing-tropical-vacation.jpg"
               alt="a-relaxtion-couple" className="h-50 w-full object-cover" />
-            <div className="py-2 px-3">
+            <div className="py-3 px-3">
               <CardSubTitle>
                 ACTIVITIES FOR LOVERS
               </CardSubTitle>
@@ -98,7 +100,7 @@ export default function HomePage() {
           <Card>
             <img src="https://indochinatreks.com/wp-content/uploads/2022/11/Ninh_binh_-boat-along-Ngo-Dong-River.jpg"
               alt="Trang An sailing" className="h-50 w-full object-cover" />
-            <div className="py-2 px-3">
+            <div className="py-3 px-3">
               <CardSubTitle>
                 ACTIVITIES FOR LOVERS
               </CardSubTitle>
@@ -113,6 +115,10 @@ export default function HomePage() {
               </Link>
             </div>
           </Card>
+        </div>
+        <div className="text-3xl font-bold mb-7 mt-10">
+            <p>Stay Guest Love</p>
+            <HotelTagsArrowScroll />
         </div>
       </div>
     </>

@@ -35,7 +35,7 @@ const CardSubTitle = React.forwardRef<
 >(({className,...props}, ref)=>(
     <div
         ref={ref}
-        className={cn("pt-1 text-stone-400 text-xs font-bold", className)}
+        className={cn("text-stone-400 text-xs font-bold", className)}
         {...props}
     />
 ))
