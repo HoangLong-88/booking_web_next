@@ -35,7 +35,7 @@ const Google_Icon: React.FC = () => {
 const Phone_Icon: React.FC = () => {
     return (
         <svg
-            className="h-5 w-5"x
+            className="h-5 w-5"
             fill="currentColor"
             viewBox="0 0 64 64"
             >
@@ -43,4 +43,15 @@ const Phone_Icon: React.FC = () => {
         </svg>
     );
 };
-export { Auth_Icon, Google_Icon, Phone_Icon };
+const Mail_Icon: React.FC = () => {
+    return (
+        <svg
+            className="h-5 w-5"
+            fill="currentColor"
+            viewBox="0 0 24 24"
+            >
+            <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/> 
+        </svg>
+    );
+}
+export { Auth_Icon, Google_Icon, Phone_Icon, Mail_Icon };

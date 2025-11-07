@@ -32,6 +32,7 @@
   --color-primary: #96b8d9;
   --color-secondary: hsla(209, 45%, 72%, 0.2);
   --color-accent: hsla(30, 10%, 92%, 0.2);
+  --color-auth: oklch(0.439 0 0);
 
   --color-sidebar: var(--sidebar);
   --color-sidebar-foreground: var(--sidebar-foreground);
