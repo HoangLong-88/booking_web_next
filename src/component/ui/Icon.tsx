@@ -35,7 +35,7 @@ const Google_Icon: React.FC = () => {
 const Phone_Icon: React.FC = () => {
     return (
         <svg
-            className="h-5 w-5"x
+            className="h-5 w-5"
             fill="currentColor"
             viewBox="0 0 64 64"
             >
