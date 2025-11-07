@@ -1,61 +1,41 @@
 import { Card, CardTitle, CardSubTitle } from "@/component/ui/Card";
-import { 
+import {
   LateEscapeDeal,
   FamilyHoliday,
-  CreditCardOffer, 
+  CreditCardOffer,
   DisabledDiscount
 } from "@/component/ui/Image";
 import Link from "next/link";
 import { HomeSearchBar } from "@/component/ui/SearchBar";
 import { HeroHomePage } from "@/component/layout/Hero";
-import {HotelTagsArrowScroll} from "@/component/ui/TagScroll";
+import { HotelTagsArrowScroll, NoteTags } from "@/component/ui/TagScroll";
+import { TrendingDestinationsRecommendation } from "@/component/layout/gridLayout";
 
 
 export default function HomePage() {
   return (
     <>
-        {/* HERO */}
+      {/* HERO */}
       <header className="mt-[var(--spacing-top)]">
         {/* background image + dark vignette */}
         <HeroHomePage />
         <HomeSearchBar />
       </header>
       <div className="min-h-screen p-10 bg-white text-black overflow-hidden">
-        <p className="text-4xl font-bold mb-5 mt-10">
-          Hot trending destinations
-        </p>
+        <TrendingDestinationsRecommendation/>
         <div className="pb-10">
-          <div className="grid grid-cols-2 gap-3 py-3">
-            <img className="rounded-xl h-80 w-full object-cover"
-              src="https://static.vinwonders.com/production/Da-Nang-weather-in-November-1.jpg" alt="Danang" />
-            <p className="absolute text-white p-3 text-4xl font-bold">
-                Danang
-            </p>
-            <img className="rounded-xl h-80 w-full object-cover"
-              src="https://1.bp.blogspot.com/-LkY1ZIjboUk/VENBGHRpQRI/AAAAAAAAPOc/3o4EXQiJyZs/s1600/Ben+Thanh+Market+2014.jpg" alt="HoChiMinhCity" />
+          <p className="text-4xl font-bold pb-2">
+            Hot Offers
+          </p>
+          <p className="text-stone-400 text-xl pb-5">
+            Promotions, deals and special offers for you
+          </p>
+          <div className="grid grid-cols-2 gap-3">
+            <LateEscapeDeal />
+            <FamilyHoliday />
+            <CreditCardOffer />
+            <DisabledDiscount />
           </div>
-          <div className="grid grid-cols-3 gap-3 pb-10">
-            <img className="rounded-xl h-full object-cover"
-              src="https://www.gpsmycity.com/img/gd_sight/52374.jpg" alt="Hanoi" />
-            <img className="rounded-xl h-full object-cover"
-              src="https://premiumtravel.info/wp-content/uploads/2017/10/viet-nam-package-tour-9.jpg" alt="Hoian" />
-            <img className="rounded-xl h-full object-cover"
-              src="https://media.techcity.cloud/vietnam.vn/2023/06/2022052714322311-Chieu-Da-Lat-scaled.jpg" alt="DaLat" />
-          </div>
-        </div>
-        <div className="pb-10">
-            <p className="text-4xl font-bold pb-2">
-                Hot Offers
-            </p>
-            <p className="text-stone-400 text-xl pb-5">
-                Promotions, deals and special offers for you
-            </p>
-            <div className="grid grid-cols-2 gap-3">
-                <LateEscapeDeal/>
-                <FamilyHoliday />
-                <CreditCardOffer />
-                <DisabledDiscount />
-            </div>
         </div>
         <p className="text-3xl font-bold mb-7 mt-10">
           Spotlight this month
@@ -116,9 +96,13 @@ export default function HomePage() {
             </div>
           </Card>
         </div>
-        <div className="text-3xl font-bold mb-7 mt-10">
-            <p>Stay Guest Love</p>
-            <HotelTagsArrowScroll />
+        <div className="mb-7 mt-15">
+          <p className="text-3xl font-bold">Stay Guest Love</p>
+          <HotelTagsArrowScroll />
+        </div>
+        <div className="mb-7 mt-20">
+            <p className="text-2xl font-bold mb-5">Why should be SKYLINK ?</p>
+            <NoteTags/>
         </div>
       </div>
     </>
