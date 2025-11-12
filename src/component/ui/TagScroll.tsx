@@ -217,7 +217,7 @@ function NoteTags() {
   ];
 
   return (
-    <div className="grid grid-cols-4">
+    <div className="grid grid-cols-4 gap-4">
       {WhyTag.map((tag) => (
         <Card className="bg-stone-100 mx-5 rounded-sm px-3 py-5 shadow-sm w-70">
           <img

@@ -21,7 +21,7 @@ export default function HomePage() {
         <HeroHomePage />
         <HomeSearchBar />
       </header>
-      <div className="min-h-screen p-10 bg-white text-black overflow-hidden">
+      <div className="min-h-screen p-20 bg-white text-black overflow-hidden">
         <TrendingDestinationsRecommendation/>
         <div className="pb-10">
           <p className="text-4xl font-bold pb-2">

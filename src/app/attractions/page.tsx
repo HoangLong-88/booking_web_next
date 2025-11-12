@@ -1,8 +1,20 @@
+import { AttractionsSearchBar } from "@/component/ui/SearchBar";
+import { HeroAttractionsPage } from "@/component/layout/Hero";
+import { DestinationsLoadMore } from "@/component/ui/LoadMorePattern";
 
 export default function AttractionsPage() {
   return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-bold">
-      Attractions Page!
-    </div>
+    <>
+      <header className="mt-[var(--spacing-top)] ">
+        <HeroAttractionsPage />
+        <AttractionsSearchBar />
+      </header>
+      <main className="p-20">
+        <p className="text-2xl mt-[100px] mb-5 font-bold">
+          Nearby Destinations
+        </p>
+        <DestinationsLoadMore />
+      </main>
+    </>
   );
 }

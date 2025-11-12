@@ -1,7 +1,5 @@
 'client server'
 import Link from "next/link"
-export { TrendingDestinationsRecommendation }
-
 
 function TrendingDestinationsRecommendation() {
     return (
@@ -72,7 +70,6 @@ function TrendingDestinationsRecommendation() {
             </div>
         </>
     )
-}
+};
 
-
-
+export { TrendingDestinationsRecommendation}

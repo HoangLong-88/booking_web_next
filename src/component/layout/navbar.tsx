@@ -8,9 +8,9 @@ import { Auth_Icon } from "../ui/Icon";
 
 const navItems = [
   { name: "Stays", href: "/stays" },
-  { name: "FlighSign Ints", href: "/flights" },
+//   { name: "FlighSign Ints", href: "/flights" },
   { name: "Cars", href: "/cars" },
-  { name: "Attractions", href: "/atractions" },
+  { name: "Attractions", href: "/attractions" },
 ];
 
 function NavBar({isAuthPage}:{isAuthPage: boolean}) {
