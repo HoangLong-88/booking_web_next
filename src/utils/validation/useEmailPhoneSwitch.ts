@@ -14,7 +14,7 @@ function useAuthSwitchForm() {
                 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
                 setIsValid(emailRegex.test(email));
             } else if (switchToPhone && phone) {
-                const phoneRegex = /^\+?[1-9]\d{1,14}$/;
+                const phoneRegex = /^\+?[0-9]\d{1,14}$/;
                 setIsValid(phoneRegex.test(phone));
             } else {
                 setIsValid(null);

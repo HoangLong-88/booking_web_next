@@ -1,21 +1,16 @@
 'use client';
 import React from "react";
-import Link from "next/link";
 
 import { useAuthSwitchForm } from "@/utils/validation/useEmailPhoneSwitch";
+import { useVerifyContact } from "./hook/useVerifyContact";
+
 import { Google_Icon, Phone_Icon, Mail_Icon } from "@/component/ui/Icon";
-import { Input } from "@/component/auth/auth_input";
-import { Label } from "@/component/auth/auth_input_label";
 import { CustomButton } from "@/component/ui/Button";
 import { AuthContactField } from "@/component/auth/auth_contact_field";
-import {
-  Card,
-  CardTitle,
-} from '@/component/ui/Card';
 
 function Login_Register_Page() {
     const {
-    switchToPhone,
+    switchToPhone: isPhoneMode,
     setSwitchToPhone,
     email,
     setEmail,
@@ -23,6 +18,11 @@ function Login_Register_Page() {
     setPhone,
     isValid,
   } = useAuthSwitchForm();
+    const { checking, exists, handleContinue } = useVerifyContact({
+    switchToPhone: isPhoneMode,
+    email,
+    phone,
+  });
     return (
         <div className="min-h-screen flex items-center justify-center bg-white">
             <div className="bg-white text-gray-800 p-8 rounded shadow-xl/20 w-full max-w-md">
@@ -31,10 +31,13 @@ function Login_Register_Page() {
                 <form className="space-y-4">
                     <div className='relative'>
                     <AuthContactField
-                      type={switchToPhone ? "phone" : "email"}
-                      value={switchToPhone ? phone : email}
-                      onChange={switchToPhone ? (e) => setPhone(e.target.value) : (e) => setEmail(e.target.value)}
+                      type={isPhoneMode ? "phone" : "email"}
+                      value={isPhoneMode ? phone : email}
+                      onChange={isPhoneMode ? (e) => setPhone(e.target.value) : (e) => setEmail(e.target.value)}
                       isValid={isValid}
+                      checking={checking}
+                      exists={exists}
+                      onContinue={handleContinue}
                     />
                     </div>
                 </form>
@@ -56,11 +59,11 @@ function Login_Register_Page() {
                   </CustomButton>
                   <CustomButton
                     type="button"
-                    onClick={() => setSwitchToPhone(!switchToPhone)}
+                    onClick={() => setSwitchToPhone(!isPhoneMode)}
                     variant={'outline'}
                     size={'lg'}
                   >
-                    {switchToPhone ? <Mail_Icon /> : <Phone_Icon />}
+                    {isPhoneMode ? <Mail_Icon /> : <Phone_Icon />}
                   </CustomButton>
                   </div>
             </div>

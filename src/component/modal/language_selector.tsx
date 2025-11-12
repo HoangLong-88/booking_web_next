@@ -4,6 +4,8 @@ import { getLanguageFromCookie, changeLanguage } from "@/libs/language";
 import { Overlay } from "@/component/ui/Overlay";
 import { useModal } from "@/utils/dom/useModal";
 import { createPortal } from "react-dom";
+import { initPageI18n } from "@/libs/i18n";
+import { useTranslation } from "react-i18next";
 
 type Lang = {
   code: string;
@@ -15,8 +17,7 @@ type Lang = {
 function LanguageSelector() {
   const { isOpen, open, close, modalRef } = useModal(); 
   const [selectedLanguage, setSelectedLanguage] = useState<string>("EN");
-  const [lang, setLang] = useState("en");
-  const [isLanguageModalOpen, setIsModalOpen] = useState(false);   
+  const { t, i18n } = useTranslation();
   const languages: Lang[] = [
     { code: "EN", label: "English", flag: "icon/flags/united-states.png", locale: "en" },
     { code: "VI", label: "Việt Nam", flag: "icon/flags/vietnam.png", locale: "vi" },
@@ -27,10 +28,14 @@ function LanguageSelector() {
   ];
 
   useEffect(() => {
-    const saved = getLanguageFromCookie();
-    setLang(saved);
-    const langObj = languages.find((l) => l.locale === saved);
-    if (langObj) setSelectedLanguage(langObj.code);
+    const setup = async () => {
+      await initPageI18n();
+      const savedLang = getLanguageFromCookie();
+      const langObj = languages.find((l) => l.locale === savedLang) ?? languages[0];
+      setSelectedLanguage(langObj.code);
+      i18n.changeLanguage(langObj.locale);
+    };
+    setup();
   }, []);
 
   const selected = languages.find((l) => l.code === selectedLanguage) ?? languages[0];

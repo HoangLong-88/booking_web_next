@@ -9,9 +9,12 @@ interface AuthInputProps {
   value: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   isValid: boolean | null;
+  checking: boolean;
+  exists: boolean | null;
+  onContinue:() => void;
 }
 
-export function AuthContactField({ type, value, onChange, isValid }: AuthInputProps) {
+export function AuthContactField({ type, value, onChange, isValid, checking, exists ,onContinue }: AuthInputProps) {
   const placeholder =
     type === "email" ? "chatgpt@mail.ln" : "+1 234 567 8901";
   const label =
@@ -34,23 +37,33 @@ export function AuthContactField({ type, value, onChange, isValid }: AuthInputPr
           isValid === null
             ? ""
             : isValid
-            ? "border-green-500 pr-10"
-            : "border-red-500 pr-10"
+            ? "border-green-500 pr-10 focus-visible:ring-green-500"
+            : "border-red-500 pr-10 focus-visible:ring-red-500"
         }
       />
         <Label htmlFor={type}>
             {type === "phone" ? "Phone number" : "Email address"}
         </Label>
       {isValid === null ? null : isValid ? (
-        <CustomButton
-          variant="default"
-          asChild
-          className="relative opacity-80 w-full shadow-lg mr-[0.5rem] top-2"
-        >
-          <Link href="#" className="px-6 py-2 text-white">
-            Continue
-          </Link>
-        </CustomButton>
+        <>
+          <CustomButton
+            variant="default"
+            className="relative opacity-70 w-full shadow-lg mr-[0.5rem] top-2 text-white"
+            onClick={onContinue}
+            disabled={checking}
+          >
+            {checking ? "Checking..." : "Continue"}
+          </CustomButton>
+          {exists !== null && (
+            <p
+              className={`mt-2 text-sm font-semibold ${
+                exists ? "text-green-600" : "text-blue-600"
+              }`}
+            >
+              {exists ? "✅ Already exists" : "🆕 Available"}
+            </p>
+          )}
+        </>
       ) : (
         <>
           <div className="absolute inset-y-0 right-0 flex items-center -top-1/3 pr-3 pointer-events-none">
