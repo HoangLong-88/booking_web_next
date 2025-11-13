@@ -5,8 +5,8 @@ import { CustomButton } from "../ui/Button";
 
 const HeroHomePage: React.FC = () => {
     return (<div
-          className="h-[420px] md:h-[584px] w-full bg-cover bg-center "
-          style={{ backgroundImage: "url('https://www.nissanusa.com/content/dam/Nissan/us/rental-cars/nissan-rental-car-lineup-hero-v3.jpg.ximg.l_full_m.smart.jpg')" }}
+          className="h-[420px] md:h-[490px] w-full bg-cover bg-center "
+          style={{ backgroundImage: "url('https://overatours.com/wp-content/uploads/2024/06/Scenery-view.jpg')" }}
         >
           <div className="absolute 
           inset-0 
@@ -31,7 +31,7 @@ const HeroHomePage: React.FC = () => {
               text-white 
               drop-shadow-[0_8px_20px_rgba(0,0,0,0.6)]
                leading-tight">
-              Giảm đến 15% khi thuê<br/>xe
+              Giảm đến 15% khi đặt<br/>hoạt động
             </h1>
 
             <p className="mt-6 
@@ -57,5 +57,18 @@ const HeroHomePage: React.FC = () => {
           </div>
         </div>
     );
-}
-export { HeroHomePage };
+};
+
+const HeroAttractionsPage: React.FC = () => {
+    return(
+      <>
+        <div
+          className="h-[420px] md:h-[490px] w-full bg-cover bg-center "
+          style={{ backgroundImage: "url('https://www.nissanusa.com/content/dam/Nissan/us/rental-cars/nissan-rental-car-lineup-hero-v3.jpg.ximg.l_full_m.smart.jpg')" }}
+        ></div>
+      </>
+    );
+};
+
+
+export { HeroHomePage , HeroAttractionsPage};

@@ -3,7 +3,11 @@ import { Card, CardSubTitle, CardTitle } from "./Card";
 import { useRef, useState, useEffect } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import Link from "next/link";
-export { HotelTagsArrowScroll };
+import { describe } from "node:test";
+export {
+  HotelTagsArrowScroll,
+  NoteTags
+};
 
 
 function HotelTagsArrowScroll() {
@@ -112,7 +116,7 @@ function HotelTagsArrowScroll() {
       {canScrollLeft && (
         <button
           onClick={() => scroll("left")}
-          className="absolute left-0 top-1/3 -translate-y-1/2 bg-white shadow rounded-full p-2 z-10 hover:bg-gray-100 transition"
+          className="absolute left-0 top-1/4 -translate-y-1/2 bg-white shadow rounded-full p-2 z-10 hover:bg-gray-100 transition"
         >
           <ChevronLeft className="w-5 h-5" />
         </button>
@@ -123,18 +127,18 @@ function HotelTagsArrowScroll() {
         ref={scrollRef}
         className="flex gap-3 overflow-x-auto scroll-smooth no-scrollbar py-2"
       >
-        {DanangHotelTag.map((tag) => (
+        {DanangHotelTag.map(tag => (
           <Link href={`/stays/${tag.href}${tag.name}`}
             className="block"
           >
             <Card
               key={tag.id}
-              className="min-w-[260px] max-w-[320px] rounded-2xl relative overflow-hidden duration-200 mb-10"
+              className="min-w-[270px] max-w-[420px] h-full rounded-2xl relative overflow-hidden duration-200 mb-2"
             >
               <img
                 src={tag.img}
                 alt={tag.name}
-                className="object-cover h-50"
+                className="object-cover h-45"
               />
               <div className="mx-3">
                 <CardTitle className="text-lg my-1">
@@ -155,7 +159,7 @@ function HotelTagsArrowScroll() {
                       <p className="text-xs font-normal">Reviews: {tag.reviews?.quantity}</p>
                     </div>
                   </div>
-                  <div className="justify-items-end pt-15">
+                  <div className="justify-items-end pt-10">
                     <p>
                       <span className="text-xs font-normal text-blue-400">Starting with</span> {tag.price} VND</p>
                   </div>
@@ -171,11 +175,61 @@ function HotelTagsArrowScroll() {
       {canScrollRight && (
         <button
           onClick={() => scroll("right")}
-          className="absolute right-0 top-1/3 -translate-y-1/2 bg-white shadow rounded-full p-2 z-10 hover:bg-gray-100 transition"
+          className="absolute right-0 top-1/4 -translate-y-1/2 bg-white shadow rounded-full p-2 z-10 hover:bg-gray-100 transition"
         >
           <ChevronRight className="w-5 h-5" />
         </button>
       )}
+    </div>
+  );
+}
+
+function NoteTags() {
+  const WhyTag = [
+    {
+      id: 1,
+      name: 'booking-icon',
+      content: 'Đặt ngay bây giờ, thanh toán tại chỗ nghỉ',
+      description: 'MIỄN PHÍ hủy cho hầu hết các phòng',
+      img: 'icon/tags/booking-icon.png'
+    },
+    {
+      id: 2,
+      name: 'loving-favourite-icon',
+      content: 'Hơn 5 triệu đánh giá từ khách khác',
+      description: 'Tham khảo thông tin đáng tin cậy từ du khách như bạn',
+      img: 'icon/tags/heart-favourite-icon.png'
+    },
+    {
+      id: 3,
+      name: 'map-guide-icon',
+      content: 'Hơn 50 ngàn chỗ nghỉ trên toàn quốc',
+      description: 'Khách sạn, guest house, căn hộ và nhiều loại chỗ ở khác…',
+      img: 'icon/tags/pngtree-meb-map-guide.png',
+    },
+    {
+      id: 4,
+      name: 'customer-service-assistant-icon',
+      content: 'Dịch vụ khách hàng đáng tin cậy, hoạt động 24/7',
+      description: 'Chúng tôi luôn sẵn sàng giúp đỡ bạn',
+      img: 'icon/tags/CustomerServiceAssistant.png',
+    }
+  ];
+
+  return (
+    <div className="grid grid-cols-4 gap-4">
+      {WhyTag.map((tag) => (
+        <Card className="bg-stone-100 mx-5 rounded-sm px-3 py-5 shadow-sm w-70">
+          <img
+            key={tag.id} src={'/' + tag.img} alt={tag.name}
+            className="w-17 h-17 rounded-xl"
+          />
+          <div className="mt-5">
+              <p className="text-xl font-bold">{tag.content}</p>
+              <p className="text-sm py-2">{tag.description}</p>
+          </div>
+        </Card>
+      ))}
     </div>
   );
 }
