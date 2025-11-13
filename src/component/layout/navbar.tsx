@@ -5,20 +5,21 @@ import { useState, useEffect, useRef } from "react";
 import { LanguageSelector } from "../modal/language_selector";
 import { SetUpNavbarScroll } from "@/utils/dom/Scroll";
 import { Auth_Icon } from "../ui/Icon";
+import { useTranslation } from "react-i18next";
 
-const navItems = [
-  { name: "Stays", href: "/stays" },
-  { name: "FlighSign Ints", href: "/flights" },
-  { name: "Cars", href: "/cars" },
-  { name: "Attractions", href: "/atractions" },
-];
 
 function NavBar({isAuthPage}:{isAuthPage: boolean}) {
     const pathname = usePathname()
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
     const navbarRef =  useRef<HTMLElement>(null)
-    // const [isAuthenticated, user, logout, fetchCurrentUser] = useAuthStore()
-    // const [mounted, setMounted] = useState(false)
+    const { t } = useTranslation();
+
+    const navItems = [
+    { name: t('nav_item.stays'), href: "/stays" },
+    { name: t('nav_item.cars'), href: "/cars" },
+    { name: t('nav_item.attractions'), href: "/attractions" },
+    ];
+
     useEffect(() => {
         if (navbarRef.current) {
             const cleanup = SetUpNavbarScroll(navbarRef.current)
@@ -35,7 +36,7 @@ function NavBar({isAuthPage}:{isAuthPage: boolean}) {
                 <div className={`font-bold ${ !isAuthPage ? 'text-5xl' : 'text-4xl'} text-amber-50`}>
                     <Link href="/">SKYLINK</Link>
                 </div>
-                {!isAuthPage && <div className="text-1xl text-amber-50">Your travel partner</div>} 
+                {!isAuthPage && <div className="text-1xl text-amber-50">{t("header:logo_subtitle")}</div>} 
             </div>
 
             {/* Menu button (mobile) */}    
