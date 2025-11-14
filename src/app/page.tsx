@@ -1,3 +1,4 @@
+
 import { Card, CardTitle, CardSubTitle } from "@/component/ui/Card";
 import {
   LateEscapeDeal,
@@ -10,7 +11,6 @@ import { HomeSearchBar } from "@/component/ui/SearchBar";
 import { HeroHomePage } from "@/component/layout/Hero";
 import { HotelTagsArrowScroll, NoteTags } from "@/component/ui/TagScroll";
 import { TrendingDestinationsRecommendation } from "@/component/layout/gridLayout";
-
 
 export default function HomePage() {
   return (
