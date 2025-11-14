@@ -14,6 +14,10 @@ export default function AttractionsPage() {
           Nearby Destinations
         </p>
         <DestinationsLoadMore />
+        <div className="mt-[var(--spacing-top)]">
+          <p className="text-2xl font-bold">Popular activites options</p>
+          <p className="text-stone-500">Explore more things to do</p>
+        </div>
       </main>
     </>
   );

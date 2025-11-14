@@ -70,9 +70,9 @@ function DestinationsLoadMore() {
             href: '/attractions',
         },
         {
-            name: 'Lao Cai',
+            name: 'Sapa',
             img_url: 'https://www.guidevietnam.org/wp-content/uploads/2020/07/Sapa-trong-may-mu.jpg',
-            alt: 'LaoCaipic',
+            alt: 'Sapapic',
             href: '/attractions',
         },
         {
