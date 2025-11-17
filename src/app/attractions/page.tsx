@@ -1,6 +1,7 @@
 import { AttractionsSearchBar } from "@/component/ui/SearchBar";
 import { HeroAttractionsPage } from "@/component/layout/Hero";
 import { DestinationsLoadMore } from "@/component/ui/LoadMorePattern";
+import { ActivitesMenu } from "@/component/ui/ListMenu";
 
 export default function AttractionsPage() {
   return (
@@ -17,6 +18,7 @@ export default function AttractionsPage() {
         <div className="mt-[var(--spacing-top)]">
           <p className="text-2xl font-bold">Popular activites options</p>
           <p className="text-stone-500">Explore more things to do</p>
+          <ActivitesMenu/>
         </div>
       </main>
     </>
