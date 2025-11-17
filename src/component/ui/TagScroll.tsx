@@ -4,6 +4,7 @@ import { useRef, useState, useEffect } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import Link from "next/link";
 import { describe } from "node:test";
+import { useTranslation } from "react-i18next";
 export {
   HotelTagsArrowScroll,
   NoteTags
@@ -185,12 +186,13 @@ function HotelTagsArrowScroll() {
 }
 
 function NoteTags() {
+  const { t } = useTranslation()
   const WhyTag = [
     {
       id: 1,
       name: 'booking-icon',
-      content: 'Đặt ngay bây giờ, thanh toán tại chỗ nghỉ',
-      description: 'MIỄN PHÍ hủy cho hầu hết các phòng',
+      content: t('homepage:note_tags.why_tags.id_1.content'),
+      description: t('homepage:note_tags.why_tags.id_1.description'),
       img: 'icon/tags/booking-icon.png'
     },
     {

@@ -1,0 +1,8 @@
+{
+    "title": "Sign in or create an account",
+    "subtitle": "You can sign in using your Sky account to access our services.",
+    "auth_type" : {
+        "email" : "Email address",
+        "phone" : "Phone number"
+    }
+}
