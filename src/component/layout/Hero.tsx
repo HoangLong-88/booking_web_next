@@ -64,7 +64,19 @@ const HeroAttractionsPage: React.FC = () => {
     return(
       <>
         <div
-          className="h-[420px] md:h-[490px] w-full bg-cover bg-center "
+          className="h-[420px] md:h-[475px] w-full bg-cover bg-center"
+          style={{ backgroundImage: "url('https://localvietnam.com/wp-content/uploads/2024/07/driving-motorbike-sapa-2.jpg')" }}
+        ></div>
+      </>
+    );
+};
+
+
+const HeroCarPage: React.FC = () => {
+    return(
+      <>
+        <div
+          className="h-[420px] md:h-[475px] w-full bg-cover bg-center "
           style={{ backgroundImage: "url('https://www.nissanusa.com/content/dam/Nissan/us/rental-cars/nissan-rental-car-lineup-hero-v3.jpg.ximg.l_full_m.smart.jpg')" }}
         ></div>
       </>
@@ -72,4 +84,4 @@ const HeroAttractionsPage: React.FC = () => {
 };
 
 
-export { HeroHomePage , HeroAttractionsPage};
+export { HeroHomePage , HeroAttractionsPage, HeroCarPage};
