@@ -96,23 +96,23 @@ function ActivitesMenu() {
             content: [
                 {
                     name: "Thuê tàu thuyền",
-                    img: "https://static.vinwonders.com/production/Le-hoi-den-long-hoi-an-8.jpg"
+                    img: "https://swallowtravel.com/files/thumb/1140/670/uploads/Destinations/Nha-Trang/emperor/2-Emperor-Cruise.jpg "
                 },
                 {
                     name: "Công viên thiên nhiên",
-                    img: "https://res.klook.com/image/upload/c_fill,w_680,h_456/w_80,x_15,y_15,g_south_west,l_Klook_water_br_trans_yhcmh3/activities/l8spimvndlajipqndzlc.jpg"
+                    img: "https://images.loctung.com/uploads/2021/08/tu6.jpg"
                 },
                 {
-                    name: "Trải nghiệm độc lạ",
-                    img: "https://kenh14cdn.com/203336854389633024/2023/2/4/photo-6-16754953703071600706270.jpg"
+                    name: "Vườn quốc gia",
+                    img: "https://cattour.vn/images/upload/images/du-lich-ninh-binh/vuon-quoc-gia-cuc-phuong/vuon-quoc-gia-cuc-phuong-22.jpg"
                 },
                 {
-                    name: "Tour đạp xe leo núi",
-                    img: "https://media.vov.vn/sites/default/files/styles/large/public/2020-11/anh_2_3.jpg"
+                    name: "Nhảy dù trải nghiệm",
+                    img: "https://nanotravel.vn/wp-content/uploads/2023/07/nhay-du-son-tra.jpg"
                 },
                 {
-                    name: "Bữa tối trên du thuyền",
-                    img: "https://lanhabaycruises.vn/wp-content/uploads/2019/10/paradise-grand-cruise-lan-ha-bay-5.jpg"
+                    name: "Lướt ván sóng biển",
+                    img: "https://c.wallhere.com/photos/27/79/california_danapoint_nikon_nikond5300_pacificocean_strandbeach_beach_geotagged-920982.jpg!d"
                 }
             ]
         },
