@@ -1,8 +1,18 @@
+import { HeroCarPage } from "@/component/layout/Hero";
+import { QuestionDropdown } from "@/component/ui/Dropdown";
+import { CarSearchBar } from "@/component/ui/SearchBar";
 
 export default function CarsPage() {
   return (
-    <div className="font-bold font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      Cars Page!
-    </div>
+    <>
+      <header className="mt-[var(--spacing-top)]">
+        <HeroCarPage />
+        <CarSearchBar />
+      </header>
+      <main className="p-20">
+          <p className="">...</p>
+          <QuestionDropdown/>
+      </main>
+    </>
   );
 }
