@@ -4,5 +4,9 @@
         "stays": "住宿",
         "cars": "租車",
         "attractions": "景點"
+    },
+    "langs_modal" : {
+        "title": "選擇語言",
+        "subtitle": "所有語言"
     }
 }

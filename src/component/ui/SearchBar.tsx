@@ -2,9 +2,9 @@ import React from 'react';
 
 const HomeSearchBar: React.FC = () => {
   return (
-        <div className="absolute left-1/2 -translate-x-1/2 bottom-[-40px] z-20 w-[92%] md:w-[85%] max-w-6xl">
+        <div className="relative left-1/2 -translate-x-1/2 bottom-[40px] z-20 w-[92%] md:w-[85%] max-w-6xl">
           <form className="bg-white rounded-xl shadow-2xl ring-1 ring-black/5 p-3 flex gap-3 items-center border-2 border-orange-300">
-            <div className="flex-1 flex items-center gap-3">
+            <div className="flex-1 flex items-center gap-3">  
               <div className="flex grow items-center gap-3 px-4 py-3 rounded-lg border border-transparent hover:border-gray-200 w-72 bg-white">
                 <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" d="M17 11V6a5 5 0 00-10 0v5M7 11h10v6a2 2 0 01-2 2H9a2 2 0 01-2-2v-6z"/></svg>
                 <input className="w-full text-sm outline-none" placeholder="Where are you going" />
@@ -32,7 +32,7 @@ const HomeSearchBar: React.FC = () => {
 
 const AttractionsSearchBar: React.FC = () => {
   return(
-    <div className="absolute left-1/2 -translate-x-1/2 bottom-[-40px] z-20 w-[92%] md:w-[85%] max-w-6xl">
+    <div className="relative left-1/2 -translate-x-1/2 bottom-[40px] z-20 w-[92%] md:w-[85%] max-w-6xl">
           <form className="bg-white rounded-xl shadow-2xl ring-1 ring-black/5 p-3 flex gap-3 items-center border-2 border-orange-300">
             <div className="flex-1 flex items-center gap-3">
               <div className="flex grow items-center gap-3 px-4 py-3 rounded-lg border border-transparent hover:border-gray-200 w-72 bg-white">

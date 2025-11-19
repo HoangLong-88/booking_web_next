@@ -19,8 +19,8 @@ export default function HomePage() {
       <header className="mt-[var(--spacing-top)]">
         {/* background image + dark vignette */}
         <HeroHomePage />
-        <HomeSearchBar />
       </header>
+        <HomeSearchBar />
       <div className="min-h-screen p-20 bg-white text-black overflow-hidden">
         <TrendingDestinationsRecommendation/>
         <div className="pb-10">

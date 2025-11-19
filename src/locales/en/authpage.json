@@ -4,5 +4,6 @@
     "auth_type" : {
         "email" : "Email address",
         "phone" : "Phone number"
-    }
+    },
+    "continue_with": "Or continue with"
 }

@@ -4,5 +4,9 @@
         "stays": "stays",
         "cars": "cars",
         "attractions": "attractions"
+    },
+    "langs_modal" : {
+        "title": "Select language",
+        "subtitle": "All language"
     }
 }

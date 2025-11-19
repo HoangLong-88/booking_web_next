@@ -1,6 +1,6 @@
 'use client'
 import { useState } from "react";
-import { checkEmailExists, checkPhoneExists } from "../service/verify_email";
+import { checkEmailExists, checkPhoneExists } from "../service/verify_contact";
 
 export interface UseVerifyContactProps {
     switchToPhone: boolean;
@@ -10,7 +10,7 @@ export interface UseVerifyContactProps {
 export interface UseVerifyContactReturn {
     checking: boolean;
     exists: boolean | null;
-    handleContinue: () => Promise<void>;
+    handleContinue: () => Promise<boolean>;
 }
 export function useVerifyContact({ switchToPhone, email, phone}: UseVerifyContactProps): UseVerifyContactReturn {
     const [checking, setChecking] = useState(false);
@@ -24,14 +24,17 @@ export function useVerifyContact({ switchToPhone, email, phone}: UseVerifyContac
             if (switchToPhone) {
                 const response = await checkPhoneExists(phone);
                 setExists(response.exists);
+                return response.exists;
             } else {
                 const response = await checkEmailExists(email);
                 setExists(response.exists);
+                return response.exists;
             }
         }
         catch (error) {
             console.error("Error verifying contact:", error);
             setExists(null);
+            return false;
         }
         finally {
             setChecking(false);
