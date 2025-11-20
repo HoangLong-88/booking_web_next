@@ -43,11 +43,6 @@ export const initPageI18n = async () => {
       ns: ns,
       defaultNS: "header",
     });
-  console.log("Supported langs:", langs)
-  console.log("Loaded resources:", resources);
-  for (const lang of Object.keys(resources)) {
-    console.log(lang, "namespaces:", Object.keys(resources[lang]));
-  }
   initialized = true;
   return i18n;
 };

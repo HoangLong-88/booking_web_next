@@ -3,6 +3,7 @@ import React from "react";
 
 import { useAuthSwitchForm } from "@/utils/validation/useEmailPhoneSwitch";
 import { useVerifyContact } from "./hook/useVerifyContact";
+import { CustomOtpInput } from "./component/otp";
 
 import { Google_Icon, Phone_Icon, Mail_Icon } from "@/component/ui/Icon";
 import { CustomButton } from "@/component/ui/Button";
@@ -12,7 +13,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 function Login_Register_Page() {
-  const [step, setStep] = useState<"check" | "register" | "login">("check");
+  const [step, setStep] = useState<"check" | "otp" |  "register" | "login">("check");
     const {
     switchToPhone: isPhoneMode,
     setSwitchToPhone,
@@ -27,10 +28,13 @@ function Login_Register_Page() {
     email,
     phone,
   });
+    const [otp, setOtp] = useState("");
   const onContinue = async () => {
+    console.log("before:", step);
     const result = await handleContinue();
+    console.log("handleContinue returned:", result);
       if (result === false) {
-        setStep('register');
+        setStep('otp');
       } else {
         setStep('login');
       }
@@ -47,8 +51,8 @@ function Login_Register_Page() {
                       {step === "check" && (
                         <motion.div
                           key="check"
-                          initial={{ x: 300, opacity: 0 }}
-                          animate={{ x: 0, opacity: 1 }}
+                          initial={false}
+                          animate={{}}
                           exit={{ x: -300, opacity: 0 }}
                           transition={{ type: "spring", stiffness: 100 }}
                         >
@@ -60,6 +64,19 @@ function Login_Register_Page() {
                             checking={checking}
                             exists={exists}
                             onContinue={onContinue}
+                          />
+                        </motion.div>
+                      )}
+                      {step === "otp" && (
+                        <motion.div
+                          key="otp"
+                          initial={{ x: 300, opacity: 0}}
+                          animate={{ x: 0, opacity: 1 }}
+                          exit={{ x: -300, opacity: 0 }}
+                          transition={{ type: "spring", stiffness: 120 }}
+                        >
+                          <CustomOtpInput
+                            value={otp} onChange={setOtp}
                           />
                         </motion.div>
                       )}

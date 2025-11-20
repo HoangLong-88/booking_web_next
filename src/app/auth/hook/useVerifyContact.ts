@@ -21,6 +21,8 @@ export function useVerifyContact({ switchToPhone, email, phone}: UseVerifyContac
         setExists(null);
 
         try {
+            let responseExists = false;
+
             if (switchToPhone) {
                 const response = await checkPhoneExists(phone);
                 setExists(response.exists);

@@ -20,6 +20,7 @@ export default function HomePage() {
         {/* background image + dark vignette */}
         <HeroHomePage />
         <HomeSearchBar />
+      </header>
         {/* <SearchBar/> */}
       <div className="min-h-screen p-20 bg-white text-black overflow-hidden">
         <TrendingDestinationsRecommendation/>
