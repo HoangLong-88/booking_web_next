@@ -127,7 +127,7 @@ function DestinationsLoadMore() {
                             href={image.href}
                             className="relative block"
                         >
-                            <img className="rounded-xl h-42 w-full object shadow-xl"
+                            <img className="rounded-xl h-42 w-full shadow-xl border-2 border-sky-400"
                                 src={image.img_url} alt={image.alt} />
                             <p className="absolute text-white m-3 text-lg font-bold bottom-0 flex">
                                 {image.name}
@@ -142,7 +142,8 @@ function DestinationsLoadMore() {
                 <div className="flex justify-center">
                     <CustomButton
                         size='lg'
-                        className="absolute mt-[-25px] rounded-3xl shadow-xl text-white hover:bg-white hover:text-blue-500"
+                        className="w-80 mt-[20px] shadow-xl text-sky-500 hover:bg-stone-100 hover:border-orange-300
+                        hover:text-orange-300 border-2 border-sky-400 bg-white"
                         onClick={() => setPage(page + 1)}
                     >
                         Xem thêm
