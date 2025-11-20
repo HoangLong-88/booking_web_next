@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import { Input } from "./auth_input";
 import { Label } from "./auth_input_label";
 import { CustomButton } from "@/component/ui/Button";
@@ -21,7 +22,8 @@ export function AuthContactField({ type, value, onChange, isValid, checking, exi
     type === "email"
       ? "Please check if the email address you've entered is correct."
       : "Please check if the phone number you've entered is correct.";
-
+  const { t } = useTranslation()
+  
   return (
     <div className="relative">
       <Input
@@ -42,7 +44,7 @@ export function AuthContactField({ type, value, onChange, isValid, checking, exi
         }
       />
         <Label htmlFor={type}>
-            {type === "phone" ? "Phone number" : "Email address"}
+            {type === "phone" ? t("authpage:auth_type.phone") : t("authpage:auth_type.email")}
         </Label>
       {isValid === null ? null : isValid ? (
         <>

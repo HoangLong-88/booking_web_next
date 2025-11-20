@@ -5,10 +5,11 @@ import { CustomButton } from "../ui/Button";
 
 const HeroHomePage: React.FC = () => {
     return (<div
-          className="h-[420px] md:h-[475px] w-full bg-cover bg-center "
+          className="h-[420px] md:h-[800px] w-full bg-cover bg-center "
           style={{ backgroundImage: "url('https://overatours.com/wp-content/uploads/2024/06/Scenery-view.jpg')" }}
         >
-          <div className="absolute 
+          <div className="relative 
+          
           inset-0 
           bg-gradient-to-r 
           from-black/60 
@@ -43,13 +44,13 @@ const HeroHomePage: React.FC = () => {
             </p>
 
             <div className="mt-8">
-              <CustomButton asChild variant="default" size="lg" className="shadow-lg mr-[0.5rem]">
+              <CustomButton asChild variant="default" size="lg" className="shadow-lg mr-[0.5rem] text-white">
                <Link href="/book" className="px-6 py-2">
                  Đặt xe ngay bây giờ
                </Link>
              </CustomButton>
              <CustomButton asChild variant='ghost' size='lg'>
-                <Link href="/learn-more" className="px-6 py-2">
+                <Link href="/learn-more" className="px-6 py-2 hover:text-white">
                   Tìm hiểu thêm
                 </Link>
              </CustomButton>

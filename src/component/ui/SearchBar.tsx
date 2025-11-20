@@ -23,6 +23,7 @@ const HomeSearchBar: React.FC = () => {
             <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" d="M5.121 17.804A13.937 13.937 0 0112 15c2.485 0 4.81.63 6.879 1.804M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
             <input className="w-full text-sm outline-none" placeholder="2 người lớn · 0 trẻ em · 1 phòng" />
           </div>
+
         </div>
 
         <button type="submit" className="px-6 py-3 rounded-lg bg-blue-600 text-white text-base shadow-md">
