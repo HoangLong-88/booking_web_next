@@ -5,5 +5,9 @@
     "email": "Địa chỉ email",
     "phone": "Số điện thoại"
   },
-  "continue_with": "Hoặc tiếp tục với"
+  "email_format_error": "Vui lòng kiểm tra xem địa chỉ email bạn nhập có chính xác không.",
+  "phone_format_error": "Vui lòng kiểm tra xem số điện thoại bạn nhập có chính xác không.",
+  "continue_with": "Hoặc tiếp tục với",
+  "otp_title": "Xác minh địa chỉ email của bạn để đăng nhập",
+  "otp_subtitle": "Chúng tôi đã gửi mã xác minh đến <bold>{{contact}}</bold>. Nhập mã này để tiếp tục."
 }

@@ -1,7 +1,7 @@
 'use client'
 import React from 'react';
 import { useState, useEffect, useRef, ChangeEvent } from "react";
-import useDebounce from '@/hook/Debounce';
+import useDebounce from '@/hook/useDebounce';
 
 const HomeSearchBar: React.FC = () => {
   return (
