@@ -13,16 +13,23 @@ interface AuthInputProps {
   checking: boolean;
   exists: boolean | null;
   onContinue:() => void;
+  onContactChange?: (contact: string) => void;
 }
 
-export function AuthContactField({ type, value, onChange, isValid, checking, exists ,onContinue }: AuthInputProps) {
+export function AuthContactField({ type, value, onChange, isValid, checking, exists, onContinue, onContactChange }: AuthInputProps) {
+    const { t } = useTranslation()
   const placeholder =
     type === "email" ? "chatgpt@mail.ln" : "+1 234 567 8901";
-  const label =
+  const label = 
     type === "email"
-      ? "Please check if the email address you've entered is correct."
-      : "Please check if the phone number you've entered is correct.";
-  const { t } = useTranslation()
+      ? t("authpage:email_format_error")
+      : t("authpage:phone_format_error");
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    onChange(e);
+    if (onContactChange) {
+      onContactChange(e.target.value);
+    }
+  };
   
   return (
     <div className="relative">
@@ -34,7 +41,7 @@ export function AuthContactField({ type, value, onChange, isValid, checking, exi
         required
         placeholder={placeholder}
         value={value}
-        onChange={onChange}
+        onChange={handleChange}
         className={
           isValid === null
             ? ""
