@@ -28,6 +28,7 @@ const Input = React.forwardRef<
         focus-visible:outline-none
         disabled:cursor-not-allowed 
         disabled:opacity-50`,
+      className
       )}
       ref={ref}
       {...props}

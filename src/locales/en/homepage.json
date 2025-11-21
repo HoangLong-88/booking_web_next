@@ -1,0 +1,23 @@
+{ 
+    "Why should be SKYLINK ?": "Why should be SKYLINK ?",
+    "note_tags" : {
+        "why_tags" : {
+            "id_1": {
+                "content" : "Book now, pay at the property",
+                "description" : "FREE cancellation on most rooms"
+            },
+            "id_2": {
+                "content" : "Over 5 million reviews from other guests",
+                "description": "Get reliable information from travelers like you"
+            },
+            "id_3": {
+                "content" : "More than 50 thousand accommodations nationwide",
+                "description": "Hotels, guest houses, apartments and many other types of accommodation"
+            },
+            "id_4": {
+                "content" : "Reliable customer service, available 24/7",
+                "description": "We are always ready to help you"
+            }
+        }
+    }
+}

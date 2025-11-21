@@ -4,6 +4,8 @@ import { getLanguageFromCookie, changeLanguage } from "@/libs/language";
 import { Overlay } from "@/component/ui/Overlay";
 import { useModal } from "@/utils/dom/useModal";
 import { createPortal } from "react-dom";
+import { initPageI18n } from "@/libs/i18n";
+import { useTranslation } from "react-i18next";
 
 type Lang = {
   code: string;
@@ -15,8 +17,7 @@ type Lang = {
 function LanguageSelector() {
   const { isOpen, open, close, modalRef } = useModal(); 
   const [selectedLanguage, setSelectedLanguage] = useState<string>("EN");
-  const [lang, setLang] = useState("en");
-  const [isLanguageModalOpen, setIsModalOpen] = useState(false);   
+  const { t, i18n } = useTranslation();
   const languages: Lang[] = [
     { code: "EN", label: "English", flag: "icon/flags/united-states.png", locale: "en" },
     { code: "VI", label: "Việt Nam", flag: "icon/flags/vietnam.png", locale: "vi" },
@@ -27,10 +28,14 @@ function LanguageSelector() {
   ];
 
   useEffect(() => {
-    const saved = getLanguageFromCookie();
-    setLang(saved);
-    const langObj = languages.find((l) => l.locale === saved);
-    if (langObj) setSelectedLanguage(langObj.code);
+    const setup = async () => {
+      await initPageI18n();
+      const savedLang = getLanguageFromCookie();
+      const langObj = languages.find((l) => l.locale === savedLang) ?? languages[0];
+      setSelectedLanguage(langObj.code);
+      i18n.changeLanguage(langObj.locale);
+    };
+    setup();
   }, []);
 
   const selected = languages.find((l) => l.code === selectedLanguage) ?? languages[0];
@@ -41,12 +46,12 @@ function LanguageSelector() {
         type="button" 
         aria-haspopup="dialog"
         onClick={() => open()}
-        className="flex items-center gap-2 px-3 py-2 rounded-md bg-white/30 backdrop-blur-sm text-sm font-medium text-gray-800 hover:bg-white/40 border"
+        className="flex items-center gap-2 px-3 py-2 rounded-md bg-transparent backdrop-blur-sm text-sm font-bold text-white hover:bg-white/40"
       >
         <img
           src={"/" + selected.flag}
           alt={selected.label}
-          className="w-5 h-5 rounded-sm shadow-sm"
+          className="w-5 h-5 shadow-sm"
         />
         <span className="hidden md:inline">{selectedLanguage}</span>
         <svg className="w-4 h-4 opacity-70" viewBox="0 0 20 20" fill="currentColor" aria-hidden>
@@ -63,13 +68,13 @@ function LanguageSelector() {
             className="inset-0 fixed z-50 flex items-center justify-center p-6 pointer-events-none"
             // prevent overlay close when clicking inside modal
           >
-            <div ref={modalRef} role="dialog" className="flex flex-col w-full max-w-4xl bg-white overflow-hidden rounded-xl shadow-2xl ring-1 ring-black/5 pointer-events-auto"
+            <div ref={modalRef} role="dialog" className="flex flex-col w-full max-w-4xl bg-white overflow-hidden rounded-xl shadow-2xl ring-1 pointer-events-auto"
             onClick={(e) => e.stopPropagation()} aria-modal="true" 
             > 
               {/* Header */}
-              <div className="px-6 py-5 border-b">
+              <div className="px-6 py-5 pb-0.5">
                 <div className="flex items-center justify-between">
-                  <div className="text-lg font-medium text-black">Select language</div>
+                  <div className="text-2xl font-extrabold text-black">{t("header:langs_modal.title")}</div>
                   <button
                     aria-label="Close"
                     onClick={() => close()}
@@ -80,19 +85,12 @@ function LanguageSelector() {
                     </svg>
                   </button>
                 </div>
+                <div className="text-md font-medium text-black">{t("header:langs_modal.subtitle")}</div>
               </div>
 
               {/* Content */}
-              <div className="p-6">
+              <div className="p-6 pt-1">
                 <div className="mb-4">
-                  <label className="relative block">
-                    <input
-                      type="text"
-                      placeholder="Search"
-                      className="w-full rounded-md border px-4 py-2 text-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-300"
-                      onChange={() => {}}
-                    />
-                  </label>
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 gap-4">
@@ -103,7 +101,8 @@ function LanguageSelector() {
                         key={lang.code}
                         onClick={() => {
                           setSelectedLanguage(lang.code);
-                          changeLanguage(lang);
+                          changeLanguage(lang)
+                          window.location.reload();
                         }}
                         className={
                           `flex items-center 
@@ -114,16 +113,17 @@ function LanguageSelector() {
                            rounded-lg 
                            border 
                            transition-colors
+                           cursor-pointer
                           ` +
                           (active
-                            ? `border-indigo-500 ring-1 
+                            ? `border-none ring-1 
                             ring-indigo-200
                              bg-gradient-to-r
                               from-indigo-50
                                to-white 
                                text-gray-500`
-                            :  `border-gray-200
-                             hover:bg-gray-50
+                            :  `border-none
+                             hover:bg-gray-100
                              text-black`)
                         }
                         aria-pressed={active}

@@ -1,0 +1,9 @@
+{
+  "title": "登录或创建账户",
+  "subtitle": "您可以使用 Sky 账户登录以访问我们的服务。",
+  "auth_type": {
+    "email": "电子邮箱地址",
+    "phone": "电话号码"
+  },
+  "continue_with": "或继续使用"
+}
