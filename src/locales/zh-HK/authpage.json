@@ -5,5 +5,9 @@
       "email": "電郵地址",
       "phone": "電話號碼"
     },
-    "continue_with": "或繼續使用"
+    "email_format_error" : "請檢查您輸入的電子郵件地址是否正確。",
+    "phone_format_error" : "請檢查您輸入的電話號碼是否已通過驗證。",
+    "continue_with": "或繼續使用",
+    "otp_title": "驗證您的電子郵件地址以登入",
+    "otp_subtitle": "我們已將驗證碼傳送至 <bold>{{contact}}</bold>。請輸入此代碼以繼續。"
 }

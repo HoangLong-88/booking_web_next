@@ -25,13 +25,13 @@ export function useVerifyContact({ switchToPhone, email, phone}: UseVerifyContac
 
             if (switchToPhone) {
                 const response = await checkPhoneExists(phone);
-                setExists(response.exists);
-                return response.exists;
+                responseExists = !!response.exists;
             } else {
                 const response = await checkEmailExists(email);
-                setExists(response.exists);
-                return response.exists;
+                responseExists = !!response.exists;
             }
+            setExists(responseExists)
+            return responseExists;
         }
         catch (error) {
             console.error("Error verifying contact:", error);
