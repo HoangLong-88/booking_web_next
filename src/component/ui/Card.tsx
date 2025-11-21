@@ -1,7 +1,6 @@
 import { cn } from "@/libs/utils";
 import Link from "next/link";
 import React from "react";
-export {Card,CardTitle,CardSubTitle}
 
 const Card = React.forwardRef<
     HTMLDivElement,
@@ -35,8 +34,14 @@ const CardSubTitle = React.forwardRef<
 >(({className,...props}, ref)=>(
     <div
         ref={ref}
-        className={cn("pt-1 text-stone-400 text-xs font-bold", className)}
+        className={cn("text-stone-400 text-xs font-bold", className)}
         {...props}
     />
 ))
 CardSubTitle.displayName = 'CardSubTitle';
+
+
+// function Attractions
+
+
+export {Card,CardTitle,CardSubTitle}

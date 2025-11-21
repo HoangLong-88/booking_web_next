@@ -1,0 +1,9 @@
+{
+  "title": "Đăng nhập hoặc tạo tài khoản",
+  "subtitle": "Bạn có thể đăng nhập bằng tài khoản Sky để sử dụng các dịch vụ của chúng tôi.",
+  "auth_type": {
+    "email": "Địa chỉ email",
+    "phone": "Số điện thoại"
+  },
+  "continue_with": "Hoặc tiếp tục với"
+}

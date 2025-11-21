@@ -1,0 +1,12 @@
+{
+    "logo_subtitle": "Your travel partner",
+    "nav_item": {
+        "stays": "stays",
+        "cars": "cars",
+        "attractions": "attractions"
+    },
+    "langs_modal" : {
+        "title": "Select language",
+        "subtitle": "All language"
+    }
+}

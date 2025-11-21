@@ -3,21 +3,30 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "npm-run-all -p start:server start:browser",
-    "start:server": "next dev",
-    "start:browser": "open-cli http://localhost:3000",
-    "build": "next build",
+    "dev": "concurrently \"next dev\" \"sleep 3 && xdg-open http://localhost:3000\"",
     "start": "next start",
     "lint": "eslint"
   },
   "dependencies": {
-    "@radix-ui/react-slot": "^1.2.3",
+    "axios": "^1.13.1",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
+    "concurrently": "^9.2.1",
+    "framer-motion": "^12.23.24",
+    "i18next": "^25.6.1",
+    "i18next-browser-languagedetector": "^8.2.0",
+    "i18next-http-backend": "^3.0.2",
+    "js-cookie": "^3.0.5",
+    "lucide-react": "^0.548.0",
     "next": "15.5.4",
+    "next-i18next": "^15.4.2",
+    "next-intl": "^4.5.0",
+    "radix-ui": "^1.4.3",
     "react": "19.1.0",
     "react-dom": "19.1.0",
-    "tailwind-merge": "^3.3.1"
+    "react-i18next": "^16.2.4",
+    "tailwind-merge": "^3.3.1",
+    "utils": "^0.3.1"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
@@ -25,13 +34,13 @@
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
-    "concurrently": "^9.2.1",
+    "autoprefixer": "^10.4.21",
     "eslint": "^9",
     "eslint-config-next": "15.5.4",
-    "npm-run-all": "^4.1.5",
+    "open": "^10.2.0",
     "open-cli": "^8.0.0",
-    "tailwindcss": "^4",
-    "typescript": "^5",
-    "wait-on": "^9.0.1"
+    "postcss": "^8.5.6",
+    "tailwindcss": "^4.1.14",
+    "typescript": "5.9.2"
   }
 }

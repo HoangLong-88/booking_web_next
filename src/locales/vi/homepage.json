@@ -1,0 +1,10 @@
+{ 
+    "Why should be SKYLINK ?": "Tại sao chọn SKYLINK ?",
+    "note_tags" : {
+        "why_tags" : {
+            "1": {
+                "booking_content" : "Đặt ngay bây giờ, thanh toán tại chỗ nghỉ",
+                "booking_description" : "MIỄN PHÍ hủy cho hầu hết các phòng"
+            }
+        }
+}}
