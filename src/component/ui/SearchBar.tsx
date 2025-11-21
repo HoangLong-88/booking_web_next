@@ -1,7 +1,7 @@
 'use client'
 import React from 'react';
 import { useState, useEffect, useRef, ChangeEvent } from "react";
-import useDebounce from '@/app/auth/hook/debounce';
+import useDebounce from '@/hook/useDebounce';
 
 const HomeSearchBar: React.FC = () => {
   return (
@@ -137,7 +137,6 @@ export default function SearchBar() {
   const handleSelect = (value: string) => {
     setQuery(value);
     setIsOpen(false);
-    console.log("Searching for:", value);
   };
 
   return (
