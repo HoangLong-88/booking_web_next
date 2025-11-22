@@ -1,0 +1,23 @@
+{ 
+    "Why should be SKYLINK ?": "為甚麼要選擇 SKYLINK？",
+    "note_tags" : {
+        "why_tags" : {
+            "id_1": {
+                "content" : "立即預訂，到店付款",
+                "description" : "大部分客房可免費取消"
+            },
+            "id_2": {
+                "content" : "超過 500 萬條其他住客的評價",
+                "description": "獲取來自像您一樣的旅客的可靠資訊"
+            },
+            "id_3": {
+                "content" : "全國超過 5 萬間住宿",
+                "description": "飯店、賓館、公寓和許多其他類型的住宿"
+            },
+            "id_4": {
+                "content" : "可靠的客戶服務，24/7 全天候可用",
+                "description": "我們隨時準備為您提供協助"
+            }
+        }
+    }
+}

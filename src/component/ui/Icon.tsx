@@ -3,7 +3,7 @@ import Link from "next/link";
 
 const Auth_Icon: React.FC = () => {
     return (
-        <Link href="/auth" className="w-6 h-6 lg:w-8 h-8 " aria-label="Authentication Icon">
+        <Link href="/auth" className="block sm:block md:hidden lg:block w-8 h-8" aria-label="Authentication Icon">
             <svg className="fill-amber-50 drop-shadow-[0_2px_4px_rgba(0,0,0,0.3)]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
                 <path d="M224 248a120 120 0 1 0 0-240 120 120 0 1 0 0 240zm-29.7 56C95.8 304 16 383.8 16 482.3 16 498.7 29.3 512 45.7 512l356.6 0c16.4 0 29.7-13.3 29.7-29.7 0-98.5-79.8-178.3-178.3-178.3l-59.4 0z"/>
             </svg>
@@ -35,7 +35,7 @@ const Google_Icon: React.FC = () => {
 const Phone_Icon: React.FC = () => {
     return (
         <svg
-            className="h-5 w-5"x
+            className="h-5 w-5"
             fill="currentColor"
             viewBox="0 0 64 64"
             >
@@ -43,4 +43,15 @@ const Phone_Icon: React.FC = () => {
         </svg>
     );
 };
-export { Auth_Icon, Google_Icon, Phone_Icon };
+const Mail_Icon: React.FC = () => {
+    return (
+        <svg
+            className="h-5 w-5"
+            fill="currentColor"
+            viewBox="0 0 24 24"
+            >
+            <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/> 
+        </svg>
+    );
+}
+export { Auth_Icon, Google_Icon, Phone_Icon, Mail_Icon };

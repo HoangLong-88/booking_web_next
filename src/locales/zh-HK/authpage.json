@@ -1,0 +1,13 @@
+{
+    "title": "登入或建立帳戶",
+    "subtitle": "您可以使用 Sky 帳戶登入以使用我們的服務。",
+    "auth_type": {
+      "email": "電郵地址",
+      "phone": "電話號碼"
+    },
+    "email_format_error" : "請檢查您輸入的電子郵件地址是否正確。",
+    "phone_format_error" : "請檢查您輸入的電話號碼是否已通過驗證。",
+    "continue_with": "或繼續使用",
+    "otp_title": "驗證您的電子郵件地址以登入",
+    "otp_subtitle": "我們已將驗證碼傳送至 <bold>{{contact}}</bold>。請輸入此代碼以繼續。"
+}

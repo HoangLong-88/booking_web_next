@@ -1,0 +1,13 @@
+{
+    "title": "Sign in or create an account",
+    "subtitle": "You can sign in using your Sky account to access our services.",
+    "auth_type" : {
+        "email" : "Email address",
+        "phone" : "Phone number"
+    },
+    "email_format_error": "Please check if the email address you've entered is correct.",
+    "phone_format_error": "Please check if the phone you've entered is correct.",
+    "continue_with": "Or continue with",
+    "otp_title" : "Verify your email address to sign in",
+    "otp_subtitle": "We sent a verification code to <bold>{{contact}}</bold>. Enter this code to continue."
+}
