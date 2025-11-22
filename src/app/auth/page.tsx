@@ -95,6 +95,9 @@ function Login_Register_Page() {
                           <CustomOtpInput
                             value={otp} onChange={setOtp}
                           />
+                          <CustomButton>
+                            
+                          </CustomButton>
                         </motion.div>
                       )}
 
