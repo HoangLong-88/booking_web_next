@@ -3,7 +3,6 @@ import { Card, CardSubTitle, CardTitle } from "./Card";
 import { useRef, useState, useEffect } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import Link from "next/link";
-import { describe } from "node:test";
 import { useTranslation } from "react-i18next";
 export {
   HotelTagsArrowScroll,
@@ -130,7 +129,7 @@ function HotelTagsArrowScroll() {
       >
         {DanangHotelTag.map(tag => (
           <Link href={`/stays/${tag.href}${tag.name}`}
-            className="block"
+            className="block" key={tag.id}
           >
             <Card
               key={tag.id}
@@ -221,9 +220,9 @@ function NoteTags() {
   return (
     <div className="grid grid-cols-4">
       {WhyTag.map((tag) => (
-        <Card className="bg-orange-200 rounded-sm px-3 py-5 shadow-sm w-66">
+        <Card key={tag.id} className="bg-orange-200 rounded-sm px-3 py-5 shadow-sm w-66">
           <img
-            key={tag.id} src={'/' + tag.img} alt={tag.name}
+            src={'/' + tag.img} alt={tag.name}
             className="w-17 h-17 rounded-xl"
           />
           <div className="mt-5">
