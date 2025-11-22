@@ -37,7 +37,7 @@ export default function CarsPage() {
         <p className="text-3xl font-semibold mb-3 mt-5 text-center text-orange-300">Thuê xe với SKYLINK</p>
         <div className="bg-sky-100 py-17 flex mb-12 rounded-xl border-3 border-orange-300">
             {Ads.map((item) => (
-              <div className="flex items-center mx-10">
+              <div className="flex items-center mx-10" key={item.title}>
                 <img src={item.img} alt={item.alt} className="w-22 h-22" />
                 <div className="ml-2">
                   <p className="font-bold">{item.title}</p>
