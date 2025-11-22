@@ -1,4 +1,4 @@
-import i18n from "i18next";
+import i18n, { Resources } from "i18next";
 import { initReactI18next } from "react-i18next";
 
 declare const require: {
@@ -8,19 +8,26 @@ declare const require: {
     filter?: RegExp
   ) => {
     keys: () => string[];
-    <T = any>(id: string): T;
+    <T = unknown>(id: string): T;
   };
 };
+type TranslationJSON = Record<string, unknown>;
+type TranslationResources = Record<string, Record<string, TranslationJSON>>;
 
-function importAll(r: any) {
-  const translations: Record<string, any> = {};
+function importAll(r: ReturnType<typeof require.context>): TranslationResources {
+  const translations: TranslationResources = {};
+
   r.keys().forEach((key: string) => {
     const match = key.match(/\/([^/]+)\/([^/]+)\.json$/);
     if (!match) return;
-    const [ _, lang, ns] = match;
+
+    const [, lang, ns] = match;
+    const json = r<TranslationJSON>(key);
+
     if (!translations[lang]) translations[lang] = {};
-    translations[lang][ns] = r(key);
+    translations[lang][ns] = json;
   });
+
   return translations;
 }
 
