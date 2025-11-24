@@ -5,7 +5,7 @@ import { CustomButton } from "../ui/Button";
 
 const HeroHomePage: React.FC = () => {
     return (<div
-          className="h-[420px] md:h-[800px] w-full bg-cover bg-center "
+          className="h-[420px] md:h-[490px] w-full bg-cover bg-center "
           style={{ backgroundImage: "url('https://overatours.com/wp-content/uploads/2024/06/Scenery-view.jpg')" }}
         >
           <div className="relative 

@@ -1,7 +1,31 @@
 'use client'
 import React from 'react';
-import { useState, useEffect, useRef, ChangeEvent } from "react";
+import { useState, useEffect, useRef, ChangeEvent, forwardRef } from "react";
 import useDebounce from '@/hook/useDebounce';
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import { format } from "date-fns";
+
+// 1. Định nghĩa interface cho props
+interface CustomDateInputProps {
+  value?: string;
+  onClick?: () => void;
+  placeholder?: string;
+  selectedDate?: Date | null; // thêm prop mới
+}
+
+const CustomDateInput = forwardRef<HTMLButtonElement, CustomDateInputProps>(
+  ({ selectedDate, onClick, placeholder }, ref) => (
+    <button
+      type='button'
+      className="text-sm text-stone-400"
+      onClick={onClick}
+      ref={ref}
+    >
+      {selectedDate ? format(selectedDate, "dd/MM/yyyy") : placeholder}
+    </button>
+  )
+);
 
 const HomeSearchBar: React.FC = () => {
   return (
@@ -10,20 +34,13 @@ const HomeSearchBar: React.FC = () => {
         <div className="flex-1 flex items-center gap-3">
           <div className="flex grow items-center gap-3 px-4 py-3 rounded-lg border border-transparent hover:border-gray-200 w-72 bg-white">
             <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" d="M17 11V6a5 5 0 00-10 0v5M7 11h10v6a2 2 0 01-2 2H9a2 2 0 01-2-2v-6z" /></svg>
-            {/* <input className="w-full text-sm outline-none" placeholder="Where are you going" /> */}
-            <SearchBar />
+            <KeySearchBar />
           </div>
 
           <div className="flex grow items-center gap-3 px-4 py-3 rounded-lg border border-transparent hover:border-gray-200 bg-white">
             <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" d="M8 7V3M16 7V3M3 11h18M5 21h14a2 2 0 002-2V7H3v12a2 2 0 002 2z" /></svg>
-            <input className="w-full text-sm outline-none" placeholder="Check in date — Check out date" />
+            <DateBar />
           </div>
-
-          <div className="flex grow items-center gap-3 px-4 py-3 rounded-lg border border-transparent hover:border-gray-200 bg-white">
-            <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" d="M5.121 17.804A13.937 13.937 0 0112 15c2.485 0 4.81.63 6.879 1.804M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
-            <input className="w-full text-sm outline-none" placeholder="2 người lớn · 0 trẻ em · 1 phòng" />
-          </div>
-
         </div>
 
         <button type="submit" className="px-6 py-3 rounded-lg bg-blue-600 text-white text-base shadow-md">
@@ -42,13 +59,12 @@ const AttractionsSearchBar: React.FC = () => {
         <div className="flex-1 flex items-center gap-3">
           <div className="flex grow items-center gap-3 px-4 py-3 rounded-lg border border-transparent hover:border-gray-200 w-72 bg-white">
             <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" d="M17 11V6a5 5 0 00-10 0v5M7 11h10v6a2 2 0 01-2 2H9a2 2 0 01-2-2v-6z" /></svg>
-            {/* <input className="w-full text-sm outline-none" placeholder="Where are you going" /> */}
-            <SearchBar />
+            <KeySearchBar />
           </div>
 
           <div className="flex grow items-center gap-3 px-4 py-3 rounded-lg border border-transparent hover:border-gray-200 bg-white">
             <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" d="M8 7V3M16 7V3M3 11h18M5 21h14a2 2 0 002-2V7H3v12a2 2 0 002 2z" /></svg>
-            <input className="w-full text-sm outline-none" placeholder="Check in date — Check out date" />
+            <DateBar />
           </div>
         </div>
         <button type="submit" className="px-6 py-3 rounded-lg bg-blue-600 text-white text-base shadow-md grow-0">
@@ -67,13 +83,12 @@ const CarSearchBar: React.FC = () => {
         <div className="flex-1 flex items-center gap-3">
           <div className="flex grow items-center gap-3 px-4 py-3 rounded-lg border border-transparent hover:border-gray-200 w-72 bg-white">
             <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" d="M17 11V6a5 5 0 00-10 0v5M7 11h10v6a2 2 0 01-2 2H9a2 2 0 01-2-2v-6z" /></svg>
-            {/* <input className="w-full text-sm outline-none" placeholder="Where are you going" /> */}
-            <SearchBar />
+            <KeySearchBar />
           </div>
 
           <div className="flex grow items-center gap-3 px-4 py-3 rounded-lg border border-transparent hover:border-gray-200 bg-white">
             <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" d="M8 7V3M16 7V3M3 11h18M5 21h14a2 2 0 002-2V7H3v12a2 2 0 002 2z" /></svg>
-            <input className="w-full text-sm outline-none" placeholder="Check in date — Check out date" />
+            <DateBar />
           </div>
         </div>
         <button type="submit" className="px-6 py-3 rounded-lg bg-blue-600 text-white text-base shadow-md grow-0">
@@ -85,7 +100,7 @@ const CarSearchBar: React.FC = () => {
 };
 
 
-export default function SearchBar() {
+export function KeySearchBar() {
   // State definitions
   const [query, setQuery] = useState<string>("");
   const [suggestions, setSuggestions] = useState<string[]>([]); // Type as array of strings
@@ -140,7 +155,7 @@ export default function SearchBar() {
   };
 
   return (
-    <div ref={wrapperRef} className="relative w-full h-5">
+    <div ref={wrapperRef} className="relative w-full">
       <div className="relative">
         <input
           type="text"
@@ -148,7 +163,6 @@ export default function SearchBar() {
           onChange={handleInputChange}
           onFocus={() => { if (suggestions.length > 0) setIsOpen(true); }}
           placeholder="Địa điểm..."
-          // className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
           className='outline-none text-sm w-full'
         />
 
@@ -174,6 +188,35 @@ export default function SearchBar() {
       )}
     </div>
   );
+};
+
+export function DateBar() {
+  const [checkIn, setCheckIn] = useState<Date | null>(null);
+  const [checkOut, setCheckOut] = useState<Date | null>(null);
+
+  return (
+    <>
+      <DatePicker
+        selected={checkIn}
+        onChange={setCheckIn}
+        placeholderText='Ngày nhận'
+        className='outline-none'
+        dateFormat='dd/MM/yyyy'
+        selectsStart
+        customInput={<CustomDateInput placeholder='Ngày nhận' selectedDate={checkIn} />}
+      />
+      —
+      <DatePicker
+        selected={checkOut}
+        onChange={setCheckOut}
+        placeholderText='Ngày trả'
+        dateFormat='dd/MM/yyyy'
+        className='outline-none'
+        selectsEnd
+        customInput={<CustomDateInput placeholder='Ngày trả' selectedDate={checkOut} />}
+      />
+    </>
+  )
 }
 
 export { HomeSearchBar, AttractionsSearchBar, CarSearchBar };
