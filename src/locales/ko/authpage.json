@@ -21,5 +21,6 @@
       "confirm_password": "비밀번호 확인"
     },
   "password_length_error": "비밀번호는 최소 8자 이상이어야 합니다",
-  "password_match_error": "비밀번호가 일치하지 않습니다"
+  "password_match_error": "비밀번호가 일치하지 않습니다",
+  "sign_up_btn": "회원가입"
 }

@@ -21,5 +21,6 @@
       "confirm_password": "確認密碼"
     },
     "password_length_error": "密碼必須至少為8個字符",
-    "password_match_error": "密碼不匹配"
+    "password_match_error": "密碼不匹配",
+    "sign_up_btn": "註冊"
 }

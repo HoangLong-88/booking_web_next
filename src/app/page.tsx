@@ -7,7 +7,7 @@ import {
   DisabledDiscount
 } from "@/component/ui/Image";
 import Link from "next/link";
-import { HomeSearchBar } from "@/component/ui/SearchBar";
+import { HomeSearchBar } from "@/component/layout/CustomSearchBar";
 import { HeroHomePage } from "@/component/layout/Hero";
 import { HotelTagsArrowScroll, NoteTags } from "@/component/ui/TagScroll";
 import { TrendingDestinationsRecommendation } from "@/component/layout/gridLayout";
@@ -91,7 +91,7 @@ export default function HomePage() {
               <p className="mt-1 mb-5">
                 Book over 300,000 travel activities in more than 200 countries worldwide!
               </p>
-              <Link href="/" className="text-blue-500 hover:underline">
+              <Link href="/attractions" className="text-blue-500 hover:underline">
                 Learn more
               </Link>
             </div>

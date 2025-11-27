@@ -21,5 +21,6 @@
     "confirm_password": "បញ្ជាក់ពាក្យសម្ងាត់"
   },
   "password_length_error": "ពាក្យសម្ងាត់ត្រូវតែមានយ៉ាងហោចណាស់ 8 តួអក្សរ",
-  "password_match_error": "ពាក្យសម្ងាត់មិនត្រូវគ្នា"
+  "password_match_error": "ពាក្យសម្ងាត់មិនត្រូវគ្នា",
+  "sign_up_btn": "ចុះឈ្មោះ"
 }

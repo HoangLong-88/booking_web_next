@@ -20,5 +20,6 @@
       "confirm_password": "Xác nhận mật khẩu"
     },
   "password_length_error": "Mật khẩu phải có ít nhất 8 ký tự",
-  "password_match_error": "Mật khẩu không khớp"
+  "password_match_error": "Mật khẩu không khớp",
+  "sign_up_btn": "Đăng ký"
 }
