@@ -1,4 +1,4 @@
-import { AttractionsSearchBar } from "@/component/ui/SearchBar";
+import { AttractionsSearchBar } from "@/component/layout/CustomSearchBar";
 import { HeroAttractionsPage } from "@/component/layout/Hero";
 import { DestinationsLoadMore } from "@/component/ui/LoadMorePattern";
 import { ActivitesMenu } from "@/component/ui/ListMenu";

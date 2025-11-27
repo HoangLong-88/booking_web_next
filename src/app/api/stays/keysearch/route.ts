@@ -1,8 +1,8 @@
 import { NextResponse, NextRequest } from 'next/server';
 
 const KEYWORDS: string[] = [
-  "Hà Nội", "TP.Hồ Chí Minh", "Đà Nẵng", "Hội An", "Hạ Long Bay", 
-  "Đà Lạt", "Ninh Bình", "Hà Giang", "Sapa", "Huế", 
+  "Hà Nội", "TP.Hồ Chí Minh", "Đà Nẵng", "Hội An", "Hạ Long Bay",
+  "Đà Lạt", "Ninh Bình", "Hà Giang", "Sapa", "Huế",
   "Nha Trang", "Phú Quốc", "Cần Thơ", "Vũng Tàu", "Phan Thiết"
 ];
 
@@ -20,3 +20,4 @@ export async function GET(request: NextRequest) {
 
   return NextResponse.json(filtered.slice(0, 5));
 }
+
