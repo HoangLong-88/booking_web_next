@@ -7,7 +7,7 @@ import {
   DisabledDiscount
 } from "@/component/ui/Image";
 import Link from "next/link";
-import SearchBar, { HomeSearchBar } from "@/component/ui/SearchBar";
+import { HomeSearchBar } from "@/component/ui/SearchBar";
 import { HeroHomePage } from "@/component/layout/Hero";
 import { HotelTagsArrowScroll, NoteTags } from "@/component/ui/TagScroll";
 import { TrendingDestinationsRecommendation } from "@/component/layout/gridLayout";

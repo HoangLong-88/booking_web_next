@@ -9,5 +9,17 @@
     "phone_format_error": "Please check if the phone you've entered is correct.",
     "continue_with": "Or continue with",
     "otp_title" : "Verify your email address to sign in",
-    "otp_subtitle": "We sent a verification code to <bold>{{contact}}</bold>. Enter this code to continue."
+    "otp_subtitle": "We sent a verification code to <bold>{{contact}}</bold>. Enter this code to continue.",
+    "verify_otp_btn": "Verify Otp",
+    "back_to_sign_in_btn": "Back to Sign in",
+    "wrong_otp_error": "Invalid otp code. Please enter again",
+    "register_title": "Enter your credential to continue",
+    "label": {
+        "contact": "Contact",
+        "name": "Name <italic> - Optional</italic>",
+        "password": "Password",
+        "confirm_password": "Confirm password"
+    },
+    "password_length_error": "Password must be at least 8 characters",
+    "password_match_error": "Passwords do not match"
 }

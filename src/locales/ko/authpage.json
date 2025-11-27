@@ -9,5 +9,17 @@
   "phone_format_error": "입력한 전화번호 주소가 정확한지 확인해 주세요.",
   "continue_with": "또는 다음으로 계속",
   "otp_title": "로그인하려면 이메일 주소를 인증하세요",
-  "otp_subtitle": "인증 코드가 <bold>{{contact}}</bold>(으)로 전송되었습니다. 계속하려면 이 코드를 입력하세요."
+  "otp_subtitle": "인증 코드가 <bold>{{contact}}</bold>(으)로 전송되었습니다. 계속하려면 이 코드를 입력하세요.",
+  "verify_otp_btn": "OTP 인증",
+  "back_to_sign_in_btn": "로그인으로 돌아가기",
+  "wrong_otp_error": "유효하지 않은 OTP 코드입니다. 다시 입력해주세요",
+  "register_title": "계속하려면 자격 증명을 입력하세요",
+      "label": {
+      "contact": "연락처",
+      "name": "이름 <italic> - 선택사항</italic>",
+      "password": "비밀번호",
+      "confirm_password": "비밀번호 확인"
+    },
+  "password_length_error": "비밀번호는 최소 8자 이상이어야 합니다",
+  "password_match_error": "비밀번호가 일치하지 않습니다"
 }

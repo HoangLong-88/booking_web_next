@@ -9,5 +9,16 @@
   "phone_format_error": "Vui lòng kiểm tra xem số điện thoại bạn nhập có chính xác không.",
   "continue_with": "Hoặc tiếp tục với",
   "otp_title": "Xác minh địa chỉ email của bạn để đăng nhập",
-  "otp_subtitle": "Chúng tôi đã gửi mã xác minh đến <bold>{{contact}}</bold>. Nhập mã này để tiếp tục."
+  "otp_subtitle": "Chúng tôi đã gửi mã xác minh đến <bold>{{contact}}</bold>. Nhập mã này để tiếp tục.",
+  "verify_otp_btn": "Xác minh OTP",
+  "back_to_sign_in_btn": "Quay lại Đăng nhập",
+  "register_title": "Nhập thông tin đăng nhập để tiếp tục",
+      "label": {
+      "contact": "Liên hệ",
+      "name": "Tên <italic> - Tùy chọn</italic>",
+      "password": "Mật khẩu",
+      "confirm_password": "Xác nhận mật khẩu"
+    },
+  "password_length_error": "Mật khẩu phải có ít nhất 8 ký tự",
+  "password_match_error": "Mật khẩu không khớp"
 }
