@@ -9,5 +9,18 @@
   "phone_format_error": "请检查您输入的电话号码是否已通过验证。",
   "continue_with": "或继续使用",
   "otp_title": "验证您的邮箱地址以登录",
-  "otp_subtitle": "我们已将验证码发送至 <bold>{{contact}}</bold>。请输入此代码以继续。"
+  "otp_subtitle": "我们已将验证码发送至 <bold>{{contact}}</bold>。请输入此代码以继续。",
+  "verify_otp_btn": "验证验证码",
+  "back_to_sign_in_btn": "返回登录",
+  "wrong_otp_error": "验证码无效。请重新输入",
+  "register_title": "输入您的凭据以继续",
+      "label": {
+      "contact": "联系方式",
+      "name": "姓名 <italic> - 可选</italic>",
+      "password": "密码",
+      "confirm_password": "确认密码"
+    },
+  "password_length_error": "密码必须至少为8个字符",
+  "password_match_error": "密码不匹配",
+  "sign_up_btn": "注册"
 }

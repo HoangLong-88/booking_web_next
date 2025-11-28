@@ -9,5 +9,18 @@
     "phone_format_error" : "請檢查您輸入的電話號碼是否已通過驗證。",
     "continue_with": "或繼續使用",
     "otp_title": "驗證您的電子郵件地址以登入",
-    "otp_subtitle": "我們已將驗證碼傳送至 <bold>{{contact}}</bold>。請輸入此代碼以繼續。"
+    "otp_subtitle": "我們已將驗證碼傳送至 <bold>{{contact}}</bold>。請輸入此代碼以繼續。",
+    "verify_otp_btn": "驗證驗證碼",
+    "back_to_sign_in_btn": "返回登入",
+    "wrong_otp_error": "驗證碼無效。請重新輸入",
+    "register_title": "輸入您的憑據以繼續",
+    "label": {
+      "contact": "聯絡方式",
+      "name": "姓名 <italic> - 可選</italic>",
+      "password": "密碼",
+      "confirm_password": "確認密碼"
+    },
+    "password_length_error": "密碼必須至少為8個字符",
+    "password_match_error": "密碼不匹配",
+    "sign_up_btn": "註冊"
 }
