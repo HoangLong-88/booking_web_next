@@ -9,10 +9,16 @@ export async function POST(req: Request) {
       body: JSON.stringify({ contact })
     }
   );
-
-  const data = await laravelRes.json();
+  const text = await laravelRes.text(); // luôn đọc raw response
+  let data;
+  try {
+    data = JSON.parse(text);
+  } catch {
+    data = { success: false, message: text || "Empty response from Laravel" };
+  }
+  // const data = await laravelRes.json();
 
   return Response.json(data, {
     status: laravelRes.status
   });
-}
+} 
