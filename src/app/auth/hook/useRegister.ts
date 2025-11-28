@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { registerService } from "../service/register.service";
 
-interface RegisterResult {
+interface RegisterResult<T = unknown> {
   ok: boolean;
   status: number;
-  data: any;
+  data: T;
 }
 
 export function useRegister() {
@@ -25,8 +25,12 @@ export function useRegister() {
         setError(res.data?.message || "Registration failed");
       }
       return res;
-    } catch (err: any) {
-      setError(err.message || "Registration failed");
+    } catch (err: unknown) {
+      if (err instanceof Error) {
+        setError(err.message)
+      } else {
+        setError('An unknown error occurred')
+      }
       return null;
     } finally {
       setLoading(false);

@@ -27,6 +27,7 @@ const CustomDateInput = forwardRef<HTMLButtonElement, CustomDateInputProps>(
   )
 );
 
+CustomDateInput.displayName = 'CustomDateInput';
 
 interface KeySearchProp {
   onChange?: (value: string) => void;
