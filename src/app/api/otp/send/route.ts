@@ -1,25 +1,37 @@
+import { NextResponse } from "next/server";
+
 export async function POST(req: Request) {
-  const { contact } = await req.json();
-  const body = await req.json();
-  console.log("Next.js API Route hit!", body);
-  const laravelRes = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/api/otp/send-otp`,
-    {
+  try {
+    const body = await req.json(); // read once
+    const { contact } = body ?? {};
+
+    if (!contact) {
+      return NextResponse.json({ success: false, message: "Missing contact" }, { status: 400 });
+    }
+
+    const laravelRes = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/otp/send-otp`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ contact })
+      body: JSON.stringify({ contact }),
+    });
+
+    const text = await laravelRes.text();
+    let data;
+
+    if (text && text.trim().length > 0) {
+      try {
+        data = JSON.parse(text);
+      } catch (err) {
+        // non-JSON response from backend
+        data = { success: false, message: text };
+      }
+    } else {
+      data = { success: laravelRes.ok, message: "Empty response from backend" };
     }
-  );
-  const text = await laravelRes.text(); // luôn đọc raw response
-  let data;
-  try {
-    data = JSON.parse(text);
-  } catch {
-    data = { success: false, message: text || "Empty response from Laravel" };
+
+    return NextResponse.json(data, { status: laravelRes.status });
+  } catch (err) {
+    console.error("OTP proxy error:", err);
+    return NextResponse.json({ success: false, error: String(err) }, { status: 500 });
   }
-  // const data = await laravelRes.json();
-  console.log("Response from Laravel:", data); // <-- log response
-  return Response.json(data, {
-    status: laravelRes.status
-  });
-} 
+}
