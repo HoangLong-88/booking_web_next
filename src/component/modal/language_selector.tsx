@@ -6,6 +6,7 @@ import { useModal } from "@/utils/dom/useModal";
 import { createPortal } from "react-dom";
 import { initPageI18n } from "@/libs/i18n";
 import { useTranslation } from "react-i18next";
+import { usePathname, useRouter } from "next/navigation";
 
 type Lang = {
   code: string;
@@ -15,6 +16,8 @@ type Lang = {
 };
 
 function LanguageSelector() {
+  const router = useRouter();
+  const pathname = usePathname();
   const { isOpen, open, close, modalRef } = useModal(); 
   const [selectedLanguage, setSelectedLanguage] = useState<string>("EN");
   const { t, i18n } = useTranslation();
@@ -101,8 +104,8 @@ function LanguageSelector() {
                         key={lang.code}
                         onClick={() => {
                           setSelectedLanguage(lang.code);
-                          changeLanguage(lang)
-                          window.location.reload();
+                          changeLanguage(lang, {persist : true})
+                          i18n.changeLanguage(lang.locale)
                         }}
                         className={
                           `flex items-center 

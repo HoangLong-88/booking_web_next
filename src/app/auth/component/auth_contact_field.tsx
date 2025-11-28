@@ -69,7 +69,6 @@ export function AuthContactField({ type, value, onChange, isValid, checking, exi
                 exists ? "text-green-600" : "text-blue-600"
               }`}
             >
-              {exists ? "✅ Already exists" : "🆕 Available"}
             </p>
           )}
         </>

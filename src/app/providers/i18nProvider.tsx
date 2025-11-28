@@ -19,6 +19,6 @@ export default function I18nProvider({ children }: { children: ReactNode }) {
   }, []);
 
   if (!i18nInstance) return null;
-
+  
   return <I18nextProvider i18n={i18nInstance}>{children}</I18nextProvider>;
 }

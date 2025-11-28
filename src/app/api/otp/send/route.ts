@@ -2,7 +2,7 @@ export async function POST(req: Request) {
   const { contact } = await req.json();
 
   const laravelRes = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/api/otp/send`,
+    `${process.env.NEXT_PUBLIC_API_URL}/api/otp/send-otp`,
     {
       method: "POST",
       headers: { "Content-Type": "application/json" },
