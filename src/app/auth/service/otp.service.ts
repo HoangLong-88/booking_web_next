@@ -5,6 +5,15 @@ export const otpService = {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ contact })
     });
+    const text = await res.text();
+    let data;
+      if (text && text.trim()) {
+        try {
+          data = JSON.parse(text);
+        } catch {
+          data = { message: text };
+        }
+      }
 
     return {
       ok: res.ok,
