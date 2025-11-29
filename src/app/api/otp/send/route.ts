@@ -15,7 +15,7 @@ export async function POST(req: Request) {
       method: "POST",
       headers: { "Content-Type": "application/json", "Accept": "application/json" },
       body: JSON.stringify({ contact }),
-      redirect: "follow",
+      redirect: "manual",
     });
 
     // đọc body 1 lần
