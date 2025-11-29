@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
   try {
-    const body = await req.json(); // read once
+    const body = await req.json();
     const { contact } = body ?? {};
 
     if (!contact) {
@@ -11,27 +11,26 @@ export async function POST(req: Request) {
 
     const laravelRes = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/otp/send-otp`, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json",
+      },
       body: JSON.stringify({ contact }),
+      redirect: "follow", // quan trọng nếu Laravel redirect HTTP->HTTPS
     });
 
-    const text = await laravelRes.text();
     let data;
-
-    if (text && text.trim().length > 0) {
-      try {
-        data = JSON.parse(text);
-      } catch (err) {
-        // non-JSON response from backend
-        data = { success: false, message: text };
-      }
-    } else {
-      data = { success: laravelRes.ok, message: "Empty response from backend" };
+    try {
+      data = await laravelRes.json();
+    } catch (err) {
+      const text = await laravelRes.text();
+      data = { success: false, message: text || "Invalid JSON from backend" };
     }
 
-    return NextResponse.json(data, { status: laravelRes.status });
+    // luôn return 200 để Next.js route không ném 500
+    return NextResponse.json(data, { status: 200 });
   } catch (err) {
     console.error("OTP proxy error:", err);
-    return NextResponse.json({ success: false, error: String(err) }, { status: 500 });
+    return NextResponse.json({ success: false, message: String(err) }, { status: 200 });
   }
 }
