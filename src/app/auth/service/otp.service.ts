@@ -1,24 +1,24 @@
 export const otpService = {
-  sendOtp: async (contact: string) => {
+   sendOtp: async (contact: string) => {
     const res = await fetch("/api/otp/send", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ contact })
+      body: JSON.stringify({ contact }),
     });
+
     const text = await res.text();
+
     let data;
-      if (text && text.trim()) {
-        try {
-          data = JSON.parse(text);
-        } catch {
-          data = { message: text };
-        }
-      }
+    try {
+      data = JSON.parse(text);
+    } catch {
+      data = { message: text || "Invalid JSON from backend" };
+    }
 
     return {
       ok: res.ok,
       status: res.status,
-      data: await res.json()
+      data, // ← parsed
     };
   },
 
