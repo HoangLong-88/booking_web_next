@@ -1,4 +1,10 @@
 { 
+    "home_page_hero": { 
+        "title": "Giảm đến 15% khi đặt tham gia các trải nghiệm",
+        "subtitle": "Dịch vụ đặt các hoạt động trải nghiệm tin cậy — nhanh chóng, tiện lợi và đáng giá cho mọi hành trình.",
+        "primary_btn": "Đặt ngay đây",
+        "secondary_btn": "Tìm hiểu thêm"
+    },
     "Why should be SKYLINK ?": "Tại sao chọn SKYLINK ?",
     "note_tags" : {
         "why_tags" : {

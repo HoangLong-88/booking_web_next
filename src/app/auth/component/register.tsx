@@ -27,7 +27,7 @@ const RegisterComponent: React.FC<RegisterInputProps> = ({contact}) => {
     const Italic: React.FC<{ children?: React.ReactNode }> = ({ children }) => {
     return <i>{children}</i>;
         };
-
+    const [keepLoggedIn, setKeepLoggedIn ] = useState(false);
 
     return (
         <div className="relative flex flex-col">
@@ -100,7 +100,7 @@ const RegisterComponent: React.FC<RegisterInputProps> = ({contact}) => {
                     </Label>
                 </div>
             </div>
-            {passworderror && 
+            {passworderror &&
                 <motion.p
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
@@ -112,12 +112,24 @@ const RegisterComponent: React.FC<RegisterInputProps> = ({contact}) => {
                 </motion.p>
             }
             {!passworderror && password && confirmPassword &&
-                <CustomButton 
-                className="mt-5"
-                type="button"
-                onClick={() => {handleRegister(contact, password, name);}}>
-                    {t('authpage:sign_up_btn')}
-                </CustomButton>
+                <div className="relative">
+                    <div className="flex items-center ps-4 mt-3 bg-neutral-primary-soft border border-primary rounded-xl shadow-xs">
+                        <input id="bordered-checkbox-1" type="checkbox" value="" name="bordered-checkbox" className="w-4 h-4 border 
+                        border-default-medium 
+                        rounded-xs 
+                        focus:ring-2 
+                        focus:ring-brand-soft"
+                        checked={keepLoggedIn}
+                        onChange={(e) => setKeepLoggedIn(e.target.checked)}></input>
+                        <label htmlFor="bordered-checkbox-1" className="select-none w-full py-3 ms-2 text-sm font-medium text-heading">{t('authpage:remember_me_checkbox')}</label>
+                    </div>
+                    <CustomButton 
+                    className="mt-2 w-full"
+                    type="button"
+                    onClick={() => {handleRegister(contact, password, keepLoggedIn, name);}}>
+                        {t('authpage:sign_up_btn')}
+                    </CustomButton>
+                </div>
             }
             {registererror && <p>{registererror}</p>}
         </div>

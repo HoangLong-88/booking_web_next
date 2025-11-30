@@ -1,4 +1,10 @@
 { 
+    "home_page_hero": {
+      "title": "Save up to 15% when booking experiences",
+      "subtitle": "Trusted experience booking service — fast, convenient and valuable for every journey.",
+      "primary_btn": "Book now",
+      "secondary_btn": "Learn more"
+    },
     "Why should be SKYLINK ?": "Why should be SKYLINK ?",
     "note_tags" : {
         "why_tags" : {

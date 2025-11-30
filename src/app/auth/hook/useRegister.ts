@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { registerService } from "../service/register.service";
+import { saveToken, getToken ,clearToken } from "@/utils/storeLoginToken";
 
 interface RegisterResult<T = unknown> {
   ok: boolean;
@@ -14,15 +15,21 @@ export function useRegister() {
   const handleRegister = async (
     contact: string,
     password: string,
-    name?: string
+    keepLoggedIn: boolean,
+    name?: string,
   ): Promise<RegisterResult | null> => {
     setLoading(true);
     setError(null);
 
     try {
-      const res = await registerService.register(contact, password, name);
+      const res = await registerService.register(contact, password, keepLoggedIn, name);
       if (!res.ok) {
         setError(res.data?.message || "Registration failed");
+      }
+      if (res.data.remember_token) {
+        saveToken(res.data.remember_token, keepLoggedIn);
+      } else if (res.data.token) {
+        saveToken(res.data.token, keepLoggedIn);
       }
       return res;
     } catch (err: unknown) {

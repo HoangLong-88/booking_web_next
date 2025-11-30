@@ -1,4 +1,10 @@
 { 
+    "home_page_hero": {
+      "title": "체험 활동 예약 시 최대 15% 할인",
+      "subtitle": "신뢰할 수 있는 체험 활동 예약 서비스 — 빠르고 편리하며 모든 여정에 가치 있는 선택.",
+      "primary_btn": "지금 예약하기",
+      "secondary_btn": "자세히 알아보기"
+    },
     "Why should be SKYLINK ?": "SKYLINK를 선택해야 하는 이유는 무엇입니까?",
     "note_tags" : {
         "why_tags" : {
