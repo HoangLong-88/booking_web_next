@@ -48,7 +48,7 @@ function KeySearchBar({ onChange }: KeySearchProp) {
         return;
       }
 
-      const res = await fetch(`/api/keysearch?q=${debouncedQuery}`);
+      const res = await fetch(`/api/stays/keysearch?q=${encodeURIComponent(debouncedQuery)}`);
       const data: string[] = await res.json();
       setSuggestions(data);
       setIsOpen(true);
@@ -56,6 +56,14 @@ function KeySearchBar({ onChange }: KeySearchProp) {
 
     getSuggest();
   }, [debouncedQuery]);
+
+  useEffect(() => {
+    console.log('suggestion:', suggestions);
+  }, [suggestions]);
+
+  useEffect(() => {
+    console.log('isOpen:', isOpen);
+  }, [isOpen]);
 
   // Close outside click
   useEffect(() => {
@@ -91,13 +99,14 @@ function KeySearchBar({ onChange }: KeySearchProp) {
       />
 
       {isOpen && suggestions.length > 0 && (
-        <ul className="absolute z-10 bg-white shadow rounded w-full mt-1 max-h-60 overflow-auto">
+        <ul className="absolute z-10 shadow-xl bg-white shadow rounded w-full mt-1 max-h-60 overflow-auto">
           {suggestions.map((item, index) => (
             <li
               key={index}
               onClick={() => handleSelect(item)}
               className="px-4 py-2 cursor-pointer hover:bg-blue-50"
             >
+              {/* {typeof item === 'object' && item !== null ? (item as any).name || JSON.stringify(item) : item} */}
               {item}
             </li>
           ))}
@@ -113,7 +122,7 @@ interface DateBarProps {
   onCheckOutChange?: (date: Date | null) => void;
 }
 
-function DateBar({onCheckInChange, onCheckOutChange}: DateBarProps) {
+function DateBar({ onCheckInChange, onCheckOutChange }: DateBarProps) {
   const [checkIn, setCheckIn] = useState<Date | null>(null);
   const [checkOut, setCheckOut] = useState<Date | null>(null);
 
@@ -121,9 +130,9 @@ function DateBar({onCheckInChange, onCheckOutChange}: DateBarProps) {
     <>
       <DatePicker
         selected={checkIn}
-        onChange={(date)=>{
-            setCheckIn(date);
-            onCheckInChange?.(date);
+        onChange={(date) => {
+          setCheckIn(date);
+          onCheckInChange?.(date);
         }}
         placeholderText='Ngày nhận'
         className='outline-none'
@@ -134,9 +143,9 @@ function DateBar({onCheckInChange, onCheckOutChange}: DateBarProps) {
       —
       <DatePicker
         selected={checkOut}
-        onChange={(date)=>{
-            setCheckOut(date);
-            onCheckOutChange?.(date);
+        onChange={(date) => {
+          setCheckOut(date);
+          onCheckOutChange?.(date);
         }}
         placeholderText='Ngày trả'
         dateFormat='dd/MM/yyyy'
@@ -148,4 +157,4 @@ function DateBar({onCheckInChange, onCheckOutChange}: DateBarProps) {
   )
 }
 
-export {KeySearchBar, DateBar}
+export { KeySearchBar, DateBar }
