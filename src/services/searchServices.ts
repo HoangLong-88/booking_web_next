@@ -14,7 +14,7 @@ export const searchStays = async ({
   if (checkIn) params.append("checkin", checkIn.toISOString().split("T")[0]);
   if (checkOut) params.append("checkout", checkOut.toISOString().split("T")[0]);
 
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/stays/search?${params}`);
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/hotels/search?${params}`);
 
   return res.json();
 };

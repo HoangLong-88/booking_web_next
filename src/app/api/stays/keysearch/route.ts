@@ -1,5 +1,10 @@
-import { METHODS } from 'http';
 import { NextResponse, NextRequest } from 'next/server';
+
+const KEYWORDS: string[] = [
+  "Hà Nội", "TP.Hồ Chí Minh", "Đà Nẵng", "Hội An", "Hạ Long Bay",
+  "Đà Lạt", "Ninh Bình", "Hà Giang", "Sapa", "Huế",
+  "Nha Trang", "Phú Quốc", "Cần Thơ", "Vũng Tàu", "Phan Thiết"
+];
 
 export async function GET(request: NextRequest) {
   const searchParams = request.nextUrl.searchParams;
@@ -9,28 +14,10 @@ export async function GET(request: NextRequest) {
     return NextResponse.json([]);
   }
 
-  try {
-    const LaravelRes = await fetch(`
-      ${process.env.NEXT_PUBLIC_API_URL}/api/stays/keysearch?q=${encodeURIComponent(query)}`,
-      {
-        method: "GET",  
-        // Nếu API Laravel tự làm CORS:
-        cache: "no-store",
-      }
-    );
-    
-    if (!LaravelRes.ok) {
-      return NextResponse.json(
-        { error: "Failed to fetch Laravel API" },
-        { status: 500 }
-      );
-    }
-    const data = await LaravelRes.json();
-    return NextResponse.json(data.keywords);
+  const filtered = KEYWORDS.filter((item) =>
+    item.toLowerCase().includes(query.toLowerCase())
+  );
 
-  } catch (error) {
-    console.error("Error calling Laravel API:", error);
-    return NextResponse.json({ error: "Server error" }, { status: 500 });
-  }
+  return NextResponse.json(filtered.slice(0, 5));
 }
 
