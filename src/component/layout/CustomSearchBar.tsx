@@ -2,7 +2,7 @@
 import Link from 'next/link';
 import { KeySearchBar, DateBar } from '../ui/SearchBar';
 import { useState } from 'react';
-import { searchStays } from '@/services/searchServices';
+import { searchStays } from '@/services/stays/searchServices';
 
 const HomeSearchBar: React.FC = () => {
   const [location, setLocation] = useState<string>("");
