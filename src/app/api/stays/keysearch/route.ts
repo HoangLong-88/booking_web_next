@@ -1,4 +1,3 @@
-import { METHODS } from 'http';
 import { NextResponse, NextRequest } from 'next/server';
 
 export async function GET(request: NextRequest) {
@@ -10,8 +9,8 @@ export async function GET(request: NextRequest) {
   }
 
   try {
-    const LaravelRes = await fetch(`
-      ${process.env.NEXT_PUBLIC_API_URL}/api/stays/keysearch?q=${encodeURIComponent(query)}`,
+    const LaravelRes = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/api/stays/keysearch?q=${encodeURIComponent(query)}`,
       {
         method: "GET",  
         // Nếu API Laravel tự làm CORS:
