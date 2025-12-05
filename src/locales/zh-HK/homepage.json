@@ -1,4 +1,10 @@
 { 
+    "home_page_hero": {
+      "title": "預訂體驗活動可享高達15%的折扣",
+      "subtitle": "值得信賴的體驗活動預訂服務——快速、便捷且物超所值，適合每一次旅程。",
+      "primary_btn": "立即預訂",
+      "secondary_btn": "了解更多"
+    },
     "Why should be SKYLINK ?": "為甚麼要選擇 SKYLINK？",
     "note_tags" : {
         "why_tags" : {

@@ -16,8 +16,6 @@ type Lang = {
 };
 
 function LanguageSelector() {
-  const router = useRouter();
-  const pathname = usePathname();
   const { isOpen, open, close, modalRef } = useModal(); 
   const [selectedLanguage, setSelectedLanguage] = useState<string>("EN");
   const { t, i18n } = useTranslation();

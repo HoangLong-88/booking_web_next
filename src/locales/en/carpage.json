@@ -1,0 +1,60 @@
+  {
+    "faq_section_1": [
+      {
+        "question": "Why should I book a car rental in Vietnam with us?",
+        "answer": {
+          "intro": "We make it easy for you to find the right rental car for your needs. Here's what we offer:",
+          "list": [
+            "Huge collection of vehicles – from compact cars to SUVs",
+            "Support for over 30 languages",
+            "Free cancellation up to 48 hours before pickup for most bookings"
+          ]
+        }
+      },
+      {
+        "question": "What do I need to prepare to rent a car?",
+        "answer": {
+          "intro": "To register for a car rental, you only need a credit or debit card.",
+          "at_counter": "When at the rental counter, you will need:",
+          "list": [
+            "Passport",
+            "Voucher",
+            "Driver's license for each driver",
+            "Credit card of the main driver (some rental companies also accept debit cards, but most won't)."
+          ],
+          "important": "Important: Make sure you also check the rental terms, as each car rental company will have its own rules. For example: They may need to see additional identification. They may not accept certain types of credit cards. Or they may not rent if the driver has had a license for less than 36 months."
+        }
+      },
+      {
+        "question": "Am I old enough to rent a car?",
+        "answer": "Most companies will let you rent a car if you are 21 years old or older (and some will rent to younger drivers). But if you are under 25, you may still have to pay a 'young driver surcharge'."
+      }
+    ],
+    "faq_section_2": [
+      {
+        "question": "Can I book a car for my partner, friends, etc.?",
+        "answer": "Of course. Just fill in their information in the 'Driver Details' form when you book."
+      },
+      {
+        "question": "What should I consider when choosing a car?",
+        "answer": {
+          "list": [
+            "Consider where you're going. An Exciter might be a great choice for cruising through the Hai Van Pass, but a smaller car might be more sensible for driving in Rome.",
+            "See what others say. You'll find plenty of reviews and ratings on our website. So find out what other customers liked (and didn't like) about each rental company.",
+            "Don't forget to consider the transmission. In some countries, almost everyone drives manual. In others, automatic is the standard. Make sure you rent a car you can drive!"
+          ]
+        }
+      },
+      {
+        "question": "What does the price include?",
+        "answer": {
+          "paragraphs": [
+            "The price you see includes the car, mandatory insurance (e.g., Theft Protection, Collision Damage Waiver) and fees, if any, typically paid at pickup (e.g., one-way fee, airport surcharge, or local taxes).",
+            "The price also includes any additional services you've added (e.g., GPS device or child seat).",
+            "The price does not include any additional insurance you purchase at the rental counter.",
+            "Tip: Full pricing details are available on the Checkout page."
+          ]
+        }
+      }
+    ]
+  }

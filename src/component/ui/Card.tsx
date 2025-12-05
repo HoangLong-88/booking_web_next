@@ -40,8 +40,42 @@ const CardSubTitle = React.forwardRef<
 ))
 CardSubTitle.displayName = 'CardSubTitle';
 
+// customize StayCard
+interface StayObject {
+    stayName: string;
+    location: string;
+    address: string;
+    rating: string;
+    price: string;
+    image: string;
+}
+interface StayCardProps{
+    stay: StayObject;
+}
 
-// function Attractions
+const StayCard: React.FC<StayCardProps> = ({stay}) => {
+    return (
+        <div className="border rounded-xl shadow-md hover:shadow-lg transition p-3 flex gap-3">
+            <img
+                src={stay.image}
+                alt={stay.stayName}
+                className="w-40 h-32 object-cover rounded-lg"
+            />
 
+            <div className="flex flex-col justify-between w-full">
+                <div>
+                    <h2 className="text-lg font-semibold">{stay.stayName}</h2>
+                    <p className="text-sm text-gray-600">{stay.location}</p>
+                    <p className="text-xs text-gray-500">{stay.address}</p>
+                </div>
 
-export {Card,CardTitle,CardSubTitle}
+                <div className="flex justify-between items-center mt-2">
+                    <span className="text-yellow-500 font-bold">{stay.rating}⭐</span>
+                    <span className="text-blue-600 font-semibold">{stay.price} VND</span>
+                </div>
+            </div>
+        </div>
+    );
+};
+
+export {Card,CardTitle,CardSubTitle,StayCard}
