@@ -1,9 +1,11 @@
+'use client'
 import React from "react";
 import Link from "next/link";
 import { CustomButton } from "../ui/Button";
-
+import { useTranslation } from "react-i18next";
 
 const HeroHomePage: React.FC = () => {
+  const { t } = useTranslation();
     return (<div
           className="h-[420px] md:h-[490px] w-full bg-cover bg-center "
           style={{ backgroundImage: "url('https://overatours.com/wp-content/uploads/2024/06/Scenery-view.jpg')" }}
@@ -32,7 +34,7 @@ const HeroHomePage: React.FC = () => {
               text-white 
               drop-shadow-[0_8px_20px_rgba(0,0,0,0.6)]
                leading-tight">
-              Giảm đến 15% khi đặt<br/>tham gia các trải nghiệm
+              {t('homepage:home_page_hero.title')}
             </h1>
 
             <p className="mt-6 
@@ -40,18 +42,18 @@ const HeroHomePage: React.FC = () => {
             text-lg 
             md:text-xl 
             max-w-xl">
-              Dịch vụ đặt các hoạt động trải nghiệm tin cậy — nhanh chóng, tiện lợi và đáng giá cho mọi hành trình.
+              {t('homepage:home_page_hero.subtitle')}
             </p>
 
             <div className="mt-8">
               <CustomButton asChild variant="default" size="lg" className="mr-[1.5rem]">
                <Link href="/" className="px-6 py-2 text-white hover:bg-white hover:text-sky-400 hover">
-                 ĐẶT NGAY ĐÂY
+                 {t('homepage:home_page_hero.primary_btn')}
                </Link>
              </CustomButton>
              <CustomButton asChild variant='ghost' size='lg'>
                 <Link href="/learn-more" className="px-6 py-2 hover:text-white hover:border-white text-orange-400 border-1 border-orange-300">
-                  Tìm hiểu thêm
+                  {t('homepage:home_page_hero.secondary_btn')}
                 </Link>
              </CustomButton>
             </div>

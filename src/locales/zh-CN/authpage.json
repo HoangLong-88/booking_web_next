@@ -22,5 +22,6 @@
     },
   "password_length_error": "密码必须至少为8个字符",
   "password_match_error": "密码不匹配",
-  "sign_up_btn": "注册"
+  "sign_up_btn": "注册",
+  "remember_me_checkbox": "记住我"
 }

@@ -6,12 +6,15 @@ import { LanguageSelector } from "../modal/language_selector";
 import { SetUpNavbarScroll } from "@/utils/dom/Scroll";
 import { Auth_Icon } from "../ui/Icon";
 import { useTranslation } from "react-i18next";
-
+import Image from "next/image";
+import { useAuth } from "@/app/providers/authProvider";
+import AccountInformationModal from "../modal/account_infomation";
 
 function NavBar({isAuthPage}:{isAuthPage: boolean}) {
     const pathname = usePathname()
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
     const navbarRef =  useRef<HTMLElement>(null)
+    const { user } = useAuth();
     const { t } = useTranslation();
 
     const navItems = [
@@ -87,7 +90,11 @@ function NavBar({isAuthPage}:{isAuthPage: boolean}) {
             ${mobileMenuOpen ? "top-12" : "-top-60"
                     }`}>
                 <LanguageSelector />    
-                {!isAuthPage && <Auth_Icon/>}
+                {!isAuthPage && ( 
+                    !user ? (<Auth_Icon/>) :
+                (
+                    <AccountInformationModal user={user} />
+                )) }
             </div>
         </nav>
     );

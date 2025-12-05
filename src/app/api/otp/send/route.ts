@@ -1,18 +1,30 @@
+import { NextResponse } from "next/server";
+
 export async function POST(req: Request) {
-  const { contact } = await req.json();
-
-  const laravelRes = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/api/otp/send-otp`,
-    {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ contact })
+  try {
+    const { contact } = await req.json();
+    if (!contact) {
+      return NextResponse.json({ success: false, message: "Missing contact" }, { status: 400 });
     }
-  );
 
-  const data = await laravelRes.json();
+    const laravelRes = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/otp/send-otp`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json", "Accept": "application/json" },
+      body: JSON.stringify({ contact }),
+      redirect: "manual",
+    });
 
-  return Response.json(data, {
-    status: laravelRes.status
-  });
+    // đọc body 1 lần
+    const text = await laravelRes.text();
+    let data;
+    try {
+      data = JSON.parse(text);
+    } catch {
+      data = { success: laravelRes.ok, message: text || "Invalid JSON from backend" };
+    }
+
+    return NextResponse.json(data, { status: 200 });
+  } catch (err) {
+    return NextResponse.json({ success: false, message: String(err) }, { status: 200 });
+  }
 }
