@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { registerService } from "../service/register.service";
-import { saveToken, getToken ,clearToken } from "@/utils/storeLoginToken";
+import { saveToken } from "@/utils/storeLoginToken";
 
 interface RegisterResult<T = unknown> {
   ok: boolean;

@@ -8,12 +8,13 @@ import { Auth_Icon } from "../ui/Icon";
 import { useTranslation } from "react-i18next";
 import Image from "next/image";
 import { useAuth } from "@/app/providers/authProvider";
+import AccountInformationModal from "../modal/account_infomation";
 
 function NavBar({isAuthPage}:{isAuthPage: boolean}) {
     const pathname = usePathname()
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
     const navbarRef =  useRef<HTMLElement>(null)
-    const { user, logout } = useAuth();
+    const { user } = useAuth();
     const { t } = useTranslation();
 
     const navItems = [
@@ -92,16 +93,7 @@ function NavBar({isAuthPage}:{isAuthPage: boolean}) {
                 {!isAuthPage && ( 
                     !user ? (<Auth_Icon/>) :
                 (
-                    <div className="relative">
-                        <Image
-                            src={user.avatar_url ?? '/images/default-avatar.png'}
-                            alt="User Avatar"
-                            width={45}
-                            height={45}
-                            className="rounded-full hover:opacity-70 ml-2"
-                            onClick={() => {}}
-                        ></Image>
-                    </div>
+                    <AccountInformationModal user={user} />
                 )) }
             </div>
         </nav>

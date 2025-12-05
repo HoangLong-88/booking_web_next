@@ -24,6 +24,7 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
           const text = await res.text();
 
           try {
+            console.log("Response from /api/auth/me:", text);
             return JSON.parse(text);
           } catch {
             console.error("Invalid JSON from /api/auth/me:", text);
