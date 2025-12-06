@@ -54,4 +54,30 @@ const Mail_Icon: React.FC = () => {
         </svg>
     );
 }
-export { Auth_Icon, Google_Icon, Phone_Icon, Mail_Icon };
+const Stroke_Loader: React.FC = () => {
+  return (
+    <svg
+      className="animate-spin"
+      width="48"
+      height="48"
+      viewBox="0 0 24 24"
+      fill="none"
+    >
+      <circle
+        className="opacity-0"
+        cx="20"
+        cy="20"
+        r="10"
+        stroke="currentColor"
+        strokeWidth="4"
+      />
+      <path
+        className="opacity-75"
+        fill="currentColor"
+        d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
+      />
+    </svg>
+  );
+};
+
+export { Auth_Icon, Google_Icon, Phone_Icon, Mail_Icon, Stroke_Loader };
