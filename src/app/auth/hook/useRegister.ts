@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { registerService } from "../service/register.service";
 import { saveToken } from "@/utils/storeLoginToken";
+import { useRouter } from "next/navigation";
 
 interface RegisterResult<T = unknown> {
   ok: boolean;
@@ -11,7 +12,7 @@ interface RegisterResult<T = unknown> {
 export function useRegister() {
   const [loading, setLoading] = useState(false);
   const [registererror, setError] = useState<string | null>(null);
-
+  const router = useRouter();
   const handleRegister = async (
     contact: string,
     password: string,
@@ -31,6 +32,8 @@ export function useRegister() {
       } else if (res.data.token) {
         saveToken(res.data.token, keepLoggedIn);
       }
+      router.push("/");
+
       return res;
     } catch (err: unknown) {
       if (err instanceof Error) {

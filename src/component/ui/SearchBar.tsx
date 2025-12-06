@@ -59,11 +59,9 @@ function KeySearchBar({ onChange }: KeySearchProp) {
   }, [debouncedQuery]);
 
   useEffect(() => {
-    console.log('suggestion:', suggestions);
   }, [suggestions]);
 
   useEffect(() => {
-    console.log('isOpen:', isOpen);
   }, [isOpen]);
 
   // Close outside click

@@ -13,6 +13,7 @@ import { useFileUpload } from "@/hook/useFileUpload";
 import { Popover, PopoverTrigger, PopoverContent } from "@/component/ui/Popover";
 import { ChevronDown, ChevronUp, Pencil } from "lucide-react";
 import { Stroke_Loader } from "../ui/Icon";
+import { useLogout } from "@/app/auth/hook/useLogout";
 import { motion } from "framer-motion";
 
 interface Props {
@@ -36,7 +37,7 @@ export default function AccountInformationModal({
     await handleUpload(selectedFile);
   };
 
-
+  const { handleLogout } = useLogout();
   return (
     <>
       <div className="relative">
@@ -99,10 +100,11 @@ export default function AccountInformationModal({
                 exit={{ opacity: 1}}
                 className="relative flex items-center justify-center gap-1">
 
-                  <CustomButton variant={'outline'}>
+                  <CustomButton variant={'outline'} onClick={() => {
+                    handleLogout(); window.location.reload();
+                    }}>
                     Log out
-                    </CustomButton>  
-
+                    </CustomButton> 
                   {!loading ? 
                   (<CustomButton type={'button'} variant={'default'} onClick={onSubmit}>
                     Update Profile
