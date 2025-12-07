@@ -9,7 +9,7 @@ export default function StaysPage() {
         <HeroHomePage />
         <HomeSearchBar />
       </header>
-      <main className="px-20 py-3">
+      <main className="px-20 py-10">
         <StaysList/>
       </main>
     </>
