@@ -7,6 +7,7 @@ export function useLogout() {
     const handleLogout = async () => {
         try {
             const res = await logoutService.logout();
+            window.location.reload();
             return res;
         } catch (err) {
             console.error("Logout failed:", err);

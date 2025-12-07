@@ -1,5 +1,7 @@
 export interface CheckContactResponse {
-  exists: boolean;
+    success: boolean;
+    email_exists: boolean;
+    phone_exists: boolean;
 }
 
 /**

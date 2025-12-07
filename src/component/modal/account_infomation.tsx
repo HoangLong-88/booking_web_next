@@ -101,7 +101,7 @@ export default function AccountInformationModal({
                 className="relative flex items-center justify-center gap-1">
 
                   <CustomButton variant={'outline'} onClick={() => {
-                    handleLogout(); window.location.reload();
+                    handleLogout();close();
                     }}>
                     Log out
                     </CustomButton> 

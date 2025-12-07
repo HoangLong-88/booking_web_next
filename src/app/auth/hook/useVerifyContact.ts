@@ -21,14 +21,13 @@ export function useVerifyContact({ switchToPhone, email, phone}: UseVerifyContac
         setExists(null);
 
         try {
-            let responseExists = false;
-
+            let responseExists: boolean;
             if (switchToPhone) {
                 const response = await checkPhoneExists(phone);
-                responseExists = !!response.exists;
+                responseExists = !!response.phone_exists;
             } else {
                 const response = await checkEmailExists(email);
-                responseExists = !!response.exists;
+                responseExists = !!response.email_exists;
             }
             setExists(responseExists)
             return responseExists;
