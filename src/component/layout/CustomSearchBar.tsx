@@ -2,17 +2,24 @@
 import Link from 'next/link';
 import { KeySearchBar, DateBar } from '../ui/SearchBar';
 import { useState } from 'react';
-import { searchStays } from '@/services/stays/searchServices';
+import { searchStays } from '@/services/searchServices';
+import { useRouter } from 'next/navigation';
 
 const HomeSearchBar: React.FC = () => {
   const [location, setLocation] = useState<string>("");
   const [checkIn, setCheckIn] = useState<Date | null>(null);
   const [checkOut, setCheckOut] = useState<Date | null>(null);
-  const [stays, setStays] = useState([]);
+  const router = useRouter();
 
   const handleSearch = async () => {
-    const results = await searchStays({ location, checkIn, checkOut });
-    setStays(results);
+
+
+    const results = await searchStays({ location, checkIn, checkOut, router });
+    router.push(
+      `/stays/search?location=${location}` +
+      `${checkIn ? "&checkIn=" + checkIn.toISOString().split("T")[0] : ""}` +
+      `${checkOut ? "&checkOut=" + checkOut.toISOString().split("T")[0] : ""}`
+    );
   };
 
   return (
@@ -38,7 +45,7 @@ const HomeSearchBar: React.FC = () => {
         <button
           type="submit"
           className="px-6 py-3 rounded-lg bg-blue-600 hover:bg-orange-300
-        text-white text-base shadow-md cursor-pointer"
+        text-white text-base shadow-md cursor-pointer transition"
         >
           Tìm kiếm
         </button>
