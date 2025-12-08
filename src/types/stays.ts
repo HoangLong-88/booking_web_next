@@ -1,4 +1,4 @@
-interface StayObject {
+export interface StayObject {
     stayName: string;
     location: string;
     address: string;
