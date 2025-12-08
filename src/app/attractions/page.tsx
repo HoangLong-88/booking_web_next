@@ -2,6 +2,7 @@ import { AttractionsSearchBar } from "@/component/layout/CustomSearchBar";
 import { HeroAttractionsPage } from "@/component/layout/Hero";
 import { DestinationsLoadMore } from "@/component/ui/LoadMorePattern";
 import { ActivitesMenu } from "@/component/ui/ListMenu";
+import { AttractionFeatures } from "@/component/layout/Feature";
 
 export default function AttractionsPage() {
   return (
@@ -10,7 +11,8 @@ export default function AttractionsPage() {
         <HeroAttractionsPage />
         <AttractionsSearchBar />
       </header>
-      <main className="p-20">
+      <main className="px-20 py-10">
+        <AttractionFeatures/>
         <p className="text-2xl mt-[100px] mb-5 font-bold">
           Nearby Destinations
         </p>
