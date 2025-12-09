@@ -10,7 +10,7 @@ import Image from "next/image";
 import { useAuth } from "@/app/providers/authProvider";
 import AccountInformationModal from "../modal/account_infomation";
 
-function NavBar({isAuthPage}:{isAuthPage: boolean}) {
+function NavBar({isAuthPage, isAdminPage}:{isAuthPage: boolean, isAdminPage: boolean}){ 
     const pathname = usePathname()
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
     const navbarRef =  useRef<HTMLElement>(null)
@@ -31,7 +31,7 @@ function NavBar({isAuthPage}:{isAuthPage: boolean}) {
     }, [])  
 
     return (
-        <nav ref={navbarRef} className={`${isAuthPage ? 'h-[5rem]' : 'h-[4.5rem] sm:h-[6.5rem]'} 
+        <nav ref={navbarRef} className={`${isAuthPage || isAdminPage ? 'h-[5rem]' : 'h-[4.5rem] sm:h-[6.5rem]'} 
         fixed px-4 py-3 px-[2.5rem] flex justify-between z-35 w-full transition-transform duration-300 
          items-center shadow-sm`} style={{ background: "var(--navbar-background)"}}>
             {/* Logo */}
@@ -42,7 +42,7 @@ function NavBar({isAuthPage}:{isAuthPage: boolean}) {
                     text-4xl sm:text-5xl ` : `text-2xl sm:text-4xl`} text-amber-50`}>
                     <Link href="/">SKYLINK</Link>
                 </div>
-                {!isAuthPage && <div className="text-1xl text-amber-50 hidden sm:block">{t("header:logo_subtitle")}</div>} 
+                {!isAuthPage || !isAdminPage && <div className="text-1xl text-amber-50 hidden sm:block">{t("header:logo_subtitle")}</div>} 
             </div>
 
             {/* Menu button (mobile) */}    
@@ -99,4 +99,4 @@ function NavBar({isAuthPage}:{isAuthPage: boolean}) {
         </nav>
     );
 }
-export { NavBar };
+export { NavBar }

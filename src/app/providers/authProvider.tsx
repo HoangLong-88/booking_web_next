@@ -14,12 +14,10 @@ interface AuthContextType<T = unknown> {
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 function AuthProvider({ children }: { children: React.ReactNode }) {
-  const pathname = usePathname();
   const [user, setUser] = useState<User | null>(null);
 
   useEffect(() => {
     const token = getToken();
-    console.log("AuthProvider: fetched token", token);
     if (!token) {
       setUser(null);
       return;
@@ -43,7 +41,7 @@ function AuthProvider({ children }: { children: React.ReactNode }) {
           setUser(null);
         }
       });
-  }, [pathname]);
+  }, []);
 
   const logout = () => {
     clearToken();

@@ -6,12 +6,13 @@ import { usePathname } from "next/navigation";
 export function ClientLayout({children}:{children: React.ReactNode}){
     const pathName = usePathname()
     const isAuthPage = pathName.startsWith("/auth")
+    const isAdminPage = pathName.startsWith("/admin")
     
     return(
         <div className="flex min-h-screen flex-col">
-        <NavBar isAuthPage={isAuthPage}/>
+        <NavBar isAuthPage={isAuthPage} isAdminPage={isAdminPage}/>
         <main className="flex-1">{children}</main>
-        {!isAuthPage && <Footer/>}
+        {!isAuthPage && !isAdminPage && <Footer/>}
         </div>
     )
 }

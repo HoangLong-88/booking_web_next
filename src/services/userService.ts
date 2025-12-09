@@ -8,6 +8,7 @@ export const userService = {
     try {
       const token = getToken();
       if (!avatar_path) return;
+      
       const res = await fetch("/api/user/update-avatar", {
         method: "PATCH",
         headers: {
