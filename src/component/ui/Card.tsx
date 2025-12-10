@@ -42,6 +42,18 @@ const CardSubTitle = React.forwardRef<
 ))
 CardSubTitle.displayName = 'CardSubTitle';
 
+const CardContent = React.forwardRef<
+    HTMLDivElement,
+    React.HTMLAttributes<HTMLDivElement>
+>(({ className, ...props }, ref) => (
+    <div
+        ref={ref}
+        className={cn("p-4", className)}
+        {...props}
+    />
+))
+CardContent.displayName = 'CardContent';
+
 // customize StayCard
 interface StayCardProps {
     stay: StayObject;
@@ -125,4 +137,4 @@ const AttractionCard: React.FC<AttractionCardProp> = ({ attraction }) => {
     );
 };
 
-export { Card, CardTitle, CardSubTitle, StayCard, AttractionCard }
+export { Card, CardContent, CardTitle, CardSubTitle, StayCard, AttractionCard }
