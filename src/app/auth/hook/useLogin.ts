@@ -2,6 +2,7 @@ import { useState } from "react";
 import { loginService } from "../service/login.service";
 import { saveToken } from "@/utils/storeLoginToken";
 import { useRouter } from "next/navigation";
+import { cookies } from "next/headers";
 
 interface RegisterResult<T = unknown> {
   ok: boolean;
@@ -23,7 +24,6 @@ export function useLogin() {
 
     try {
       const res = await loginService.login(contact, password, keepLoggedIn);
-      console.log("useLogin: login response", res);
       if (!res.ok) {
         setError(res.data?.message || "Login failed");
       }
@@ -32,8 +32,13 @@ export function useLogin() {
       } else if (res.data.token) {
         saveToken(res.data.token, keepLoggedIn);
       }
+      if (res.data.user.role === "admin") {
+        router.push("/admin");
+        window.location.reload();
+        return res;
+      }
       router.push("/");
-
+      window.location.reload();
       return res;
     } catch (err: unknown) {
       if (err instanceof Error) {
