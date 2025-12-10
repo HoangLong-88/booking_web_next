@@ -43,7 +43,7 @@ export default function AdminSidebar() {
 
       {/* Menu */}
       <nav className="flex-1 space-y-1">
-        {items.map((it: any) => {
+        {items.map((it) => {
           const active = path.startsWith(it.href);
           return (
             <Link
