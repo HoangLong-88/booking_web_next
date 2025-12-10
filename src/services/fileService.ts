@@ -18,7 +18,6 @@ export const fileService = {
       if (!res.ok) {
         throw new Error(data.error || "Upload failed");
       }
-      console.log("Upload response data:", data);
       return data; // { filename: "...", url: "...", ... }
     } catch (err: unknown) {
       if (err instanceof Error) throw err;

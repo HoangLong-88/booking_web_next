@@ -9,6 +9,7 @@ import { Google_Icon, Phone_Icon, Mail_Icon } from "@/component/ui/Icon";
 import { CustomButton } from "@/component/ui/Button";
 import { AuthContactField } from "@/app/auth/component/auth_contact_field";
 import { RegisterComponent } from "./component/register";
+import { LoginComponent } from "./component/login";
 import { useTranslation } from "react-i18next";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -145,9 +146,9 @@ function Login_Register_Page() {
                           initial={{ x: 300, opacity: 0 }}
                           animate={{ x: 0, opacity: 1 }}
                           exit={{ x: -300, opacity: 0 }}
-                          transition={{ type: "spring", stiffness: 120 }}
+                          transition={{ type: "tween", stiffness: 120 }}
                         >
-                          {/* <LoginComponent /> */}
+                          <LoginComponent contact={contact}/>
                         </motion.div>
                       )}
                     </AnimatePresence>
