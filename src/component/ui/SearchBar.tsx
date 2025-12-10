@@ -59,11 +59,9 @@ function KeySearchBar({ onChange }: KeySearchProp) {
   }, [debouncedQuery]);
 
   useEffect(() => {
-    console.log('suggestion:', suggestions);
   }, [suggestions]);
 
   useEffect(() => {
-    console.log('isOpen:', isOpen);
   }, [isOpen]);
 
   // Close outside click
@@ -157,4 +155,27 @@ function DateBar({ onCheckInChange, onCheckOutChange }: DateBarProps) {
   )
 }
 
-export { KeySearchBar, DateBar }
+interface DateBar2Props {
+  onCheckDateChange?: (date: Date | null) => void;
+}
+
+function DateBar2({ onCheckDateChange }: DateBar2Props) {
+  const [checkDate, setCheckDate] = useState<Date | null>(null);
+  return (
+    <>
+      <DatePicker
+        selected={checkDate}
+        onChange={(date) => {
+          setCheckDate(date);
+          onCheckDateChange?.(date);
+        }}
+        placeholderText='Ngày tham gia'
+        className='outline-none'
+        dateFormat='dd/MM/yyyy'
+        customInput={<CustomDateInput placeholder='Ngày tham gia' selectedDate={checkDate} />}
+      />
+    </>
+  )
+}
+
+export { KeySearchBar, DateBar, DateBar2 }
