@@ -38,7 +38,7 @@ function KeySearchBar({ onChange }: KeySearchProp) {
   const [suggestions, setSuggestions] = useState<string[]>([]);
   const [isOpen, setIsOpen] = useState(false);
 
-  const debouncedQuery = useDebounce(query, 500);
+  const debouncedQuery = useDebounce(query, 200);
   const wrapperRef = useRef<HTMLDivElement>(null);
 
   // Fetch suggestions
