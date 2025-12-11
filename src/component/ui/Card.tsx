@@ -55,7 +55,6 @@ const CardContent = React.forwardRef<
 ))
 CardContent.displayName = 'CardContent';
 
-// customize StayCard
 interface StayCardProps {
     stay: StayObject;
 }
@@ -233,4 +232,4 @@ const AttractionCard: React.FC<AttractionCardProps> = ({ attraction }) => {
     );
 };
 
-export { Card, CardContent, CardTitle, CardSubTitle, StayCard, AttractionCard }
+export { Card, CardContent, CardTitle, CardSubTitle, StayCard, AttractionCard, CarCard }
