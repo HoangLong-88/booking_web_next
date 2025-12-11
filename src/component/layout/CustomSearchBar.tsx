@@ -102,8 +102,7 @@ const CarSearchBar: React.FC = () => {
   const router = useRouter();
 
   const handleSearch = async () => {
-
-
+    
     const results = await searchCars({ location, checkIn, checkOut });
     router.push(
       `/cars/search?location=${location}` +
