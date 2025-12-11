@@ -2,21 +2,26 @@
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { usePathname } from "next/navigation";
-import { sidebarVariant, overlayVariant } from "@/libs/animations/sidebar";
+import { sidebarVariant } from "@/libs/animations/sidebar";
 import { useState } from "react";
 
-export default function AdminSidebar() {
+type SidebarProps = {
+    active: string;
+    onSelect: (key: string) => void;
+};
+
+export default function AdminSidebar({ active, onSelect }: SidebarProps) {
   const path = usePathname() || "";
   const [open, setOpen] = useState(true);
 
   const items = [
-    { href: "/admin/dashboard", label: "Dashboard" },
-    { href: "/admin/guests", label: "Guests" },
-    { href: "/admin/bookings", label: "Bookings" },
-    { href: "/admin/rooms", label: "Rooms" },
-    { href: "/admin/settings", label: "Settings" },
+      { key: "dashboard", label: "Dashboard" },
+      { key: "guests", label: "Guests" },
+      { key: "location", label: "Locations" },
+      { key: "bookings", label: "Bookings" },
+      { key: "rooms", label: "Rooms" },
+      { key: "settings", label: "Settings" },
   ];
-
   return (
       <>
       <motion.aside
@@ -42,28 +47,20 @@ export default function AdminSidebar() {
       )}
 
       {/* Menu */}
-      <nav className="flex-1 space-y-1">
-        {items.map((it) => {
-          const active = path.startsWith(it.href);
-          return (
-            <Link
-              key={it.href}
-              href={it.href}
-              className={`flex items-center gap-3 px-3 py-2 rounded-md text-sm ${
-                active
-                  ? "bg-blue-50 text-blue-700 font-semibold"
-                  : "text-slate-600 hover:bg-slate-100 dark:hover:bg-slate-800"
-              }`}
+       <ul className="space-y-2">
+        {items.map((item) => (
+          <li key={item.key}>
+            <button
+              onClick={() => onSelect(item.key)}
+              className={`w-full text-left px-3 py-2 rounded-xl transition 
+                ${active === item.key ? "bg-slate-700" : "hover:bg-slate-800"}
+              `}
             >
-              {/* Icon placeholder */}
-              <div className="w-5 h-5 bg-slate-300 dark:bg-slate-700 rounded"></div>
-
-              {/* Ẩn label khi collapsed */}
-              {open && <span className="truncate">{it.label}</span>}
-            </Link>
-          );
-        })}
-      </nav>
+              {item.label}
+            </button>
+          </li>
+        ))}
+      </ul>
 
       {/* Quick actions */}
       {open && (
