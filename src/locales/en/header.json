@@ -3,7 +3,8 @@
     "nav_item": {
         "stays": "stays",
         "cars": "cars",
-        "attractions": "attractions"
+        "attractions": "attractions",
+        "admin": "admin"
     },
     "langs_modal" : {
         "title": "Select language",

@@ -3,10 +3,10 @@ import { Card, CardContent } from "@/component/ui/Card";
 import { CustomButton } from "@/component/ui/Button";
 import { Loader2 } from "lucide-react";
 import { useFetchLocation } from "../../hook/useFetchLocation";
+import TagsArrowScroll from "@/component/ui/TagScroll";
 
 export default function LocationList() {
     const { locations, loading, error } = useFetchLocation();
-
 
    if (loading) {
     return (
@@ -21,14 +21,13 @@ export default function LocationList() {
   }
 
   return (
-    <div className="w-full">
+    <div className="">
       <h2 className="text-xl font-semibold mb-3">Locations</h2>
-
-      <div className="flex gap-4 overflow-x-auto scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-200 py-2">
-        {locations.map((loc) => (
+      <TagsArrowScroll scrollAmount={400}>
+          {locations.map((loc) => (
           <Card
             key={loc.id}
-            className="min-w-[280px] w-[280px] rounded-xl border shadow-sm flex-shrink-0"
+            className="min-w-[280px] w-[280px] flex-none rounded-xl border shadow-sm"
           >
             <img
               src={loc.image_url ?? "/no-image.jpg"}
@@ -44,7 +43,7 @@ export default function LocationList() {
             </CardContent>
           </Card>
         ))}
-      </div>
+      </TagsArrowScroll>
     </div>
   );
 }

@@ -15,6 +15,7 @@ import { ChevronDown, ChevronUp, Pencil } from "lucide-react";
 import { Stroke_Loader } from "../ui/Icon";
 import { useLogout } from "@/app/auth/hook/useLogout";
 import { motion } from "framer-motion";
+import { userService } from "@/services/userService";
 
 interface Props {
   user: User;
@@ -26,7 +27,11 @@ export default function AccountInformationModal({
   const { isOpen, open, close, modalRef } = useModal(); 
 
   const { preview, handleUpload, fileName, loading, error, createPreview } = useFileUpload({
-    user
+   initialUrl: user.avatar_url,
+    onUploaded: async (uploaded) => {
+      await userService.updateAvatar(uploaded.path);
+      user.avatar_url = uploaded.url;  // update local state
+    },
   });
 
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
@@ -34,7 +39,7 @@ export default function AccountInformationModal({
   const onSubmit = async () => {
     if (!selectedFile) return;
 
-    await handleUpload(selectedFile);
+    await handleUpload(selectedFile, 'uploads/avatar');
   };
 
   const { handleLogout } = useLogout();
@@ -71,9 +76,11 @@ export default function AccountInformationModal({
                 preview={preview}
                 onUpload={(file) => {
                   setSelectedFile(file);
-                  createPreview(file)}}
+                  createPreview(file)
+                }}
                 accept="image/*"
                 fileName={fileName}
+                variant="avatar"
               />
 
               {/* User Info */}

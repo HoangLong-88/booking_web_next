@@ -12,7 +12,6 @@ export async function GET() {
     }
 
     const data = await res.json();
-    console.log('GET /api/admin/locations data:', data);
     return NextResponse.json({ 
       ok: true, 
       locations: data?.original?.data || data?.data || []

@@ -9,7 +9,7 @@ import {
 import Link from "next/link";
 import { HomeSearchBar } from "@/component/layout/CustomSearchBar";
 import { HeroHomePage } from "@/component/layout/Hero";
-import { HotelTagsArrowScroll, NoteTags } from "@/component/ui/TagScroll";
+import { HotelTagsArrowScroll, NoteTags } from "@/component/ui/HotelTagScroll";
 import { TrendingDestinationsRecommendation } from "@/component/layout/gridLayout";
 
 export default function HomePage() {

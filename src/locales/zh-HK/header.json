@@ -3,7 +3,8 @@
     "nav_item": {
         "stays": "住宿",
         "cars": "租車",
-        "attractions": "景點"
+        "attractions": "景點",
+        "admin": "管理員"
     },
     "langs_modal" : {
         "title": "選擇語言",

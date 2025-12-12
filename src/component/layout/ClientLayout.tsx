@@ -11,7 +11,11 @@ export function ClientLayout({children}:{children: React.ReactNode}){
     return(
         <div className="flex min-h-screen flex-col">
         <NavBar isAuthPage={isAuthPage} isAdminPage={isAdminPage}/>
-        <main className="flex-1">{children}</main>
+        <main 
+              className={isAdminPage ? "flex-1 pt-[72px]" : "flex-1"}
+            >
+              {children}
+        </main>
         {!isAuthPage && !isAdminPage && <Footer/>}
         </div>
     )

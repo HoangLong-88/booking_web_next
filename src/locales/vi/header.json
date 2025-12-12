@@ -3,7 +3,8 @@
     "nav_item": {
         "stays": "Chỗ ở",
         "cars": "Thuê xe",
-        "attractions": "Hoạt động"
+        "attractions": "Hoạt động",
+        "admin": "Quản trị viên"
     },
     "langs_modal": {
         "title": "Chọn ngôn ngữ",

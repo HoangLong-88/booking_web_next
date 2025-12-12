@@ -3,7 +3,8 @@
     "nav_item": {
         "stays": "숙소",
         "cars": "자동차",
-        "attractions": "관광지"
+        "attractions": "관광지",
+        "admin": "관리자"
     },
     "langs_modal" : {
         "title": "언어선택",

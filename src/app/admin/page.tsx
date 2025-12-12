@@ -54,14 +54,15 @@ export default function GuestsListPage() {
   };
 
   return (
-    <div className="min-h-screen flex flex-row bg-slate-50 dark:bg-slate-900 text-slate-900 mt-[4.5rem] dark:text-slate-100">
-      <AdminSidebar active={active} onSelect={setActive}/>
-      <div className="max-w-7xl w-full max-h-full flex">
-
-        <main className="flex-1 p-6">
+    <div className="min-h-screen  flex flex-row bg-slate-50 dark:bg-slate-900 text-slate-900 dark:text-slate-100">
+        <div className="flex-0">
+          <AdminSidebar active={active} 
+          onSelect={setActive}
+          className={`pt-5 ${ active === 'location' ? `pt-20` : `` }`}/>
+        </div>
+        <div className={`flex-1  mt-[4.5rem] ${ active === 'dashboard' ? `overflow-hidden`: `overflow-y-auto` }`}>
           {renderComponent()}
-        </main>
-      </div>
-    </div>
+        </div>
+    </div>  
   );
 }
