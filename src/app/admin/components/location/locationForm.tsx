@@ -88,8 +88,6 @@
               className="mt-3"
               accept="image/*"
               onUpload={(file) => {
-                console.log(file.name);
-                console.log(loc.preview)
                 updateField(idx, "image", file);
               }}
               preview={loc.preview}

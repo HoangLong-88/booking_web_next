@@ -4,10 +4,19 @@ import { CustomButton } from "@/component/ui/Button";
 import { Loader2 } from "lucide-react";
 import { useFetchLocation } from "../../hook/useFetchLocation";
 import TagsArrowScroll from "@/component/ui/TagScroll";
+import { useModal } from "@/utils/dom/useModal";
+import UpdateLocationModal from "@/component/modal/location_update";
+import type { Location } from "@/types/location";
 
-export default function LocationList() {
-    const { locations, loading, error } = useFetchLocation();
+interface Props {
+  location: Location[];
+  refreshKey: number;
+}
 
+export default function LocationList({location}: Props) {
+    const { locations, loading, error, refetch } = useFetchLocation();
+    const { isOpen, open, close } = useModal(); 
+    const [selectedLoc, setSelectedLoc] = useState<Location | null>(null);
    if (loading) {
     return (
       <div className="flex justify-center items-center h-40">
@@ -28,6 +37,7 @@ export default function LocationList() {
           <Card
             key={loc.id}
             className="min-w-[280px] w-[280px] flex-none rounded-xl border shadow-sm"
+            onClick={() => {open(); setSelectedLoc(loc)}}
           >
             <img
               src={loc.image_url ?? "/no-image.jpg"}
@@ -44,6 +54,13 @@ export default function LocationList() {
           </Card>
         ))}
       </TagsArrowScroll>
+       {selectedLoc && (
+        <UpdateLocationModal
+          open={isOpen}
+          onClose={() => {close(); refetch();}} 
+          loc={selectedLoc}
+        />
+      )}
     </div>
   );
 }

@@ -11,6 +11,7 @@ interface Props {
   fileName?: string | null;
   variant?: "avatar" | "location";
   className?: string;
+  havingImagePreview?: boolean;
 }
 
 export default function DragAndDropUpload({
@@ -20,6 +21,7 @@ export default function DragAndDropUpload({
   fileName,
   variant = "location",
   className,
+  havingImagePreview = true,
 }: Props) {
   const [dragActive, setDragActive] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -61,7 +63,7 @@ export default function DragAndDropUpload({
         className
       )}
     >
-      <img
+      {havingImagePreview ? <img
         src={
           preview ||
           (variant === "avatar" ? "/images/default-avatar.png" : undefined)
@@ -73,7 +75,7 @@ export default function DragAndDropUpload({
             ? "w-24 h-24 rounded-full"
             : "w-full h-40 rounded-lg"
         )}
-      />
+      /> : null}
 
       {!fileName && (
         <label className="text-sm font-medium text-gray-700">

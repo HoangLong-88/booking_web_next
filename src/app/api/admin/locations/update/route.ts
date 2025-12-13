@@ -2,20 +2,16 @@ import { NextResponse } from 'next/server';
 
 export async function POST(req: Request) {
   try {
-    const body = await req.json();
-    const formData = new FormData();
-    
-    formData.append("_method", "PUT");
-    formData.append("locationName", body.locationName);
-    formData.append("address", body.address);
-    formData.append("country", body.country);
-    formData.append("pinCode", body.pinCode);
-    formData.append("existing_image_path", body.oldImagePath);
+    const formData = await req.formData();
 
-    if (body.image) {
-      formData.append("image", body.image);
+    const id = formData.get("id");
+    if (!id) {
+      return NextResponse.json(
+        { ok: false, message: "Missing location id" },
+        { status: 400 }
+      );
     }
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/admin/locations/${body.id}`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/admin/locations/${id}`, {
       method: "POST",
       body: formData,
     });

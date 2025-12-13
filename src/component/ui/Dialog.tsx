@@ -30,6 +30,20 @@ export function Dialog({ open, onOpenChange, children }: DialogProps) {
   );
 }
 
+export function DialogTrigger({
+  children,
+  onOpenChange,
+}: DialogProps) {
+  return (
+    <div
+      onClick={() => onOpenChange(true)}
+      className="inline-block cursor-pointer"
+    >
+      {children}
+    </div>
+  );
+}
+
 export function DialogContent({
   children,
   className,

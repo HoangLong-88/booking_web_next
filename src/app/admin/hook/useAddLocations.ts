@@ -46,7 +46,6 @@ export function useLocationForm(): { state: State; actions: Actions } {
         if (!next[index]) return prev;
         const updated = { ...next[index], [field]: value };
 
-      // Nếu field là image → tạo preview
       if (field === "image") {
         if (value instanceof File) {
           updated.preview = URL.createObjectURL(value);
