@@ -3,11 +3,20 @@ import { Card, CardContent } from "@/component/ui/Card";
 import { CustomButton } from "@/component/ui/Button";
 import { Loader2 } from "lucide-react";
 import { useFetchLocation } from "../../hook/useFetchLocation";
+import TagsArrowScroll from "@/component/ui/TagScroll";
+import { useModal } from "@/utils/dom/useModal";
+import UpdateLocationModal from "@/component/modal/location_update";
+import type { Location } from "@/types/location";
 
-export default function LocationList() {
-    const { locations, loading, error } = useFetchLocation();
+interface Props {
+  location: Location[];
+  refreshKey: number;
+}
 
-
+export default function LocationList({location}: Props) {
+    const { locations, loading, error, refetch } = useFetchLocation();
+    const { isOpen, open, close } = useModal(); 
+    const [selectedLoc, setSelectedLoc] = useState<Location | null>(null);
    if (loading) {
     return (
       <div className="flex justify-center items-center h-40">
@@ -21,14 +30,14 @@ export default function LocationList() {
   }
 
   return (
-    <div className="w-full">
+    <div className="">
       <h2 className="text-xl font-semibold mb-3">Locations</h2>
-
-      <div className="flex gap-4 overflow-x-auto scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-200 py-2">
-        {locations.map((loc) => (
+      <TagsArrowScroll scrollAmount={400}>
+          {locations.map((loc) => (
           <Card
             key={loc.id}
-            className="min-w-[280px] w-[280px] rounded-xl border shadow-sm flex-shrink-0"
+            className="min-w-[280px] w-[280px] flex-none rounded-xl border shadow-sm"
+            onClick={() => {open(); setSelectedLoc(loc)}}
           >
             <img
               src={loc.image_url ?? "/no-image.jpg"}
@@ -44,7 +53,14 @@ export default function LocationList() {
             </CardContent>
           </Card>
         ))}
-      </div>
+      </TagsArrowScroll>
+       {selectedLoc && (
+        <UpdateLocationModal
+          open={isOpen}
+          onClose={() => {close(); refetch();}} 
+          loc={selectedLoc}
+        />
+      )}
     </div>
   );
 }

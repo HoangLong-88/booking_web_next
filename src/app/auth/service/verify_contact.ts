@@ -10,7 +10,7 @@ export interface CheckContactResponse {
 export async function checkEmailExists(email: string): Promise<CheckContactResponse> {
   if (!email) throw new Error("Email is required");
 
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/check_email`, {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/auth/check-email`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ email }),
@@ -30,7 +30,7 @@ export async function checkEmailExists(email: string): Promise<CheckContactRespo
 export async function checkPhoneExists(phone: string): Promise<CheckContactResponse> {
   if (!phone) throw new Error("Phone number is required");
 
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/check_phone`, {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/auth/check-phone`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ phone }),

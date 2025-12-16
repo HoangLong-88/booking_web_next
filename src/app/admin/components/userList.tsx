@@ -1,21 +1,11 @@
 import React, { FC }from "react";
-import { useGuests } from "../hook/useGuests";
+import { useState } from "react";
+import { useFetchUser } from "../hook/useFetchUser";
 import Link from "next/link";
-
-type Guest = {
-  id: string;
-  name: string;
-  email?: string | null;
-  phone?: string | null;
-  bookingsCount?: number;
-  createdAt?: string;
-};  
-
-interface GuestsListProps {
-  guest: Guest;
-}
+import Image from "next/image";
 
 const GuestsListComponent: React.FC = () => {
+  const [tab, setTab] = useState<"customer" | "staff">("customer");
   const {
     loading,
     pageData,
@@ -26,25 +16,59 @@ const GuestsListComponent: React.FC = () => {
     total,
     totalPages,
     error,
-    remove,
-  } = useGuests(8);
-  const handleDelete = (id: string) => {
-    if (!confirm("Delete guest?")) return;
-    remove(id);
-  };
+  } = useFetchUser(tab);
   return (
     <div className="max-w-7xl w-full h-full max-h-full flex">
 
         <main className="flex-1 p-6">
-          <header className="flex items-center justify-between mb-6">
-            <div>
-              <h1 className="text-2xl font-semibold">Guests</h1>
-              <p className="text-sm text-slate-500">Manage all guest records</p>
+          <header className="mb-6">
+            <div className="flex items-center justify-between">
+              <div>
+                <h1 className="text-2xl font-semibold">
+                  {tab === "customer" ? "Customer" : "Staff"}
+                </h1>
+                <p className="text-sm text-slate-500">
+                  Manage all {tab === "customer" ? "customer" : "staff"} records
+                </p>
+              </div>
+
+              {tab === "customer" && (
+                <Link
+                  href="/admin/guests/new"
+                  className="px-4 py-2 bg-blue-600 text-white rounded-md"
+                >
+                  New Guest
+                </Link>
+              )}
             </div>
-            <div className="flex items-center gap-3">
-              <Link href="/admin/guests/new" className="px-4 py-2 bg-blue-600 text-white rounded-md">
-                New Guest
-              </Link>
+
+            {/* Tabs */}
+            <div className="mt-4 border-b flex gap-6">
+              <button
+                onClick={() => setTab("customer")}
+                className={`pb-2 text-sm font-medium transition
+                  ${
+                    tab === "customer"
+                      ? "border-b-2 border-blue-600 text-blue-600"
+                      : "text-slate-500 hover:text-slate-700"
+                  }
+                `}
+              >
+                Customers
+              </button>
+
+              <button
+                onClick={() => setTab("staff")}
+                className={`pb-2 text-sm font-medium transition
+                  ${
+                    tab === "staff"
+                      ? "border-b-2 border-blue-600 text-blue-600"
+                      : "text-slate-500 hover:text-slate-700"
+                  }
+                `}
+              >
+                Staff
+              </button>
             </div>
           </header>
 
@@ -69,29 +93,42 @@ const GuestsListComponent: React.FC = () => {
                   <table className="w-full text-left text-sm">
                     <thead>
                       <tr className="text-slate-500">
+                        <th className="py-3 px-3"></th>
+                        <th className="py-3 px-3">ID</th>
                         <th className="py-3 px-3">Name</th>
                         <th className="py-3 px-3">Email</th>
                         <th className="py-3 px-3">Phone</th>
                         <th className="py-3 px-3">Bookings</th>
                         <th className="py-3 px-3">Joined</th>
+                        <th className="py-3 px-3">Updated</th>
                         <th className="py-3 px-3">Actions</th>
                       </tr>
                     </thead>
                     <tbody>
                       {pageData.map((g) => (
                         <tr key={g.id} className="border-t border-gray-100 dark:border-slate-700">
-                          <td className="py-3 px-3">{g.name}</td>
+                          <td className="py-1 px-1">
+                            <Image 
+                            src={g.avatar_url ?? '/images/default-avatar.png'}
+                            alt="user avatar"
+                            width={30}
+                            height={30}
+                            ></Image>
+                          </td>
+                          <td className="py-3 px-3">{g.id}</td>
+                          <td className="py-3 px-3">{g.name ?? "_" }</td>
                           <td className="py-3 px-3 text-slate-600">{g.email ?? "-"}</td>
-                          <td className="py-3 px-3">{g.phone ?? "-"}</td>
+                          <td className="py-3 px-3">{g.phone ?? "_"}</td>
                           <td className="py-3 px-3">{g.bookingsCount ?? 0}</td>
-                          <td className="py-3 px-3">{g.createdAt ? new Date(g.createdAt).toLocaleDateString() : "-"}</td>
+                          <td className="py-3 px-3">{g.createdAt ? new Date(g.createdAt).toLocaleDateString() : "_"}</td>
+                          <td className="py-3 px-3">{g.updatedAt ? new Date(g.updatedAt).toLocaleDateString() : "_"}</td>
                           <td className="py-3 px-3">
                             <div className="flex gap-2">
                               <Link href={`/admin/guests/${g.id}`} className="text-sm px-2 py-1 border rounded text-blue-600">
                                 View
                               </Link>
                               <button
-                                onClick={() => handleDelete(g.id)}
+                                onClick={() => {}}
                                 className="text-sm px-2 py-1 border rounded text-red-600"
                               >
                                 Delete

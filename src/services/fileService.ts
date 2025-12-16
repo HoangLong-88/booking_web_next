@@ -4,10 +4,11 @@ export const fileService = {
     
   // 1. Upload file
 
-  upload: async (file: File) => {
+  upload: async (file: File, folder: string) => {
     try {
       const formData = new FormData();
       formData.append("file", file);
+      formData.append("folder", folder);
 
       const res = await fetch("/api/upload-file", {
         method: "POST",

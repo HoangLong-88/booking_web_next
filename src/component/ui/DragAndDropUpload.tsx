@@ -1,14 +1,17 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useRef, useCallback, useId } from "react";
 import { cn } from "@/libs/utils";
 import { Input } from "@/component/ui/input";
 
 interface Props {
   preview?: string | null;
   onUpload: (file: File) => void;
-  accept?: string; // e.g., "image/*", "application/pdf"
+  accept?: string;
   fileName?: string | null;
+  variant?: "avatar" | "location";
+  className?: string;
+  havingImagePreview?: boolean;
 }
 
 export default function DragAndDropUpload({
@@ -16,11 +19,26 @@ export default function DragAndDropUpload({
   onUpload,
   accept,
   fileName,
+  variant = "location",
+  className,
+  havingImagePreview = true,
 }: Props) {
   const [dragActive, setDragActive] = useState(false);
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  const inputId = useId();
+
+  const handleFileSelect = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      const file = e.target.files?.[0];
+      if (file) onUpload(file);
+    },
+    [onUpload]
+  );
 
   const handleDrop = (e: React.DragEvent) => {
     e.preventDefault();
+    e.stopPropagation();
     setDragActive(false);
 
     const file = e.dataTransfer.files?.[0];
@@ -31,46 +49,56 @@ export default function DragAndDropUpload({
     <div
       onDragOver={(e) => {
         e.preventDefault();
+        e.stopPropagation();
         setDragActive(true);
       }}
-      onDragLeave={() => setDragActive(false)}
+      onDragLeave={(e) => {
+        e.stopPropagation();
+        setDragActive(false);
+      }}
       onDrop={handleDrop}
       className={cn(
         "border-2 border-dashed rounded-xl p-4 flex flex-col items-center gap-3 transition",
-        dragActive ? "border-blue-500 bg-blue-50" : "border-gray-300"
+        dragActive ? "border-blue-500 bg-blue-50" : "border-gray-300",
+        className
       )}
     >
-      <img
-        src={preview || "images/default-avatar.png"}
+      {havingImagePreview ? <img
+        src={
+          preview ||
+          (variant === "avatar" ? "/images/default-avatar.png" : undefined)
+        }
         alt="preview"
-        className="w-24 h-24 rounded-full object-cover border shadow-sm"
-      />
+        className={cn(
+          "object-cover border shadow-sm bg-gray-100 dark:bg-slate-900",
+          variant === "avatar"
+            ? "w-24 h-24 rounded-full"
+            : "w-full h-40 rounded-lg"
+        )}
+      /> : null}
 
-      {!fileName && <label className="text-sm font-medium text-gray-700">
-        Drag & Drop or Choose File
-      </label>}
+      {!fileName && (
+        <label className="text-sm font-medium text-gray-700">
+          Drag & Drop or Choose File
+        </label>
+      )}
 
+      {/* Input file — với ID duy nhất */}
       <Input
-        id="file"
-        name="file"
+        id={inputId}
+        name={inputId}
         type="file"
+        ref={inputRef}
         accept={accept}
         className="hidden"
-        onChange={(e) => {
-          const file = e.target.files?.[0];
-          if (file) onUpload(file);
-        }}
+        onChange={handleFileSelect}
       />
+
       <label
-        htmlFor="file"
-        className="block w-full border border-gray-500 
-         text-gray-700
-           rounded-md p-2
-            cursor-pointer
-             text-left
-             hover:bg-gray-500"
+        htmlFor={inputId}
+        className="block w-full border border-gray-500 text-gray-700 rounded-md p-2 cursor-pointer text-left hover:bg-gray-100"
       >
-        {fileName || "Browse..."} {/* <-- custom placeholder */}
+        {fileName || "Browse..."}
       </label>
     </div>
   );

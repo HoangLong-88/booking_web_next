@@ -3,7 +3,9 @@
     "nav_item": {
         "stays": "stays",
         "cars": "cars",
-        "attractions": "attractions"
+        "attractions": "attractions",
+        "admin": "admin - staff",
+        "staff": "staff"
     },
     "langs_modal" : {
         "title": "Select language",

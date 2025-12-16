@@ -2,7 +2,6 @@ import { useState } from "react";
 import { loginService } from "../service/login.service";
 import { saveToken } from "@/utils/storeLoginToken";
 import { useRouter } from "next/navigation";
-import { cookies } from "next/headers";
 
 interface RegisterResult<T = unknown> {
   ok: boolean;

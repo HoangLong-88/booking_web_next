@@ -1,14 +1,15 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { locationService } from "../service/locationService";
+import { Location } from "@/types/location";
 
-export interface Location {
-  id: string;
-  name: string;
-  address: string;
-  country: string;
-  pinCode: string;
-  imagePath: string;
-  image_url?: string;
+interface RawLocation {
+  locationID: string;
+  locationName: string;
+  address: string | null;
+  country: string | null;
+  pinCode: string | null;
+  location_image_path: string | null;
+  image_url: string | null;
 }
 
 export function useFetchLocation() {
@@ -16,26 +17,40 @@ export function useFetchLocation() {
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
-  useEffect(() => {
-    async function fetchLocations() {
-      setLoading(true);
-      setError(null);
-      try {
-        const res = await locationService.fetchLocations();
-        if (res.ok) {
-          setLocations(res.locations);
-        } else {
-          setError(res.message || "Failed to fetch locations");
-        }
-      } catch (err) {
-        setError(String(err));
-      } finally {
-        setLoading(false);
-      }
-    }
+  const fetchLocations = useCallback(async () => {
+    setLoading(true);
+    setError(null);
 
-    fetchLocations();
+    try {
+      const res = await locationService.fetchLocations();
+
+      if (res.ok) {
+        const mapped: Location[] = res.locations.map(
+          (item: RawLocation) => ({
+            id: item.locationID,
+            name: item.locationName,
+            address: item.address ?? "",
+            country: item.country ?? "",
+            pinCode: item.pinCode ?? "",
+            imagePath: item.location_image_path ?? "",
+            image_url: item.image_url ?? undefined,
+          })
+        );
+
+        setLocations(mapped);
+      } else {
+        setError(res.message || "Failed to fetch locations");
+      }
+    } catch (err) {
+      setError(String(err));
+    } finally {
+      setLoading(false);
+    }
   }, []);
 
-  return { locations, loading, error };
+  // 2️⃣ useEffect CHỈ GỌI fetchLocations
+  useEffect(() => {
+    fetchLocations();
+  }, [fetchLocations]);
+  return { locations, loading, error, refetch: fetchLocations };
 }
