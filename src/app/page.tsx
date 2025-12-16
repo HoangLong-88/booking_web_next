@@ -1,4 +1,4 @@
-
+'use client'
 import { Card, CardTitle, CardSubTitle } from "@/component/ui/Card";
 import {
   LateEscapeDeal,
@@ -11,8 +11,14 @@ import { HomeSearchBar } from "@/component/layout/CustomSearchBar";
 import { HeroHomePage } from "@/component/layout/Hero";
 import { HotelTagsArrowScroll, NoteTags } from "@/component/ui/TagScroll";
 import { TrendingDestinationsRecommendation } from "@/component/layout/gridLayout";
+import { useEffect } from "react";
 
 export default function HomePage() {
+  useEffect(() => {
+      if (!localStorage.getItem("userID")) {
+        localStorage.setItem("userID", "USR-TEST-001");
+      }
+    }, []);
   return (
     <>
       {/* HERO */}

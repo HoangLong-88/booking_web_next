@@ -1,9 +1,9 @@
 'use client'
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ChevronDown, ChevronUp } from "lucide-react";
 
 
-export default function QAItem({ question, answer }: QAProps) {
+const QAItem = ({ question, answer }: QAProps) => {
   const [open, setOpen] = useState(false);
 
   return (
@@ -31,7 +31,7 @@ interface QAProps {
 }
 
 // Example usage component
-function QAList() {
+const QAList = () => {
   const data1 = [
     {
       question: "Tại sao tôi nên đặt thuê xe ở Việt Nam với ?",
@@ -143,4 +143,60 @@ function QAList() {
   );
 };
 
-export { QAList }
+function RoomType() {
+  const data = [
+    'Vip thượng lưu',
+    'Trung lưu',
+    'Phổ thông'
+  ]
+
+  const [open, setOpen] = useState(false);
+  const [selected, setSelected] = useState<string>("Chọn loại phòng");
+  useEffect(() => {
+    const close = () => setOpen(false);
+    window.addEventListener("click", close);
+    return () => window.removeEventListener("click", close);
+  }, []);
+
+
+  return (
+    <div className="absolute top-3 right-3 z-20">
+      <div
+        className="group relative"
+        onClick={(e) => e.stopPropagation()}
+      >
+        {/* Nút dropdown */}
+        <button
+          onClick={() => setOpen(!open)}
+          className="flex items-center gap-1 bg-white border shadow-sm px-3 py-1.5 rounded-lg text-sm"
+        >
+          <span className="truncate max-w-[120px]">{selected}</span>
+          <ChevronDown size={16} />
+        </button>
+
+
+        {/* Menu */}
+        <div
+          className={`absolute right-0 mt-2 w-44 bg-white shadow-xl rounded-xl transition-all p-2
+          ${open ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"}`}
+        >
+          {data.map((item) => (
+            <button
+              key={item}
+              onClick={() => {
+                setSelected(item);   
+                setOpen(false);      
+              }}
+              className={`w-full text-left px-3 py-2 rounded-lg text-sm
+              ${selected === item ? "bg-gray-100 font-medium" : "hover:bg-gray-100"}`}  
+            >
+              {item}
+            </button>
+          ))}
+        </div>
+      </div>
+    </div>
+  )
+}
+
+export { QAList, RoomType }
