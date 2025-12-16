@@ -16,6 +16,7 @@ const Label = React.forwardRef <
         left-3 
         -top-3
         bg-white
+        dark:bg-slate-900
         rounded-xl
         px-1
         font-medium 
@@ -23,7 +24,8 @@ const Label = React.forwardRef <
         peer-placeholder-shown:top-2.5
         peer-placeholder-shown:text-gray-400
         peer-focus:-top-3 
-        peer-focus:text-gray-900`)}
+        peer-focus:text-gray-900
+        dark:peer-focus:text-gray-400`)}
         {...props}
         >
         {children}

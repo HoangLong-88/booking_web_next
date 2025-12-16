@@ -70,7 +70,7 @@ export default function DragAndDropUpload({
         }
         alt="preview"
         className={cn(
-          "object-cover border shadow-sm bg-gray-100",
+          "object-cover border shadow-sm bg-gray-100 dark:bg-slate-900",
           variant === "avatar"
             ? "w-24 h-24 rounded-full"
             : "w-full h-40 rounded-lg"

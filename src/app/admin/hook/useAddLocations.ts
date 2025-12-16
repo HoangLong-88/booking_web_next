@@ -95,6 +95,7 @@ export function useLocationForm(): { state: State; actions: Actions } {
       throw err;
     } finally {
       setLoading(false);
+      window.location.reload;
     }
   }, [locations]);
 

@@ -45,7 +45,7 @@
       ref={navbarRef}
       className="
         fixed left-0 right-0 z-30 
-        bg-white border-b 
+        bg-white dark:bg-slate-900 border-b 
         px-4 py-3 
         flex items-center justify-between 
         transition-all duration-300
@@ -60,7 +60,7 @@
 
 
         {locations.map((loc, idx) => (
-          <div key={idx} className="bg-white rounded-lg p-6 mt-[2.5rem] shadow-sm border">
+          <div key={idx} className="bg-white dark:bg-slate-900 rounded-lg p-6 mt-[2.5rem] shadow-sm border">
             <div className="flex flex-row items-center justify-center gap-3">
               <div className="relative w-full">
                 <Input

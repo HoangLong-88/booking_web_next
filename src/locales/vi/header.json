@@ -4,7 +4,8 @@
         "stays": "Chỗ ở",
         "cars": "Thuê xe",
         "attractions": "Hoạt động",
-        "admin": "Quản trị viên"
+        "admin": "Quản trị viên - Nhân viên",
+        "staff": "Nhân viên"
     },
     "langs_modal": {
         "title": "Chọn ngôn ngữ",

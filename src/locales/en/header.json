@@ -4,7 +4,8 @@
         "stays": "stays",
         "cars": "cars",
         "attractions": "attractions",
-        "admin": "admin"
+        "admin": "admin - staff",
+        "staff": "staff"
     },
     "langs_modal" : {
         "title": "Select language",

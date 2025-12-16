@@ -3,8 +3,11 @@ export interface User {
   name?: string | null;
   email?: string | null;
   phone?: string | null;
-  language: string;
+  language?: string;
   avatar_url?: string | null;
   role: "customer" | "staff" | "admin";
   remember_token?: string | null;
+  bookingsCount?: number;
+  createdAt?: string;
+  updatedAt?: string;
 }

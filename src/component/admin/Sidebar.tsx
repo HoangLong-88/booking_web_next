@@ -28,7 +28,7 @@ export default function AdminSidebar({ active, onSelect, className }: SidebarPro
 
   const items = [
         { key: "dashboard", label: "Dashboard", icon: <LayoutDashboard size={20} /> },
-        { key: "guests", label: "Guests", icon: <Users size={20} /> },
+        { key: "guests", label: "Guests - Staffs", icon: <Users size={20} /> },
         { key: "location", label: "Locations", icon: <MapPin size={20} /> },
         { key: "bookings", label: "Bookings", icon: <CalendarCheck size={20} /> },
         { key: "rooms", label: "Rooms", icon: <Bed size={20} /> },
