@@ -5,23 +5,27 @@ import { cn } from "@/libs/utils";
 import { Input } from "@/component/ui/input";
 
 interface Props {
-  preview?: string | null;
-  onUpload: (file: File) => void;
+  preview?: string | string[] | null;
+  onUpload?: (file: File) => void;
+  onUploadMultiple?: (files: File[]) => void;
   accept?: string;
   fileName?: string | null;
   variant?: "avatar" | "location";
   className?: string;
   havingImagePreview?: boolean;
+  multiple?: boolean;
 }
 
 export default function DragAndDropUpload({
   preview,
   onUpload,
+  onUploadMultiple,
   accept,
   fileName,
   variant = "location",
   className,
   havingImagePreview = true,
+  multiple = false,
 }: Props) {
   const [dragActive, setDragActive] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -29,11 +33,17 @@ export default function DragAndDropUpload({
   const inputId = useId();
 
   const handleFileSelect = useCallback(
-    (e: React.ChangeEvent<HTMLInputElement>) => {
-      const file = e.target.files?.[0];
-      if (file) onUpload(file);
+  (e: React.ChangeEvent<HTMLInputElement>) => {
+      const files = e.target.files;
+      if (!files || files.length === 0) return;
+
+      if (multiple && onUploadMultiple) {
+        onUploadMultiple(Array.from(files));
+      } else if (onUpload) {
+        onUpload(files[0]);
+      }
     },
-    [onUpload]
+    [multiple, onUpload, onUploadMultiple]
   );
 
   const handleDrop = (e: React.DragEvent) => {
@@ -41,8 +51,14 @@ export default function DragAndDropUpload({
     e.stopPropagation();
     setDragActive(false);
 
-    const file = e.dataTransfer.files?.[0];
-    if (file) onUpload(file);
+    const files = e.dataTransfer.files;
+    if (!files || files.length === 0) return;
+
+    if (multiple && onUploadMultiple) {
+      onUploadMultiple(Array.from(files));
+    } else if (onUpload) {
+      onUpload(files[0]);
+    }
   };
 
   return (
@@ -63,19 +79,40 @@ export default function DragAndDropUpload({
         className
       )}
     >
-      {havingImagePreview ? <img
-        src={
-          preview ||
-          (variant === "avatar" ? "/images/default-avatar.png" : undefined)
-        }
-        alt="preview"
-        className={cn(
-          "object-cover border shadow-sm bg-gray-100 dark:bg-slate-900",
-          variant === "avatar"
-            ? "w-24 h-24 rounded-full"
-            : "w-full h-40 rounded-lg"
-        )}
-      /> : null}
+      {havingImagePreview ? (
+      <>
+          {/* SINGLE */}
+          {typeof preview === "string" && (
+            <img
+              src={
+                preview ||
+                (variant === "avatar" ? "/images/default-avatar.png" : undefined)
+              }
+              alt="preview"
+              className={cn(
+                "object-cover border shadow-sm bg-gray-100 dark:bg-slate-900",
+                variant === "avatar"
+                  ? "w-24 h-24 rounded-full"
+                  : "w-full h-40 rounded-lg"
+              )}
+            />
+          )}
+
+          {/* MULTIPLE */}
+          {Array.isArray(preview) && preview.length > 0 && (
+            <div className="grid grid-cols-3 gap-2">
+              {preview.map((src, idx) => (
+                <img
+                  key={idx}
+                  src={src}
+                  alt={`preview-${idx}`}
+                  className="w-full h-24 object-cover rounded-md border"
+                />
+              ))}
+            </div>
+          )}
+        </>
+      ) : null}
 
       {!fileName && (
         <label className="text-sm font-medium text-gray-700">

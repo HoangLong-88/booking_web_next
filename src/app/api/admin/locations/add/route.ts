@@ -3,7 +3,6 @@ import { NextResponse } from "next/server";
 export async function POST(req: Request) {
   try { 
     const formData = await req.formData();
-    console.log(formData)
     const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/admin/locations`, {
       method: "POST",
       body: formData

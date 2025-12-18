@@ -3,9 +3,12 @@ import { useState } from "react";
 import { useFetchUser } from "../hook/useFetchUser";
 import Link from "next/link";
 import Image from "next/image";
+import { useAuth } from "@/app/providers/authProvider";
 
 const GuestsListComponent: React.FC = () => {
   const [tab, setTab] = useState<"customer" | "staff">("customer");
+  const { user } = useAuth();
+  if (!user) return null;
   const {
     loading,
     pageData,
@@ -57,7 +60,7 @@ const GuestsListComponent: React.FC = () => {
                 Customers
               </button>
 
-              <button
+              {user.role === 'admin' ? <button
                 onClick={() => setTab("staff")}
                 className={`pb-2 text-sm font-medium transition
                   ${
@@ -68,7 +71,7 @@ const GuestsListComponent: React.FC = () => {
                 `}
               >
                 Staff
-              </button>
+              </button> : null}
             </div>
           </header>
 
