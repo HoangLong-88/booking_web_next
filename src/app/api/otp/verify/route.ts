@@ -11,7 +11,7 @@ export async function POST(req: Request) {
       body: JSON.stringify({ contact, otp })
     }
   );
-
+  console.log()
   const data = await laravelRes.json();
 
   return NextResponse.json(data, { status: laravelRes.status });

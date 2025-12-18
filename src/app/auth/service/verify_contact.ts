@@ -1,7 +1,7 @@
 export interface CheckContactResponse {
-    success: boolean;
-    email_exists: boolean;
-    phone_exists: boolean;
+  success: boolean;
+  email_exists: boolean;
+  phone_exists: boolean;
 }
 
 /**
@@ -43,3 +43,6 @@ export async function checkPhoneExists(phone: string): Promise<CheckContactRespo
   const data: CheckContactResponse = await res.json();
   return data;
 }
+
+  console.log("API URL:", process.env.NEXT_PUBLIC_API_URL);
+

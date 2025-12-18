@@ -2,19 +2,21 @@
 "use client";
 
 import PaymentForm from "@/component/ui/Form";
+import { useAuth } from "@/hook/useAuth";
 import { BookingItem } from "@/types/bookings";
 
 
 export default function CheckoutPage() {
-  const token = localStorage.getItem("token") || "";
+  const { token } = useAuth() || { token: '' };
 
   const items: BookingItem[] = [
     {
+      bookingID: 'BKG-123',
       serviceType: "stay",
       serviceID: "STAY",
       quantity: 1,
-      meta: {
-        room_id: "ROOM_02",
+      metaJson: {
+        roomID: "ROOM_02",
         days: 2,
         price: 1200000,
       },
