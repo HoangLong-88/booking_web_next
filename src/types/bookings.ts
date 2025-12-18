@@ -1,8 +1,9 @@
     export type ServiceType = "stay" | "car" | "attraction";
 
     export interface BookingItem {
+    bookingID: string,
     serviceType: ServiceType;
-    serviceID: string
+    serviceID: string,
     quantity: number; // rất quan trọng
-    meta?: Record<string, any>;
+    metaJson?: Record<string, any>;
     }

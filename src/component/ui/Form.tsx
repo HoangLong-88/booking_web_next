@@ -1,62 +1,18 @@
 "use client";
 
+import { useBookingService } from "@/hook/useBookingInit";
 import { BookingItem } from "@/types/bookings";
-import { PaymentMethod } from "@/types/payment";
+import { PaymentFormProps} from "@/types/payment";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
-interface PaymentFormProps {
-  token: string;
-  items: BookingItem[];
-  totalPrice: number;
-}
 
 export default function PaymentForm({
   token,
   items,
   totalPrice,
 }: PaymentFormProps) {
-  const [method, setMethod] = useState<PaymentMethod>("stay");
-  const [loading, setLoading] = useState(false);
-  const router = useRouter();
-  
-
-  const handleConfirm = async () => {
-    try {
-      setLoading(true);
-
-      const res = await fetch("/api/bookings", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({
-          payment_method: method,
-          items,
-          total_price: totalPrice,
-        }),
-      });
-
-      if (!res.ok) {
-        throw new Error("Create booking failed");
-      }
-
-      const data = await res.json();
-
-      if (data.redirect_url) {
-        window.location.href = data.redirect_url; // VNPay / Momo
-      } else {
-        router.push("/bookings"); // pay at hotel
-      }
-    } catch (err) {
-      console.error(err);
-      alert("Có lỗi khi tạo booking");
-    } finally {
-      setLoading(false);
-    }
-  };
-
+  const {loading, method, setMethod, handleConfirm } = useBookingService(token, items, totalPrice);
   return (
     <div className="max-w-xl mx-auto bg-white rounded-2xl shadow-lg p-6 space-y-6">
       <h2 className="text-xl font-semibold">Thanh toán</h2>
