@@ -25,7 +25,32 @@ export const fileService = {
       throw new Error("Upload failed");
     }
   },
+  uploadMultiple: async (files: File[], folder: string) => {
+    try {
+      const formData = new FormData();
+      files.forEach((file) => {
+        formData.append("images[]", file);
+      });
 
+      if (folder) {
+        formData.append("folder", folder);
+      }
+
+      const res = await fetch("/api/upload-multiple-files", {
+        method: "POST",
+        body: formData,
+      });
+
+      const data = await res.json();
+      if (!res.ok) {
+        throw new Error(data.error || "Upload failed");
+      }
+      return data; // { filename: "...", url: "...", ... }
+    } catch (err: unknown) {
+      if (err instanceof Error) throw err;
+      throw new Error("Upload failed");
+    }
+  },
   // 2. Get file (proxy to Laravel)
 
   get: async (filename: string) => {

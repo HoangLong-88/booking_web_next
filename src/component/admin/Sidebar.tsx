@@ -13,27 +13,48 @@ import {
   CalendarCheck,
   Bed,
   Settings,
+  Hotel
 } from "lucide-react";
 import { cn } from "@/libs/utils";
+import { useAuth } from "@/app/providers/authProvider";
 
 type SidebarProps = {
-    active: string;
+    active: string; 
     onSelect: (key: string) => void;
     className?: string;
+    userRole?: string;
 };
 
 export default function AdminSidebar({ active, onSelect, className }: SidebarProps) {
+  const { user } = useAuth();
   const path = usePathname() || "";
   const [open, setOpen] = useState(true);
 
-  const items = [
-        { key: "dashboard", label: "Dashboard", icon: <LayoutDashboard size={20} /> },
-        { key: "guests", label: "Guests - Staffs", icon: <Users size={20} /> },
-        { key: "location", label: "Locations", icon: <MapPin size={20} /> },
-        { key: "bookings", label: "Bookings", icon: <CalendarCheck size={20} /> },
-        { key: "rooms", label: "Rooms", icon: <Bed size={20} /> },
-        { key: "settings", label: "Settings", icon: <Settings size={20} /> },
+  if (!user) return null;
+
+  const adminItems = [
+    { key: "dashboard", label: "Dashboard", icon: <LayoutDashboard size={20} /> },
+    { key: "guests", label: "Guests - Staffs", icon: <Users size={20} /> },
+    { key: "location", label: "Locations", icon: <MapPin size={20} /> },
+    { key: "bookings", label: "Bookings", icon: <CalendarCheck size={20} /> },
+    { key: "rooms", label: "Rooms", icon: <Bed size={20} /> },
+    { key: "settings", label: "Settings", icon: <Settings size={20} /> },
   ];
+
+  const staffItems = [
+    { key: "dashboard", label: "Dashboard", icon: <LayoutDashboard size={20} /> },
+    { key: "guests", label: "Guests", icon: <Users size={20} /> },
+    { key: "bookings", label: "Bookings", icon: <CalendarCheck size={20} /> },
+    { key: "stays", label: "Stays", icon: <Hotel size={20}/>},
+    { key: "rooms", label: "Rooms", icon: <Bed size={20} /> },
+  ];
+
+  const menuItems =
+  user.role === "admin"
+    ? adminItems
+    : user.role === "staff"
+    ? staffItems
+    : [];
   return (
   <motion.aside
     variants={sidebarVariant}
@@ -65,7 +86,7 @@ export default function AdminSidebar({ active, onSelect, className }: SidebarPro
     
     {/* Menu */}
     <ul className="space-y-2">
-      {items.map((item) => (
+      {menuItems.map((item) => (
         <li key={item.key}>
           <CustomButton
             variant="destructive"

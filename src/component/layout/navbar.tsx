@@ -22,7 +22,13 @@ function NavBar({isAuthPage, isAdminPage}:{isAuthPage: boolean, isAdminPage: boo
     { name: t('nav_item.stays'), href: "/stays" },
     { name: t('nav_item.cars'), href: "/cars" },
     { name: t('nav_item.attractions'), href: "/attractions" },
-    ...(user?.role === 'admin' ? [{ name: t('nav_item.admin'), href: "/admin" }] : [])
+    ...(user?.role === 'admin'
+        ? [{ name: t('nav_item.admin'), href: "/admin" }]
+        : []),
+
+    ...(user?.role === 'staff' || user?.role === 'admin'
+        ? [{ name: t('nav_item.staff'), href: "/staff" }]
+        : [])
     ]
 
 
