@@ -2,8 +2,9 @@ import { cn } from "@/libs/utils";
 import { AttractionObject } from "@/types/attraction";
 import { CarObject } from "@/types/car";
 import { StayObject } from "@/types/stays";
-import { Users, Luggage, Gauge, MapPin, Star, Bath, Wifi, BedDouble } from "lucide-react";
+import { Users, Luggage, Gauge, MapPin, Star, Bath, Wifi, BedDouble, ChevronDown } from "lucide-react";
 import React from "react";
+import { RoomType } from "./Dropdown";
 
 const Card = React.forwardRef<
     HTMLDivElement,
@@ -66,19 +67,24 @@ interface CarCardProps {
 }
 
 const StayCard: React.FC<StayCardProps> = ({ stay }) => {
+    const days = Number(stay.days ?? 0);
+    const priceBase = Number(stay.totalPrice ?? stay.price ?? 0);
+
     const displayPrice =
-        stay.totalPrice !== undefined && (stay.days ?? 0) > 0
-            ? `${stay.totalPrice.toLocaleString('vi-VN')} VNĐ (${stay.days} đêm)`
-            : `${stay.price.toLocaleString()} VNĐ / đêm`;
+        priceBase > 0 && days > 0
+            ? `${priceBase.toLocaleString("vi-VN")} VNĐ (${days} đêm)`
+            : `${Number(stay.price ?? 0).toLocaleString("vi-VN")} VNĐ / đêm`;
 
     return (
-        <div className="border rounded-2xl shadow-md hover:shadow-lg transition p-4 flex gap-4 bg-white">
+        <div className="border rounded-2xl shadow-md hover:shadow-lg transition p-4 flex gap-4 bg-white relative">
+            {/* Dropdown chọn loại phòng */}
+            <RoomType />
 
             {/* Ảnh */}
             <img
                 src={stay.image}
                 alt={stay.stayName}
-                className="w-50 h-40 object-cover rounded-xl"
+                className="w-52 h-47 object-cover rounded-xl"
             />
 
             {/* Nội dung */}
@@ -87,9 +93,16 @@ const StayCard: React.FC<StayCardProps> = ({ stay }) => {
                 <div>
                     <h2 className="text-xl font-semibold">{stay.stayName}</h2>
 
-                    <p className="text-sm text-gray-500 flex items-center gap-1 mt-1">
-                        <MapPin size={14} /> {stay.location}
+                    <p className="text-sm text-gray-500 flex items-center gap-2 mt-1">
+                        <MapPin size={14} />
+                        <span>{stay.location}</span>
+
+                        <span className="flex items-center gap-1 px-2 py-0.5 rounded-md bg-yellow-50 text-yellow-700 text-xs font-semibold">
+                            <Star size={14} className="text-yellow-500" />
+                            {stay.rating}
+                        </span>
                     </p>
+
 
                     <p className="text-xs text-gray-500 mt-1">{stay.address}</p>
 
@@ -107,29 +120,24 @@ const StayCard: React.FC<StayCardProps> = ({ stay }) => {
                     </div>
                 </div>
 
-                {/* Rating + giá */}
-                <div className="flex justify-between items-end mt-4">
-                    {/* Rating giống Booking.com */}
-                    <div className="flex items-center gap-2">
-                        <span className="flex items-center gap-1 px-2 py-1 rounded-lg text-sm font-semibold text-yellow-700">
-                            <Star size={16} className="text-yellow-500"/>
-                            {stay.rating}
-                        </span>
-                    </div>
+                {/* Giá + Button */}
+                <div className="flex mt-4">
+                    <div className="ml-auto flex flex-col items-end w-fit">
+                        <p className="text-lg font-bold text-blue-700">
+                            {displayPrice}
+                        </p>
 
-                    {/* Giá */}
-                    <div className="text-right">
-                        <p className="text-lg font-bold text-blue-700">{displayPrice}</p>
-                        {stay.days && stay.days > 0 && (
-                            <p className="text-xs text-gray-500">Đã bao gồm thuế & phí</p>
+                        {(stay.days ?? 0) > 0 && (
+                            <p className="text-xs text-gray-500">
+                                Đã bao gồm thuế & phí
+                            </p>
                         )}
+
+                        <button className="mt-2 w-full bg-blue-600 text-white py-2 px-6 rounded-lg hover:bg-orange-400 transition font-medium">
+                            Đặt ngay
+                        </button>
                     </div>
                 </div>
-
-                {/* button */}
-                <button className="mt-4 bg-blue-600 text-white py-2 rounded-lg hover:bg-orange-400 transition font-medium">
-                    Đặt ngay
-                </button>
             </div>
         </div>
     );
