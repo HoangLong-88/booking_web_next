@@ -11,6 +11,7 @@ import { Label } from "../ui/label";
 import { CustomButton } from "../ui/Button";
 import DragAndDropUpload from "../ui/DragAndDropUpload";
 import { useUpdateLocations } from "@/app/admin/hook/useUpdateLocation";
+import { useDeleteLocation } from "@/app/admin/hook/useDeleteLocation";
 import { useEffect } from "react";
 import CountryPinCodeSelector from "../admin/countryPinCodeSelector";
 
@@ -26,6 +27,7 @@ export default function UpdateLocationModal({
   loc,
 }: Props) {
     const { locations, loading, error, initialize ,updateLocation, updateLocationImage, submit } = useUpdateLocations()
+    const { deleteLocation } = useDeleteLocation();
     useEffect(() => {
     if (open && loc) {
       initialize([loc]); // hook does the mapping
@@ -104,7 +106,7 @@ export default function UpdateLocationModal({
             <div className="relative">
                 <DragAndDropUpload 
                     havingImagePreview={false}
-                    onUpload={(file) =>{ updateLocationImage(current.id, file)}}
+                    onUpload={(file) =>{ updateLocationImage(current.id, file); close()}}
                     fileName={current.fileName}
                 />
             </div>
@@ -121,6 +123,15 @@ export default function UpdateLocationModal({
                 <CustomButton
                     variant={'secondary'}
                     className=""
+                    type="button"
+                    onClick={async () => {
+                    try {
+                      await deleteLocation(current.id);
+                      onClose();
+                    } catch (err) {
+                      console.error(err);
+                    }
+                  }}
                 >
                     Delete Location
                 </CustomButton>

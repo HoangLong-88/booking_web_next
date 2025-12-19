@@ -8,11 +8,10 @@ import { useEffect, useState } from "react";
 
 
 export default function PaymentForm({
-  token,
   items,
   totalPrice,
 }: PaymentFormProps) {
-  const {loading, method, setMethod, handleConfirm } = useBookingService(token, items, totalPrice);
+  const {loading, method, setMethod, handleConfirm } = useBookingService(items, totalPrice);
   return (
     <div className="max-w-xl mx-auto bg-white rounded-2xl shadow-lg p-6 space-y-6">
       <h2 className="text-xl font-semibold">Thanh toán</h2>

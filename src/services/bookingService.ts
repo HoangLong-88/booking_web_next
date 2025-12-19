@@ -1,17 +1,18 @@
 import { BookingItem } from "@/types/bookings";
+import { getToken } from "@/utils/storeLoginToken";
+
 
 export const bookingService = {
     createBooking: async ({
-        token,
         items,
         totalPrice,
         paymentMethod,
     }: {
-        token: string;
-        items: any[];
+        items: BookingItem[];
         totalPrice: number;
         paymentMethod: string;
     }) => {
+        const token = getToken();
         const res = await fetch("/api/bookings", {
             method: "POST",
             headers: {

@@ -7,7 +7,6 @@ export async function POST(req: Request) {
       method: "POST",
       body: formData
     });
-
     const data = await res.json();
 
     return NextResponse.json(data, { status: res.status });

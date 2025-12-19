@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { bookingService } from "@/services/bookingService";
+import { BookingItem } from "@/types/bookings";
 
 export function useBookingService(
-    token: string,
-    items: any[],
+    items: BookingItem[],
     totalPrice: number,
 ) {
     const [loading, setLoading] = useState(false);
@@ -16,7 +16,6 @@ export function useBookingService(
             setLoading(true);
 
             const bookingData = await bookingService.createBooking({
-                token,
                 items,
                 totalPrice,
                 paymentMethod: method,
