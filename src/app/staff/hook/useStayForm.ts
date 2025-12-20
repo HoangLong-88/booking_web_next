@@ -16,7 +16,6 @@ export function useStayForm() {
 
     stayName: '',
     description: '',
-    location: '',
     address: '',
 
     price: '',

@@ -1,4 +1,4 @@
-import { getToken, clearToken } from "@/utils/storeLoginToken";
+import { getToken } from "@/utils/storeLoginToken";
 
 export const userService = {
 

@@ -9,16 +9,10 @@ import {
 import Link from "next/link";
 import { HomeSearchBar } from "@/component/layout/CustomSearchBar";
 import { HeroHomePage } from "@/component/layout/Hero";
-import { HotelTagsArrowScroll, NoteTags } from "@/component/ui/HotelTagScroll";
+import { StaysTagsArrowScroll, NoteTags } from "@/component/home/StaysTagScroll";
 import { TrendingDestinationsRecommendation } from "@/component/layout/gridLayout";
-import { useEffect } from "react";
 
 export default function HomePage() {
-  useEffect(() => {
-      if (!localStorage.getItem("userID")) {
-        localStorage.setItem("userID", "USR-TEST-001");
-      }
-    }, []);
   return (
     <>
       {/* HERO */}
@@ -105,7 +99,7 @@ export default function HomePage() {
         </div>
         <div className="mb-7 mt-15">
           <p className="text-3xl font-bold">Stay Guest Love</p>
-          <HotelTagsArrowScroll />
+          <StaysTagsArrowScroll />
         </div>
         <div className="mb-7 mt-20">
             <p className="text-2xl font-bold mb-5">Why should be SKYLINK ?</p>

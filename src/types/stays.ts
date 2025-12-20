@@ -1,13 +1,20 @@
 export interface StayObject {
     stayName: string;
-    location: string;
     address: string;
     rating: string;
     price: string;
-    image?: string;
-    days?: number; // Số ngày lưu trú
-    totalPrice?: number; // Tổng giá (PascalCase để khớp với BE)
+    image?: string[];
+    days?: number;
+    totalPrice?: number; 
 }
+export interface StayHome {
+  stayName: string;
+  address: string;
+  rating: number | null;
+  price: string;
+  images: string[];
+}
+
 export interface StayFormData {
   locationID: string
   serviceID: string
@@ -15,7 +22,6 @@ export interface StayFormData {
 
   stayName: string
   description?: string | null
-  location?: string | null
   address?: string | null
 
   price: number | string

@@ -28,7 +28,7 @@ export function useLocationForm(): { state: State; actions: Actions } {
   const [locations, setLocations] = useState<LocationPayload[]>([
     { name: "", address: "", country: "", pinCode: "", image:  null, preview: null },
   ]);
-
+  const MAX_IMAGE_SIZE = 20 * 1024 * 1024;
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -75,13 +75,18 @@ export function useLocationForm(): { state: State; actions: Actions } {
     setError(null);
 
     try {
-      // validate đơn giản
       if (locations.some((l) => !l.name.trim())) {
         throw new Error("Location name is required");
       }
 
       for (const loc of locations) {
         const form = new FormData();
+        if (loc.image) {
+          if (loc.image.size > MAX_IMAGE_SIZE) {
+            setError("Image must be smaller than 2MB");
+            return;
+          }
+        }
         form.append("locationName", loc.name);
         form.append("address", loc.address);
         form.append("country", loc.country);
