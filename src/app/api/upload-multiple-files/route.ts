@@ -14,7 +14,6 @@ export async function POST(req: NextRequest) {
         laravelFormData.append("images[]", file);
     });
     laravelFormData.append("folder", folder)
-    console.log(laravelFormData)
     // Forward to Laravel API
     const laravelRes = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/upload/multiple`, {
       method: "POST",

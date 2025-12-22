@@ -83,7 +83,7 @@ export function useLocationForm(): { state: State; actions: Actions } {
         const form = new FormData();
         if (loc.image) {
           if (loc.image.size > MAX_IMAGE_SIZE) {
-            setError("Image must be smaller than 2MB");
+            setError("Image must be smaller than 20MB");
             return;
           }
         }

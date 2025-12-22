@@ -5,7 +5,7 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import Link from "next/link";
 import { useTranslation } from "react-i18next";
 import TagsArrowScroll from "@/component/ui/TagScroll";
-import { useFetchStayHomePage } from "@/hook/useFetchStayHomePage";
+import { useFetchStayHomePage } from "@/hook/stays/useFetchStayHomePage";
 
 export {
   StaysTagsArrowScroll,
@@ -19,53 +19,58 @@ function StaysTagsArrowScroll() {
   if (error) return <p>{error}</p>;
 
   return (
-    <TagsArrowScroll>
-      {stays.map((stay, index) => (
-        <Card
-          key={index}
-          className="min-w-[270px] max-w-[420px] h-full rounded-2xl relative overflow-hidden duration-200 mb-2"
-        >
-          <img
-            src={stay.images[0] ?? ""}
-            alt={stay.stayName}
-            className="object-cover h-45 w-full"
-          />
+      <TagsArrowScroll>
+        {stays.map((stay, index) => (
+          <Link
+            key={stay.stayID}
+            href={`/stays/${stay.stayID}`}
+          >
+            <Card
+              key={index}
+              className="min-w-[270px] max-w-[420px] h-full rounded-2xl relative overflow-hidden duration-200 mb-2"
+            >
+              <img
+                src={stay.images[0] ?? ""}
+                alt={stay.stayName}
+                className="object-cover h-45 w-full"
+              />
 
-          <div className="mx-3">
-            <CardTitle className="text-lg my-1">
-              {stay.stayName}
+              <div className="mx-3">
+                <CardTitle className="text-lg my-1">
+                  {stay.stayName}
 
-              <CardSubTitle className="text-xs">
-                {stay.address}
-              </CardSubTitle>
+                  <CardSubTitle className="text-xs">
+                    {stay.address}
+                  </CardSubTitle>
 
-              {/* Rate */}
-              <div className="flex my-2 items-center">
-                <p className="text-base mx-1/2">
-                  {stay.rating ?? "N/A"}
-                </p>
+                  {/* Rate */}
+                  <div className="flex my-2 items-center">
+                    <p className="text-base mx-1/2">
+                      {stay.rating ?? "N/A"}
+                    </p>
 
-                <img
-                  src="/icon/tags/blueStar.png"
-                  alt="star"
-                  className="w-5 h-5 rounded-sm mx-1"
-                />
+                    <img
+                      src="/icon/tags/blueStar.png"
+                      alt="star"
+                      className="w-5 h-5 rounded-sm mx-1"
+                    />
+                  </div>
+
+                  {/* Price */}
+                  <div className="pt-10">
+                    <p>
+                      <span className="text-xs font-normal text-blue-400">
+                        Starting with
+                      </span>{" "}
+                      {Number(stay.price).toLocaleString()} VND
+                    </p>
+                  </div>
+                </CardTitle>
               </div>
-
-              {/* Price */}
-              <div className="pt-10">
-                <p>
-                  <span className="text-xs font-normal text-blue-400">
-                    Starting with
-                  </span>{" "}
-                  {Number(stay.price).toLocaleString()} VND
-                </p>
-              </div>
-            </CardTitle>
-          </div>
-        </Card>
-      ))}
-    </TagsArrowScroll>
+            </Card>
+          </Link>
+        ))}
+      </TagsArrowScroll>
   );
 }
 

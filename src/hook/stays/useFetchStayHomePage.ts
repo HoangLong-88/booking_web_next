@@ -14,6 +14,7 @@ export function useFetchStayHomePage() {
         
 
         const normalized: StayHome[] = res.map((item) => ({
+          stayID: item.stayID,
           stayName: item.stayName,
           address: item.address,
           rating: item.rating,

@@ -7,7 +7,6 @@ export async function GET() {
             `${process.env.NEXT_PUBLIC_API_URL}/api/stays/all`,
             {
                 method: 'GET',
-                cache: 'no-store'
             }
         );
         if (!LaravelRes.ok) {

@@ -20,7 +20,6 @@ export default function StayForm() {
     addImage,
     submit,
     locationOptions,
-    serviceOptions,
     categoryOptions
   } = useStayForm()
 
@@ -44,9 +43,9 @@ export default function StayForm() {
         setSubmitting(true)
         setMessage(null)
         try {
-            await handleUpload('uploads/stays');
-
-            await submit()
+            const uploaded = await handleUpload('uploads/stays');
+ 
+            await submit(uploaded.map(f => f.path))
             setMessage('Created stay successfully')
         } catch (err) {
             console.error(err)
@@ -113,17 +112,6 @@ export default function StayForm() {
               onChange={onChange}
             />
           </div>
-
-          <div className="w-full">
-            <FormSelect
-              name="serviceID"
-              value={formData.serviceID}
-              options={serviceOptions}
-              placeholder="Select service"
-              onChange={onChange}
-            />
-          </div>
-
           <div className="w-full">
             <FormSelect
               name="categoryID"
