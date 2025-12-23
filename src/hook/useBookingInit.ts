@@ -38,6 +38,5 @@ export function useBookingService(
         method,
         setMethod,
         handleConfirm,
-        handleBooking
     };
 }
