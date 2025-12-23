@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { bookingService } from "@/services/bookingService";
+import { BookingItem } from "@/types/bookings";
 
 export function useBookingService(
     token: string,

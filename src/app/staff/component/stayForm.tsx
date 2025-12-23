@@ -20,7 +20,6 @@ export default function StayForm() {
     addImage,
     submit,
     locationOptions,
-    serviceOptions,
     categoryOptions
   } = useStayForm()
 
@@ -44,9 +43,9 @@ export default function StayForm() {
         setSubmitting(true)
         setMessage(null)
         try {
-            await handleUpload('uploads/stays');
-
-            await submit()
+            const uploaded = await handleUpload('uploads/stays');
+ 
+            await submit(uploaded.map(f => f.path))
             setMessage('Created stay successfully')
         } catch (err) {
             console.error(err)
@@ -55,7 +54,7 @@ export default function StayForm() {
             setSubmitting(false)
         }
       }}
-      className="space-y-6 max-w-3xl p-6 bg-white/80 dark:bg-slate-800 rounded-lg shadow-sm"
+      className="space-y-6 mx-2 w-full p-6 bg-white/80 dark:bg-slate-800 rounded-lg shadow-sm"
     >
       <h1 className="text-2xl font-semibold">Create Stay</h1>
 
@@ -93,15 +92,7 @@ export default function StayForm() {
           <Label>Description</Label>
         </div>
 
-        <div className="relative">
-          <Input
-            name="location"
-            onChange={onChange}
-            placeholder="Location text"
-          />
-          <Label>Location text</Label>
-        </div>
-        <div className="relative">
+        <div className="relative w-full">
           <Input
             name="address"
             onChange={onChange}
@@ -121,17 +112,6 @@ export default function StayForm() {
               onChange={onChange}
             />
           </div>
-
-          <div className="w-full">
-            <FormSelect
-              name="serviceID"
-              value={formData.serviceID}
-              options={serviceOptions}
-              placeholder="Select service"
-              onChange={onChange}
-            />
-          </div>
-
           <div className="w-full">
             <FormSelect
               name="categoryID"

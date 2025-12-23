@@ -60,9 +60,37 @@ export default function DragAndDropUpload({
       onUpload(files[0]);
     }
   };
+  const handlePaste = useCallback(
+    (e: React.ClipboardEvent<HTMLDivElement>) => {
+      e.preventDefault();
+      e.stopPropagation();
+      const items = e.clipboardData?.items;
+      if (!items) return;
+
+      const files: File[] = [];
+
+      for (const item of items) {
+        if (item.type.startsWith("image/")) {
+          const file = item.getAsFile();
+          if (file) files.push(file);
+        }
+      }
+
+      if (files.length === 0) return;
+
+      if (multiple && onUploadMultiple) {
+        onUploadMultiple(files);
+      } else if (onUpload) {
+        onUpload(files[0]);
+      }
+    },
+    [multiple, onUpload, onUploadMultiple]
+  );
+
 
   return (
     <div
+      tabIndex={0}
       onDragOver={(e) => {
         e.preventDefault();
         e.stopPropagation();
@@ -78,6 +106,7 @@ export default function DragAndDropUpload({
         dragActive ? "border-blue-500 bg-blue-50" : "border-gray-300",
         className
       )}
+      onPaste={handlePaste}
     >
       {havingImagePreview ? (
       <>

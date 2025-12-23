@@ -15,7 +15,7 @@ export interface UseMultipleFileUpload {
   previews: string[];
   files: File[];
   createPreviews: (files: File[]) => void;
-  handleUpload: (folder: string) => Promise<void>;
+  handleUpload: (folder: string) => Promise<UploadedFile[]>;
   loading: boolean;
   error: string | null;
   clear: () => void;
@@ -48,8 +48,8 @@ export function useMultipleFileUpload({
   };
 
 
-  const handleUpload = async (folder: string) => {
-    if (files.length === 0) return;
+  const handleUpload = async (folder: string): Promise<UploadedFile[]> => {
+    if (files.length === 0) return [];
 
     setLoading(true);
     setError(null);
@@ -64,10 +64,12 @@ export function useMultipleFileUpload({
       if (onUploaded) {
         await onUploaded(uploaded);
       }
+      return uploaded;
     } catch (err: unknown) {
       if (err instanceof Error) {
         setError(err.message || "Upload failed");
       }
+      return [];
     } finally {
       setLoading(false);
     }

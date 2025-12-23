@@ -1,13 +1,14 @@
 export interface StayObject {
     stayName: string;
-    location: string;
     address: string;
     rating: string;
     price: string;
-    image?: string;
-    days?: number; // Số ngày lưu trú
-    totalPrice?: number; // Tổng giá (PascalCase để khớp với BE)
+    image?: string[];
+    days?: number;
+    totalPrice?: number; 
 }
+
+
 export interface StayFormData {
   locationID: string
   serviceID: string
@@ -15,7 +16,6 @@ export interface StayFormData {
 
   stayName: string
   description?: string | null
-  location?: string | null
   address?: string | null
 
   price: number | string
@@ -28,11 +28,6 @@ export interface LocationOption {
   locationName: string
 }
 
-export interface ServiceOption {
-  serviceID: string
-  serviceType: string
-}
-
 export interface CategoryOption {
   categoryID: string
   categoryName: string
@@ -40,7 +35,35 @@ export interface CategoryOption {
 
 export interface StayFormOptions {
   locations: LocationOption[]
-  services: ServiceOption[]
   categories: CategoryOption[]
 }
+export interface StayDetail {
+  stayID: string;
+  stayName: string;
+  description: string | null;
+  address: string;
+  rating: number | null;
+  price: string;
+  image_urls: string[];
+  location: string;
+  service: string;
+  category: string;
+}
 
+export interface StayHome {
+  stayID: string;
+  stayName: string;
+  address: string;
+  rating: number | null;
+  price: string;
+  images: string[];
+}
+export interface StayHomeApi {
+  stayID: string;
+  stayName: string;
+  location: string;
+  address: string;
+  rating: number | null;
+  price: string;
+  image_url: string[]; 
+}

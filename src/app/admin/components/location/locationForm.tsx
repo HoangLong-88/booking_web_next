@@ -69,6 +69,7 @@
                   type="text"
                   placeholder={("")}
                   onChange={(e) => updateField(idx, "name", e.target.value)}
+                  required
                 />
                 <Label htmlFor={`locationname-${idx}`}>Location Name</Label>
               </div>
@@ -79,6 +80,7 @@
                   type="text"
                   placeholder={("")}
                   onChange={(e) => updateField(idx, "address", e.target.value)}
+                  required
                 />
                 <Label htmlFor={`locationaddress-${idx}`}>Location Address </Label>
               </div>
@@ -100,6 +102,7 @@
                   updateField(idx, "country", country);
                   updateField(idx, "pinCode", pinCode);
                 }}
+              
             />
             <p>{error}</p>
             {idx > 0 && (

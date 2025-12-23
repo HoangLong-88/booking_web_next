@@ -81,6 +81,7 @@ export default function AccountInformationModal({
                 accept="image/*"
                 fileName={fileName}
                 variant="avatar"
+                havingImagePreview={true}
               />
 
               {/* User Info */}

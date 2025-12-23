@@ -5,7 +5,6 @@ import type { StayFormData, StayFormOptions } from '@/types/stays'
 export function useStayForm() {
   const [options, setOptions] = useState<StayFormOptions>({
     locations: [],
-    services: [],
     categories: []
   })
 
@@ -16,7 +15,6 @@ export function useStayForm() {
 
     stayName: '',
     description: '',
-    location: '',
     address: '',
 
     price: '',
@@ -27,11 +25,6 @@ export function useStayForm() {
     const locationOptions = options.locations.map((l) => ({
         value: l.locationID,
         label: l.locationName
-    }))
-
-    const serviceOptions = options.services.map((s) => ({
-        value: s.serviceID,
-        label: s.serviceType
     }))
 
     const categoryOptions = options.categories.map((c) => ({
@@ -47,7 +40,6 @@ export function useStayForm() {
       if (res.ok) {
         setOptions({
           locations: res.data.locations ?? [],
-          services: res.data.services ?? [],
           categories: res.data.categories ?? []
         })
       }
@@ -79,9 +71,10 @@ export function useStayForm() {
     }))
   }
 
-  const submit = async () => {  
+  const submit = async (images?: string[]) => {  
         const fd = buildStayFormData({
-        ...formData,
+        ...formData,  
+        image: images,
         price: Number(formData.price),
         rate: formData.rate ? Number(formData.rate) : null
     })
@@ -93,7 +86,6 @@ export function useStayForm() {
     options,
     formData,
     locationOptions,
-    serviceOptions,
     categoryOptions,
     onChange,
     setImages,

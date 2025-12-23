@@ -29,5 +29,19 @@ export const locationService = {
     }
 
     return res.json();
+  },
+  async deleteLocation(locationId: string ) {
+    const res = await fetch(`/api/admin/locations/${locationId}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      }
+    })
+    
+    if (!res.ok) {
+      const error = await res.text()
+      throw new Error(error || "Failed to add location");
+    }
+    return res.json();
   }
 };

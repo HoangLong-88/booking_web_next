@@ -1,4 +1,6 @@
 import { BookingItem } from "@/types/bookings";
+import { getToken } from "@/utils/storeLoginToken";
+
 
 export const bookingService = {
     createBooking: async ({
