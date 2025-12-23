@@ -1,3 +1,4 @@
+import type { Review } from "./review";
 export interface StayObject {
     stayName: string;
     address: string;
@@ -39,6 +40,7 @@ export interface StayFormOptions {
 }
 export interface StayDetail {
   stayID: string;
+  serviceID: string;
   stayName: string;
   description: string | null;
   address: string;
@@ -48,6 +50,7 @@ export interface StayDetail {
   location: string;
   service: string;
   category: string;
+  reviews?: Review[];  
 }
 
 export interface StayHome {

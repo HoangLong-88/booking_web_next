@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { stayService } from "@/services/stayService";
 import { StayDetail } from "@/types/stays";
 
-export function useStayDetail(stayID: string) {
+export function useStayDetail(stayID: string, refreshKey?: number) {
   const [stay, setStay] = useState<StayDetail>();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -17,15 +17,17 @@ export function useStayDetail(stayID: string) {
         setLoading(true);
         const res = await stayService.getStayById(stayID);
         setStay(res);
-      } catch (err: any) {
-        setError(err.message);
+      } catch (err: unknown) {
+        if (err instanceof Error) {
+          setError(err.message);
+        }
       } finally {
         setLoading(false);
       }
     };
 
     fetchStay();
-  }, [stayID]);
+  }, [stayID, refreshKey]);
 
   return { stay, loading, error };
 }

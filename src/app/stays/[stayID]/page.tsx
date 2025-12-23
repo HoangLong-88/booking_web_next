@@ -5,17 +5,23 @@ import { Input } from '@/component/ui/input'
 import { Label } from '@/component/ui/label'
 import FormSelect from '@/component/common/FormSelect'
 import { useStayDetail } from '@/hook/stays/useStayDetails'
-
+import { ReviewForm } from '@/component/stays/reviewForm'
+import ReviewsSection from '@/component/review/reviewSection'
 export default function StayDetailPage({
   params,
 }: {
   params: Promise<{ stayID: string }>;
 }) {
   const { stayID } = use(params);
-  const { stay, loading, error } = useStayDetail(stayID);
+  const [refreshKey, setRefreshKey] = useState(0);
+    const { stay, loading, error } = useStayDetail(stayID, refreshKey);
+  const handleReviewSuccess = () => {
+    setRefreshKey((prev) => prev + 1); // trigger re-fetch
+  };
+
   if (!stay) return
   return (
-    <main className="max-w-6xl mx-auto px-4 py-10">
+    <main className="max-w-6xl mx-auto px-4 py-10 mt-[var(--spacing-top)]">
       {/* Breadcrumbs */}
       <nav aria-label="Breadcrumb" className="text-sm text-gray-600 mb-6">
         <ol className="flex gap-2 items-center">
@@ -73,8 +79,7 @@ export default function StayDetailPage({
             <div className="rounded-lg border p-4 min-w-[220px] bg-white shadow-sm">
               <div className="text-sm text-slate-600">Guest Favourite</div>
               <div className="mt-3 flex items-center gap-3">
-                <div className="text-2xl font-semibold">{stay.rating !== null ? stay.rating.toFixed(2) : "—"}</div>
-                <div className="text-sm text-slate-500">{stay.reviews} reviews</div>
+                <div className="text-2xl font-semibold">{stay.rating !== null ? stay.rating : "—"}</div>
               </div>
             </div>
           </div>
@@ -82,8 +87,23 @@ export default function StayDetailPage({
           {/* Description */}
           <article className="prose prose-slate max-w-none">
             <h2 className="text-lg font-medium">Comfortably furnished rooms</h2>
-            <p>{stay.description}</p>
           </article>
+          <section aria-labelledby="reviews-heading" className="mt-8">
+            <div className="flex items-center justify-between mb-4">
+              <h3 id="reviews-heading" className="text-lg font-medium">Reviews</h3>
+              <div className="text-sm text-slate-500">{stay.reviews ? stay.reviews.length : ""} total</div>
+            </div>
+
+            <div className="flex flex-col gap-5 ">
+              <div>
+                <ReviewForm serviceID={stay.serviceID} onSuccess={handleReviewSuccess}/>
+              </div>
+
+              <div className='w-full'>
+                <ReviewsSection reviews={stay.reviews ?? []} onReviewDeleted={handleReviewSuccess} />
+              </div>
+            </div>
+          </section>
         </section>
 
         {/* Right: booking card */}
@@ -97,8 +117,8 @@ export default function StayDetailPage({
               </div>
 
               <div className="text-right">
-                <div className="text-sm font-medium">{stay.rating !== null ? stay.rating.toFixed(1) : "—"}</div>
-                <div className="text-xs text-slate-500">{} reviews</div>
+                <div className="text-sm font-medium">{stay.rating !== null ? stay.rating : "—"}</div>
+                <div className="text-xs text-slate-500">reviews</div>
               </div>
             </div>
 
@@ -135,12 +155,7 @@ export default function StayDetailPage({
           {/* Quick info card */}
           <div className="rounded-lg bg-white border p-4 text-sm shadow-sm">
             <div className="font-medium mb-2">What this place offers</div>
-            <ul className="grid grid-cols-2 gap-2 text-slate-600">
-              <li>Wi‑Fi</li>
-              <li>Kitchen</li>
-              <li>Washer</li>
-              <li>Free parking</li>
-            </ul>
+              <p>{stay.description}</p>
           </div>
         </aside>
       </div>

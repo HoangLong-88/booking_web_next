@@ -8,6 +8,7 @@ export function ClientLayout({children}:{children: React.ReactNode}){
     const isAuthPage = pathName.startsWith("/auth")
     const isAdminPage = pathName.startsWith("/admin")
     const isStaffPage = pathName.startsWith("/staff")
+    const isStayPage = pathName.startsWith("/stays")
     
     return(
         <div className="flex min-h-screen flex-col">
@@ -17,7 +18,7 @@ export function ClientLayout({children}:{children: React.ReactNode}){
             >
               {children}
         </main>
-        {!isAuthPage && !isAdminPage && !isStaffPage && <Footer/>}
+        {!isAuthPage && !isAdminPage && !isStaffPage && !isStayPage && <Footer/>}
         </div>
     )
 }
