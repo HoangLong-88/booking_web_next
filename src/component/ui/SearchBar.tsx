@@ -49,7 +49,7 @@ function KeySearchBar({ onChange }: KeySearchProp) {
         return;
       }
 
-      const res = await fetch(`/api/stays/keysearch?q=${encodeURIComponent(debouncedQuery)}`);
+      const res = await fetch(`/api/keywords?q=${encodeURIComponent(debouncedQuery)}`);
       const data: string[] = await res.json();
       setSuggestions(data);
       setIsOpen(true);

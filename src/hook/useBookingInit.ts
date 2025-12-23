@@ -4,8 +4,8 @@ import { bookingService } from "@/services/bookingService";
 import { BookingItem } from "@/types/bookings";
 
 export function useBookingService(
-    items: BookingItem[],
-    totalPrice: number,
+    token: string,
+    items: any[],
 ) {
     const [loading, setLoading] = useState(false);
     const [method, setMethod] = useState("stay");
@@ -16,8 +16,8 @@ export function useBookingService(
             setLoading(true);
 
             const bookingData = await bookingService.createBooking({
+                token,
                 items,
-                totalPrice,
                 paymentMethod: method,
             });
 

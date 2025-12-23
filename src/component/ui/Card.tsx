@@ -83,7 +83,7 @@ const StayCard: React.FC<StayCardProps> = ({ stay }) => {
 
             {/* Ảnh */}
             <img
-                src={stay.image}
+                src={Array.isArray(stay?.image) ? stay.image[0] : stay?.image}
                 alt={stay.stayName}
                 className="w-52 h-47 object-cover rounded-xl"
             />
@@ -95,8 +95,8 @@ const StayCard: React.FC<StayCardProps> = ({ stay }) => {
                     <h2 className="text-xl font-semibold">{stay.stayName}</h2>
 
                     <p className="text-sm text-gray-500 flex items-center gap-2 mt-1">
-                        <MapPin size={14} />
-                        <span>{stay.location}</span>
+                        {/* <MapPin size={14} />
+                        <span>{stay.location}</span> */}
 
                         <span className="flex items-center gap-1 px-2 py-0.5 rounded-md bg-yellow-50 text-yellow-700 text-xs font-semibold">
                             <Star size={14} className="text-yellow-500" />
@@ -104,8 +104,10 @@ const StayCard: React.FC<StayCardProps> = ({ stay }) => {
                         </span>
                     </p>
 
-
-                    <p className="text-xs text-gray-500 mt-1">{stay.address}</p>
+                    <div className="flex items-center gap-2 mt-1">
+                        <MapPin size={14} />
+                        <p className="text-xs text-gray-500">{stay.address}</p>
+                    </div>
 
                     {/* tiện ích gợi ý như Booking */}
                     <div className="flex gap-3 text-sm text-gray-600 mt-3">

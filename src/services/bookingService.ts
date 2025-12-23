@@ -4,15 +4,14 @@ import { getToken } from "@/utils/storeLoginToken";
 
 export const bookingService = {
     createBooking: async ({
+        token,
         items,
-        totalPrice,
         paymentMethod,
     }: {
-        items: BookingItem[];
-        totalPrice: number;
+        token: string;
+        items: any[];
         paymentMethod: string;
     }) => {
-        const token = getToken();
         const res = await fetch("/api/bookings", {
             method: "POST",
             headers: {
@@ -22,7 +21,6 @@ export const bookingService = {
             body: JSON.stringify({
                 paymentMethod,
                 items,
-                total_price: totalPrice,
             }),
         });
 
