@@ -5,7 +5,7 @@ import { StayObject } from "@/types/stays";
 import { Users, Luggage, Gauge, MapPin, Star, Bath, Wifi, BedDouble, ChevronDown } from "lucide-react";
 import React from "react";
 import { RoomType } from "./Dropdown";
-import Link from "next/link";
+import { switchPage } from "@/libs/effects/loading";
 
 const Card = React.forwardRef<
     HTMLDivElement,
@@ -134,10 +134,11 @@ const StayCard: React.FC<StayCardProps> = ({ stay }) => {
                             </p>
                         )}
 
-                        <button className="mt-2 w-full bg-blue-600 text-white py-2 px-6 rounded-lg hover:bg-orange-400 transition font-medium">
-                            <Link href='/stays/payment'>
-                                Đặt ngay
-                            </Link>
+                        <button
+                            onClick={() => switchPage('\stays\payment')}
+                            className="mt-2 w-full bg-blue-600 text-white py-2 px-6 rounded-lg hover:bg-orange-400 transition font-medium block text-center"
+                        >
+                            Đặt ngay
                         </button>
                     </div>
                 </div>

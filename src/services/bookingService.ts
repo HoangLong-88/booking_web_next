@@ -4,12 +4,10 @@ export const bookingService = {
     createBooking: async ({
         token,
         items,
-        totalPrice,
         paymentMethod,
     }: {
         token: string;
         items: any[];
-        totalPrice: number;
         paymentMethod: string;
     }) => {
         const res = await fetch("/api/bookings", {
@@ -21,7 +19,6 @@ export const bookingService = {
             body: JSON.stringify({
                 paymentMethod,
                 items,
-                total_price: totalPrice,
             }),
         });
 

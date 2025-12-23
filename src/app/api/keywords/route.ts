@@ -10,7 +10,7 @@ export async function GET(request: NextRequest) {
 
   try {
     const LaravelRes = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/api/keysearch?q=${encodeURIComponent(query)}`,
+      `${process.env.NEXT_PUBLIC_API_URL}/api/keywords?q=${encodeURIComponent(query)}`,
       {
         method: "GET",  
         // Nếu API Laravel tự làm CORS:
