@@ -12,14 +12,6 @@ import { useSearchingService } from "@/hook/useSearching";
 function StaysList() {
     const [stays, setStays] = useState([]);
 
-    useEffect(() => {
-        const fetchStays = async () => {
-            const res = await fetch('/api/stays/all');
-            const json = await res.json();
-            setStays(json)
-        };
-        fetchStays();
-    }, []);
     return (
         <div className="space-y-5">
             <p className="text-xl underline">
@@ -65,7 +57,6 @@ function StayListSearch() {
 
             <div className="space-y-5">
                 {results.map((stay, i) => (
-                    // Sử dụng component StayCard đã được định nghĩa
                     <StayCard key={i} stay={stay as StayObject} />
                 ))}
             </div>

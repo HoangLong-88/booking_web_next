@@ -7,7 +7,7 @@ import {
   DisabledDiscount
 } from "@/component/ui/Image";
 import Link from "next/link";
-import { HomeSearchBar } from "@/component/layout/CustomSearchBar";
+import { StaySearchBar } from "@/component/home/StaySearchBar";
 import { HeroHomePage } from "@/component/layout/Hero";
 import { StaysTagsArrowScroll, NoteTags } from "@/component/home/StaysTagScroll";
 import { TrendingDestinationsRecommendation } from "@/component/layout/gridLayout";
@@ -19,7 +19,7 @@ export default function HomePage() {
       <header className="mt-[var(--spacing-top)]">
         {/* background image + dark vignette */}
         <HeroHomePage />
-        <HomeSearchBar />
+        <StaySearchBar />
       </header>
         {/* <SearchBar/> */}
       <div className="min-h-screen p-20 bg-white text-black overflow-hidden">

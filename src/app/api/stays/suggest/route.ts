@@ -2,9 +2,9 @@ import { NextResponse } from "next/server";
 
 export async function GET(req: Request) {
   const { searchParams } = new URL(req.url);
-
+  
   const backendURL =
-    `${process.env.NEXT_PUBLIC_API_URL}/api/attractions/search?` + searchParams.toString();
+    `${process.env.NEXT_PUBLIC_API_URL}/api/stays/suggest?` + searchParams.toString();
 
   const response = await fetch(backendURL);
   const data = await response.json();

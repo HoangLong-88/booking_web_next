@@ -1,25 +1,44 @@
-'use client'
-import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
+'use client';
+
 import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { toLocalDateString } from "@/utils/date";
+import type { ServiceType } from "@/types/service";
 
-export function selectSearchParams(service: string) {
-    const [location, setLocation] = useState<string>("");
-    const [checkIn, setCheckIn] = useState<Date | null>(null);
-    const [checkOut, setCheckOut] = useState<Date | null>(null);
-    const [checkDate, setCheckDate] = useState<Date | null>(null);
+export default function useSearchParams(service: ServiceType) {
+  const router = useRouter();
 
-    const handleSearch = async (router: AppRouterInstance) => {
-        const locParam = location ? `location=${location}` : "";
-        if (service === 'stays' || service === 'cars') {
-            const ci = `${checkIn ? "&checkin=" + checkIn.toISOString().split("T")[0] : ""}`;
-            const co = `${checkOut ? "&checkout=" + checkOut.toISOString().split("T")[0] : ""}`;
+  const [location, setLocation] = useState("");
+  const [checkIn, setCheckIn] = useState<Date | null>(null);
+  const [checkOut, setCheckOut] = useState<Date | null>(null);
+  const [checkDate, setCheckDate] = useState<Date | null>(null);
 
-            window.location.href =`/${service}/search?${locParam}${ci}${co}`;
-        } else if (service === 'attractions') {
-            const cdate = `${checkDate ? "&checkdate=" + checkDate.toISOString().split("T")[0] : ""}`
-            window.location.href =`/attractions/search?location=${location}`;
-        }
-    };
+  const handleSearch = () => {
+    const params = new URLSearchParams();
 
-    return { setLocation, handleSearch, setCheckIn, setCheckOut, setCheckDate }
+    if (location) params.append("location", location);
+
+    if (service === "stays" || service === "cars") {
+      if (checkIn) params.append("checkin", toLocalDateString(checkIn));
+      if (checkOut) params.append("checkout", toLocalDateString(checkOut));
+    }
+
+    if (service === "attractions" && checkDate) {
+      params.append("checkdate", toLocalDateString(checkDate));
+    }
+
+    router.push(`/${service}/search?${params.toString()}`);
+  };
+
+  return {
+    location,
+    checkIn,
+    checkOut,
+    checkDate,
+    setLocation,
+    setCheckIn,
+    setCheckOut,
+    setCheckDate,
+    handleSearch
+  };
 }

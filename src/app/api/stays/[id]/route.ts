@@ -10,7 +10,7 @@ export async function GET(
   { params }: RouteProps
 ) {
   try {
-    const { id } = params;
+    const { id } = await params;
 
     if (!id) {
       return NextResponse.json(
