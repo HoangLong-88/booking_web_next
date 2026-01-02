@@ -1,3 +1,63 @@
+
+export const searchServices = {
+  LocationAndDuelDates: async ({
+    location,
+    checkIn,
+    checkOut,
+    service
+  }: {
+    location: string;
+    checkIn: Date | null;
+    checkOut: Date | null;
+    service: string;
+  }) => {
+
+    const params = new URLSearchParams();
+
+    if (location) params.append("location", location);
+    if (checkIn) params.append("checkin", checkIn.toISOString().split("T")[0]);
+    if (checkOut) params.append("checkout", checkOut.toISOString().split("T")[0]);
+
+    const res = await fetch(
+      `/api/${service}/search?${params.toString()}`,
+      {
+        method: 'GET',
+        cache: 'no-store',
+        next: { revalidate: 0 }
+      } // tránh lỗi cache
+    );
+    return res.json();
+  },
+
+  LocationAndSingleDate : async ({
+    location,
+    checkDate,
+    service
+  }: {
+    location: string;
+    checkDate: Date | null;
+    service: string;
+  }) => {
+
+    const params = new URLSearchParams();
+
+    if (location) params.append("location", location);
+    if (checkDate) params.append("checkdate", checkDate.toISOString().split("T")[0]);
+
+    const res = await fetch(
+      `/api/${service}/search?${params.toString()}`,
+      {
+        method: 'GET',
+        cache: 'no-store',
+        next: { revalidate: 0 }
+      } // tránh lỗi cache
+    );
+    return res.json();
+  },
+}
+
+
+
 const searchStays = async ({
   location,
   checkIn,

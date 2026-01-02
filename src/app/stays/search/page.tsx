@@ -1,18 +1,27 @@
 'use client'
-import { StayListSearch } from "@/component/layout/CustomCardsList";
-import { HomeSearchBar } from "@/component/layout/CustomSearchBar";
 import { HeroHomePage } from "@/component/layout/Hero";
+import { StayListSearch } from "../component/staysCardList";
+import { getStaysFromSearching } from "../hook/useStaysListSearch";
+import { DuelDateSearchBar } from "@/component/custom/searchBar/CustomSearchBar";
 
 
 export default function SearchStaysPage() {
+    const {location, checkin, checkout, isLoading, results, error} = getStaysFromSearching();
     return (
         <>
             <header className="mt-[var(--spacing-top)]">
                 <HeroHomePage />
-                <HomeSearchBar />
+                <DuelDateSearchBar />
             </header>
             <main className="px-20 py-10">
-                <StayListSearch/>
+                <StayListSearch 
+                    location={location}
+                    checkin={checkin}
+                    checkout={checkout}
+                    isLoading={isLoading}
+                    results={results}
+                    error={error}
+                />
             </main>
         </>
     );

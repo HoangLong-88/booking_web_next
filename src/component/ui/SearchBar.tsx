@@ -1,10 +1,11 @@
 'use client'
 import React from 'react';
-import { useState, useEffect, useRef, ChangeEvent, forwardRef } from "react";
-import useDebounce from '@/hook/useDebounce';
+import { forwardRef } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { format } from "date-fns";
+import { getLocationInput } from '@/hook/customUI/useLocationInput';
+import { getDateInput } from '@/hook/customUI/useDateInput';
 
 // . Định nghĩa interface cho props
 interface CustomDateInputProps {
@@ -34,58 +35,7 @@ interface KeySearchProp {
 }
 
 function KeySearchBar({ onChange }: KeySearchProp) {
-  const [query, setQuery] = useState("");
-  const [suggestions, setSuggestions] = useState<string[]>([]);
-  const [isOpen, setIsOpen] = useState(false);
-
-  const debouncedQuery = useDebounce(query, 200);
-  const wrapperRef = useRef<HTMLDivElement>(null);
-
-  // Fetch suggestions
-  useEffect(() => {
-    const getSuggest = async () => {
-      if (!debouncedQuery) {
-        setSuggestions([]);
-        return;
-      }
-
-      const res = await fetch(`/api/stays/keysearch?q=${encodeURIComponent(debouncedQuery)}`);
-      const data: string[] = await res.json();
-      setSuggestions(data);
-      setIsOpen(true);
-    };
-
-    getSuggest();
-  }, [debouncedQuery]);
-
-  useEffect(() => {
-  }, [suggestions]);
-
-  useEffect(() => {
-  }, [isOpen]);
-
-  // Close outside click
-  useEffect(() => {
-    const handleClick = (e: MouseEvent) => {
-      if (wrapperRef.current && !wrapperRef.current.contains(e.target as Node)) {
-        setIsOpen(false);
-      }
-    };
-    document.addEventListener("mousedown", handleClick);
-    return () => document.removeEventListener("mousedown", handleClick);
-  }, []);
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setQuery(e.target.value);
-    onChange?.(e.target.value);
-  };
-
-  const handleSelect = (value: string) => {
-    setQuery(value);
-    setIsOpen(false);
-    onChange?.(value);
-  };
-
+  const { query, isOpen, suggestions, wrapperRef, setIsOpen, handleInputChange, handleSelect } = getLocationInput(onChange);
   return (
     <div ref={wrapperRef} className="relative w-full">
       <input
@@ -121,9 +71,7 @@ interface DateBarProps {
 }
 
 function DateBar({ onCheckInChange, onCheckOutChange }: DateBarProps) {
-  const [checkIn, setCheckIn] = useState<Date | null>(null);
-  const [checkOut, setCheckOut] = useState<Date | null>(null);
-
+  const { checkIn, checkOut, setCheckIn, setCheckOut } = getDateInput();
   return (
     <>
       <DatePicker
@@ -160,7 +108,7 @@ interface DateBar2Props {
 }
 
 function DateBar2({ onCheckDateChange }: DateBar2Props) {
-  const [checkDate, setCheckDate] = useState<Date | null>(null);
+  const { checkDate, setCheckDate } = getDateInput();
   return (
     <>
       <DatePicker
