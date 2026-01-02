@@ -4,9 +4,6 @@ export interface CheckContactResponse {
   phone_exists: boolean;
 }
 
-/**
- * Kiểm tra email đã tồn tại chưa
- */
 export async function checkEmailExists(email: string): Promise<CheckContactResponse> {
   if (!email) throw new Error("Email is required");
 
@@ -24,9 +21,6 @@ export async function checkEmailExists(email: string): Promise<CheckContactRespo
   return data;
 }
 
-/**
- * Kiểm tra phone đã tồn tại chưa
- */
 export async function checkPhoneExists(phone: string): Promise<CheckContactResponse> {
   if (!phone) throw new Error("Phone number is required");
 
@@ -44,5 +38,4 @@ export async function checkPhoneExists(phone: string): Promise<CheckContactRespo
   return data;
 }
 
-  console.log("API URL:", process.env.NEXT_PUBLIC_API_URL);
 

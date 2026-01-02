@@ -5,7 +5,7 @@ import { Loader2 } from "lucide-react";
 import { useFetchLocation } from "../../hook/useFetchLocation";
 import TagsArrowScroll from "@/component/ui/TagScroll";
 import { useModal } from "@/utils/dom/useModal";
-import UpdateLocationModal from "@/component/modal/location_update";
+import UpdateLocationModal from "@/component/modal/admin/location_update";
 import type { Location } from "@/types/location";
 
 interface Props {

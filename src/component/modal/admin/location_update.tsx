@@ -6,14 +6,14 @@ import {
 } from "@/component/ui/Dialog"
 import { useModal } from "@/utils/dom/useModal";
 import type { Location } from "@/types/location";
-import { Input } from "../ui/input";
-import { Label } from "../ui/label";
-import { CustomButton } from "../ui/Button";
-import DragAndDropUpload from "../ui/DragAndDropUpload";
+import { Input } from "@/component/ui/input";
+import { Label } from "@/component/ui/label";
+import { CustomButton } from "@/component/ui/Button";
+import DragAndDropUpload from "@/component/ui/DragAndDropUpload";
 import { useUpdateLocations } from "@/app/admin/hook/useUpdateLocation";
 import { useDeleteLocation } from "@/app/admin/hook/useDeleteLocation";
 import { useEffect } from "react";
-import CountryPinCodeSelector from "../admin/countryPinCodeSelector";
+import CountryPinCodeSelector from "@/component/admin/countryPinCodeSelector";
 
 interface Props {
   open: boolean;
