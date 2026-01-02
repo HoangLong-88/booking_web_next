@@ -1,58 +1,37 @@
-import { searchService } from "@/services/searchServices"; 
-import { AttractionObject } from "@/types/attraction";
-import { CarObject } from "@/types/car";
-import { StayObject } from "@/types/stays";
-import { useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
-import { ServiceType } from "@/types/service";
+import { searchServices } from "@/services/searchServices";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 
-type ObjectResult = StayObject | AttractionObject | CarObject;
+export function searchLocationAndDuelDate(service: string) {
+    const [location, setLocation] = useState<string>("");
+    const [checkIn, setCheckIn] = useState<Date | null>(null);
+    const [checkOut, setCheckOut] = useState<Date | null>(null);
+    const router = useRouter();
 
-export const useSearchingService = (service: ServiceType) => {
-    const searchParams = useSearchParams();
+    const handleSearch = async () => {
+        searchServices.LocationAndDuelDates({ location, checkIn, checkOut, service });
+        router.push(
+            `/stays/search?location=${location}` +
+            `${checkIn ? "&checkIn=" + checkIn.toISOString().split("T")[0] : ""}` +
+            `${checkOut ? "&checkOut=" + checkOut.toISOString().split("T")[0] : ""}`
+        );
+    };
 
-    const [results, setResults] = useState<ObjectResult[]>([]);
-    const [isLoading, setIsLoading] = useState(true);
-    const [error, setError] = useState<string | null>(null);
+    return ({ setLocation, setCheckIn, setCheckOut, handleSearch })
+}
 
-    const location = searchParams.get('location');  
-    const checkin = searchParams.get('checkin');
-    const checkout = searchParams.get('checkout');
-    const checkdate = searchParams.get('checkdate');
+export function searchWithSingleDate(service: string) {
+    const [location, setLocation] = useState<string>("");
+    const [checkDate, setCheckDate] = useState<Date | null>(null);
+    const router = useRouter();
 
-    useEffect(() => {
-        const fetchResults = async () => {
-            setError(null);
-            
-            if (!location) {
-                setIsLoading(false);
-                setResults([]);
-                return;
-            }
+    const handleSearch = async () => {
+        searchServices.LocationAndSingleDate({ location, checkDate, service });
+        router.push(
+            `/attractions/search?location=${location}` +
+            `${checkDate ? "&checkIn=" + checkDate.toISOString().split("T")[0] : ""}`
+        );
+    };
 
-            setIsLoading(true);
-
-            try {
-                const data = await searchService.search({
-                    location,
-                    checkIn: checkin ? new Date(checkin) : null,
-                    checkOut: checkout ? new Date(checkout) : null,
-                    checkDate: checkdate ? new Date(checkdate) : null,
-                    service,
-                    mode: "search"
-                });
-
-                setResults(data?.results || []); 
-            } catch (err) {
-                console.error("Fetch Error:", err);
-                setResults([]);
-            } finally {
-                setIsLoading(false);
-            }
-        };
-
-        fetchResults();
-    }, [location, checkin, checkout, checkdate, service]); 
-
-    return { results, isLoading, error, location, checkin, checkout, checkdate };
+    return ({setLocation, setCheckDate, handleSearch})
 }
