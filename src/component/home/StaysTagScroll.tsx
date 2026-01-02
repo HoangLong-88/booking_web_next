@@ -30,7 +30,7 @@ function StaysTagsArrowScroll() {
               className="min-w-[270px] max-w-[420px] h-full rounded-2xl relative overflow-hidden duration-200 mb-2"
             >
               <img
-                src={stay.images[0] ?? ""}
+                src={Array.isArray(stay?.images) ? stay.images[0] : stay?.images}
                 alt={stay.stayName}
                 className="object-cover h-45 w-full"
               />

@@ -1,3 +1,17 @@
+// import { buildSearchParams } from "@/utils/searchParams";
+// import { SearchParams, SuggestParams } from "@/types/search";
+
+// const fetcher = async (url: string) => {
+//   const res = await fetch(url, {
+//     method: "GET",
+//     cache: "no-store",
+//     next: { revalidate: 0 }
+//   });
+
+//   if (!res.ok) {
+//     throw new Error(`HTTP error: ${res.status}`);
+//   }
+
 
 export const searchServices = {
   LocationAndDuelDates: async ({
@@ -29,7 +43,7 @@ export const searchServices = {
     return res.json();
   },
 
-  LocationAndSingleDate : async ({
+  LocationAndSingleDate: async ({
     location,
     checkDate,
     service
@@ -56,86 +70,14 @@ export const searchServices = {
   },
 }
 
+// export const searchService = {
+//   search: async (params: SearchParams) => {
+//     const query = buildSearchParams(params);
+//     return fetcher(`/api/${params.service}/search?${query.toString()}`);
+//   },
 
-
-const searchStays = async ({
-  location,
-  checkIn,
-  checkOut,
-}: {
-  location: string;
-  checkIn: Date | null;
-  checkOut: Date | null;
-}) => {
-
-  const params = new URLSearchParams();
-
-  if (location) params.append("location", location);
-  if (checkIn) params.append("checkin", checkIn.toISOString().split("T")[0]);
-  if (checkOut) params.append("checkout", checkOut.toISOString().split("T")[0]);
-
-  const res = await fetch(
-    `/api/stays/search?${params.toString()}`,
-    {
-      method: 'GET',
-      cache: 'no-store',
-      next: { revalidate: 0 }
-    } // tránh lỗi cache
-  );
-  return res.json();
-};
-
-
-const searchAttractions = async ({
-  location,
-  checkDate,
-}: {
-  location: string;
-  checkDate: Date | null;
-}) => {
-
-  const params = new URLSearchParams();
-
-  if (location) params.append("location", location);
-  if (checkDate) params.append("checkdate", checkDate.toISOString().split("T")[0]);
-
-  const res = await fetch(
-    `/api/attractions/search?${params.toString()}`,
-    {
-      method: 'GET',
-      cache: 'no-store',
-      next: { revalidate: 0 }
-    } // tránh lỗi cache
-  );
-  return res.json();
-}
-
-
-const searchCars = async ({
-  location,
-  checkIn,
-  checkOut,
-}: {
-  location: string;
-  checkIn: Date | null;
-  checkOut: Date | null;
-}) => {
-
-  const params = new URLSearchParams();
-
-  if (location) params.append("location", location);
-  if (checkIn) params.append("checkin", checkIn.toISOString().split("T")[0]);
-  if (checkOut) params.append("checkout", checkOut.toISOString().split("T")[0]);
-
-  const res = await fetch(
-    `/api/cars/search?${params.toString()}`,
-    {
-      method: 'GET',
-      cache: 'no-store',
-      next: { revalidate: 0 }
-    } // tránh lỗi cache
-  );
-  return res.json();
-};
-
-export { searchStays, searchCars, searchAttractions };
+//   suggest: async (params: SuggestParams) => {
+//     const query = buildSearchParams(params);
+//     return fetcher(`/api/${params.service}/suggest?${query.toString()}`);
+//   }
+// };

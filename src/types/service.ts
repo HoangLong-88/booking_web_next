@@ -1,0 +1,1 @@
+    export type ServiceType = "stays" | "cars" | "attractions";

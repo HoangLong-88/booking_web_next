@@ -36,7 +36,6 @@ export function useFetchLocation() {
             image_url: item.image_url ?? undefined,
           })
         );
-
         setLocations(mapped);
       } else {
         setError(res.message || "Failed to fetch locations");

@@ -1,9 +1,9 @@
-    export type ServiceType = "stay" | "car" | "attraction";
+import type { ServiceType } from "./service";
 
-    export interface BookingItem {
+export interface BookingItem<TMeta = unknown>  {
     bookingID: string,
     serviceType: ServiceType;
     serviceID: string,
-    quantity: number; // rất quan trọng
-    metaJson?: Record<string, any>;
-    }
+    quantity: number; 
+    metaJson?: TMeta;
+}

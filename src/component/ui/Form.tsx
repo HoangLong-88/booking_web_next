@@ -8,10 +8,11 @@ import { useEffect, useState } from "react";
 
 
 export default function PaymentForm({
+  token,
   items,
   totalPrice,
 }: PaymentFormProps) {
-  const {loading, method, setMethod, handleConfirm } = useBookingService(items, totalPrice);
+  const {loading, method, setMethod, handleConfirm } = useBookingService(token, items);
   return (
     <div className="max-w-xl mx-auto bg-white rounded-2xl shadow-lg p-6 space-y-6">
       <h2 className="text-xl font-semibold">Thanh toán</h2>
@@ -65,7 +66,7 @@ export default function PaymentForm({
       <button
         onClick={handleConfirm}
         disabled={loading}
-        className="w-full bg-blue-600 text-white py-3 rounded-xl hover:bg-orange-500 transition disabled:opacity-50"
+        className="w-full bg-blue-600 text-white py-3 rounded-xl hover:bg-orange-400 transition disabled:opacity-50"
       >
         {loading ? "Đang xử lý..." : "Xác nhận đặt"}
       </button>

@@ -1,5 +1,6 @@
 'use client'
-import { KeySearchBar, DateBar, DateBar2 } from '@/component/ui/SearchBar';
+import { DateBarRangePicker, DateBarSinglePicker } from '@/component/ui/DateBar';
+import { KeySearchBar} from '@/component/ui/SearchBar';
 import { searchLocationAndDuelDate, searchWithSingleDate } from '@/hook/useSearching';
 
 type ServiceSearchProps = {
@@ -21,7 +22,7 @@ export const DuelDateSearchBar = ({ service }: ServiceSearchProps) => {
 
                     <div className="flex grow items-center gap-3 px-4 py-3 rounded-lg border border-transparent hover:border-gray-200 bg-white">
                         <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" d="M8 7V3M16 7V3M3 11h18M5 21h14a2 2 0 002-2V7H3v12a2 2 0 002 2z" /></svg>
-                        <DateBar
+                        <DateBarRangePicker
                             onCheckInChange={setCheckIn}
                             onCheckOutChange={setCheckOut}
                         />
@@ -54,7 +55,7 @@ export const SingleDateSearchBar = ({service}: ServiceSearchProps) => {
 
                     <div className="flex grow items-center gap-3 px-4 py-3 rounded-lg border border-transparent hover:border-gray-200 bg-white">
                         <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" d="M8 7V3M16 7V3M3 11h18M5 21h14a2 2 0 002-2V7H3v12a2 2 0 002 2z" /></svg>
-                        <DateBar2 onCheckDateChange={setCheckDate} />
+                        <DateBarSinglePicker onCheckDateChange={setCheckDate} />
                     </div>
                 </div>
                 <button

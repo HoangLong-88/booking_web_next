@@ -6,6 +6,7 @@ import "./globals.css";
 import { ClientLayout } from "@/component/layout/ClientLayout";
 import I18nProvider from "./providers/i18nProvider"; // <- use this client provider
 import { AuthProvider } from "./providers/authProvider";
+import "react-datepicker/dist/react-datepicker.css";
 
 
 export const metadata: Metadata = {
