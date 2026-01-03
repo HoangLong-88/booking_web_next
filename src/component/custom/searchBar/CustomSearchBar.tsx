@@ -4,7 +4,7 @@ import { KeySearchBar} from '@/component/ui/SearchBar';
 import { searchLocationAndDuelDate, searchWithSingleDate } from '@/hook/useSearching';
 
 type ServiceSearchProps = {
-    service?: string | null;
+    service?: string | '';
 };
 
 export const DuelDateSearchBar = ({ service }: ServiceSearchProps) => {
@@ -17,7 +17,7 @@ export const DuelDateSearchBar = ({ service }: ServiceSearchProps) => {
                 <div className="flex-1 flex items-center gap-3">
                     <div className="flex grow items-center gap-3 px-4 py-3 rounded-lg border border-transparent hover:border-gray-200 w-72 bg-white">
                         <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" d="M17 11V6a5 5 0 00-10 0v5M7 11h10v6a2 2 0 01-2 2H9a2 2 0 01-2-2v-6z" /></svg>
-                        <KeySearchBar onChange={setLocation} />
+                        <KeySearchBar service={service?? ''} onChange={setLocation} />
                     </div>
 
                     <div className="flex grow items-center gap-3 px-4 py-3 rounded-lg border border-transparent hover:border-gray-200 bg-white">
@@ -50,7 +50,7 @@ export const SingleDateSearchBar = ({service}: ServiceSearchProps) => {
                 <div className="flex-1 flex items-center gap-3">
                     <div className="flex grow items-center gap-3 px-4 py-3 rounded-lg border border-transparent hover:border-gray-200 w-72 bg-white">
                         <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" d="M17 11V6a5 5 0 00-10 0v5M7 11h10v6a2 2 0 01-2 2H9a2 2 0 01-2-2v-6z" /></svg>
-                        <KeySearchBar onChange={setLocation} />
+                        <KeySearchBar service={service?? ''} onChange={setLocation} />
                     </div>
 
                     <div className="flex grow items-center gap-3 px-4 py-3 rounded-lg border border-transparent hover:border-gray-200 bg-white">

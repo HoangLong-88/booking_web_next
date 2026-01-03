@@ -5,10 +5,11 @@ import { getLocationInput } from '@/hook/customUI/useLocationInput';
 
 interface KeySearchProp {
   onChange?: (value: string) => void;
+  service: string | '';
 }
 
-export function KeySearchBar({ onChange }: KeySearchProp) {
-  const { query, isOpen, suggestions, wrapperRef, setIsOpen, handleInputChange, handleSelect } = getLocationInput(onChange);
+export function KeySearchBar({ onChange, service }: KeySearchProp) {
+  const { query, isOpen, suggestions, wrapperRef, setIsOpen, handleInputChange, handleSelect } = getLocationInput(service, onChange);
   return (
     <div ref={wrapperRef} className="relative w-full">
       <input

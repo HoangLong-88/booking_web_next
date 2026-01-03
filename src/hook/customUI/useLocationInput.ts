@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import useDebounce from "../useDebounce";
 
-export const getLocationInput = (onChange?: (value: string) => void) => {
+export const getLocationInput = (service: string, onChange?: (value: string) => void) => {
     const [query, setQuery] = useState("");
     const [suggestions, setSuggestions] = useState<string[]>([]);
     const [isOpen, setIsOpen] = useState(false);
@@ -17,7 +17,7 @@ export const getLocationInput = (onChange?: (value: string) => void) => {
                 return;
             }
 
-            const res = await fetch(`/api/keywords?q=${encodeURIComponent(debouncedQuery)}`);
+            const res = await fetch(`/api/${service}/suggest?q=${encodeURIComponent(debouncedQuery)}`);
             const data: string[] = await res.json();
             setSuggestions(data);
             setIsOpen(true);
