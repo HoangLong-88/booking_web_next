@@ -8,8 +8,7 @@ import FormSelect from "@/component/common/FormSelect"
 import DragAndDropUpload from "@/component/ui/DragAndDropUpload"
 import { Input } from "@/component/ui/input"
 import { Label } from "@/component/ui/label"
-import { UploadedFile } from "@/types/upload"
-import { tree } from "next/dist/build/templates/app-page"
+
 
 export default function StayForm() {
   const {

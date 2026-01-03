@@ -71,7 +71,7 @@ export default function AdminSidebar({ active, onSelect, className }: SidebarPro
       {open && (
         <div className="mb-4">
           <Link href="/admin" className="text-xl font-semibold">
-            Admin
+            {user.role === 'admin' ? 'Admin Panel' : 'Staff Panel'}
           </Link>
         </div>
       )}

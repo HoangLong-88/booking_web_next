@@ -3,6 +3,7 @@ import AdminSidebar from "@/component/admin/Sidebar";
 import { useState } from "react";
 import { GuestsListComponent } from "../admin/components/userList";
 import StayForm from "./component/stayForm";
+import RoomsForm from "./component/roomForm";
 
 export default function AdminPage() {
   const [active, setActive] = useState("dashboard");
@@ -15,8 +16,8 @@ export default function AdminPage() {
         return <StayForm />;
       // case "bookings":
       //   return <BookingsComponent />;
-      // case "rooms":
-      //   return <RoomsComponent />;
+      case "rooms":
+        return <RoomsForm />;
       // case "settings":
       //   return <SettingsComponent />;
       default:
