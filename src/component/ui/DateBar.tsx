@@ -1,41 +1,21 @@
 import DatePicker from "react-datepicker"; 
-import { forwardRef, useState } from "react";
-import { format } from "date-fns";
+import { useState } from "react";
+import { CustomDateInput } from "./CustomDateInput";
 import { useTranslation } from "react-i18next";
 import { datePickerLocales } from "@/locales/datePickerLocales";
-import { getDateInput } from "@/hook/customUI/useDateInput";
 
-// . Định nghĩa interface cho props
-interface CustomDateInputProps {
-  value?: string;
-  onClick?: () => void;
-  placeholder?: string;
-  selectedDate?: Date | null; // thêm prop mới
-}
-
-const CustomDateInput = forwardRef<HTMLButtonElement, CustomDateInputProps>(
-  ({ selectedDate, onClick, placeholder }, ref) => (
-    <button
-      type='button'
-      className="text-sm text-stone-400"
-      onClick={onClick}
-      ref={ref}
-    >
-      {selectedDate ? format(selectedDate, "dd/MM/yyyy") : placeholder}
-    </button>
-  )
-);
-CustomDateInput.displayName = 'CustomDateInput';
-
-
-interface DateBarRangeProps {
+interface DateRangePickerProps {
   onCheckInChange?: (date: Date | null) => void;
   onCheckOutChange?: (date: Date | null) => void;
 }
-
-export function DateBarRangePicker({ onCheckInChange, onCheckOutChange }: DateBarRangeProps) {
-  const { checkIn, checkOut, setCheckIn, setCheckOut } = getDateInput();
+interface SingleDatePickerProps {
+  onCheckDateChange?: (date: Date | null) => void;
+}
+export function DateBarRangePicker({ onCheckInChange, onCheckOutChange }: DateRangePickerProps) {
+  const [checkIn, setCheckIn] = useState<Date | null>(null);
+  const [checkOut, setCheckOut] = useState<Date | null>(null);
   const { i18n } = useTranslation();
+
   return (
     <>
       <DatePicker
@@ -68,14 +48,8 @@ export function DateBarRangePicker({ onCheckInChange, onCheckOutChange }: DateBa
     </>
   )
 }
-
-interface DateBarSingleProps {
-  onCheckDateChange?: (date: Date | null) => void;
-}
-
-export function DateBarSinglePicker({ onCheckDateChange }: DateBarSingleProps) {
-  const { checkDate, setCheckDate } = getDateInput();
-  const { i18n } = useTranslation();
+export function DateBarSinglePicker({ onCheckDateChange }: SingleDatePickerProps) {
+  const [checkDate, setCheckDate] = useState<Date | null>(null);
   return (
     <>
       <DatePicker
@@ -88,7 +62,6 @@ export function DateBarSinglePicker({ onCheckDateChange }: DateBarSingleProps) {
         className='outline-none'
         dateFormat='dd/MM/yyyy'
         customInput={<CustomDateInput placeholder='Ngày tham gia' selectedDate={checkDate} />}
-        locale={datePickerLocales[i18n.language] ? i18n.language : "en"}
       />
     </>
   )
