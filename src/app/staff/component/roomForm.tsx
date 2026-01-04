@@ -12,14 +12,25 @@ import  { useMultipleFileUpload }  from "@/hook/useMultipleFileUpload"
 
 export default function RoomsForm() {
   const {
-  formData,
-  roomTypeOptions,
-  imagePreviews,
-  onChange,
-  setImages,
-  submit,
-  clearForm
-} = useRoomForm(stayID)
+    formData,
+    options,
+    stayOptions,
+    roomTypeOptions,
+    onChange,
+    setImages,
+    addImage,
+    clearForm,
+    submit
+} = useRoomForm()
+  const {
+    previews,
+    createPreviews,
+    handleUpload,
+    } = useMultipleFileUpload ({
+        onUploaded: async (files) => {
+            setImages(files.map(f => f.path))
+        },
+    })
 
   const [submitting, setSubmitting] = useState(false)
   const [message, setMessage] = useState<string | null>(null)
@@ -28,40 +39,39 @@ export default function RoomsForm() {
     <main className="max-w-6xl mx-auto px-4 py-10">
       <header className="mb-6 flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-semibold">{stay.stayName} — Rooms</h1>
-          <div className="text-sm text-slate-600">{stay.address}</div>
-        </div>
-        <Link href={`/stays/${stayID}`} className="text-sm text-emerald-700 hover:underline">Back to stay</Link>
+          <h1 className="text-2xl font-semibold">{stayOptions[0]?.label} — Rooms</h1>
+          <div className="text-sm text-slate-600">{stayOptions[0]?.address}</div>
+        </div>  
+        <Link href={`/stays/${stayOptions[0]?.value}`} className="text-sm text-emerald-700 hover:underline">Back to stay</Link>
       </header>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        {/* LEFT: add room form */}
         <section className="lg:col-span-2 bg-white border rounded-lg p-6 shadow-sm">
           <h2 className="text-lg font-medium mb-4">Add room</h2>
 
           <form onSubmit={submit} className="space-y-4">
             <div className="relative">
-              <Input name="roomName" value={form.roomName} onChange={onChange} placeholder="Room name" required />
+              <Input name="roomName" value={formData.roomName} onChange={onChange} placeholder="Room name" required />
               <Label>Room name</Label>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
               <div className="relative">
-                <Input name="capacity" value={form.capacity} onChange={onChange} placeholder="Capacity" />
+                <Input name="capacity" value={formData.capacity} onChange={onChange} placeholder="Capacity" />
                 <Label>Capacity</Label>
               </div>
 
               <div className="relative">
-                <Input name="price" type="number" value={form.price} onChange={onChange} placeholder="Price" />
+                <Input name="price" type="number" value={formData.currentPrice} onChange={onChange} placeholder="Price" />
                 <Label>Price</Label>
               </div>
 
               <div>
                 <FormSelect
-                  name="categoryID"
-                  value={form.categoryID}
-                  options={(stay?.categories ?? []).map((c: any) => ({ value: c.categoryID, label: c.categoryName }))}
-                  placeholder="Category"
+                  name="roomTypeID"
+                  value={formData.roomTypeID}
+                  options={roomTypeOptions}
+                  placeholder="Room type"
                   onChange={onChange}
                 />
               </div>
@@ -71,7 +81,7 @@ export default function RoomsForm() {
               <Label className="!relative !mb-1">Description</Label>
               <textarea
                 name="description"
-                value={form.description}
+                value={formData.description}
                 onChange={onChange}
                 placeholder="Description"
                 className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm min-h-[88px] peer placeholder-transparent"
@@ -81,8 +91,8 @@ export default function RoomsForm() {
             <div>
               <Label className="!relative !mb-1">Images</Label>
               <DragAndDropUpload
-                preview={imagePreviews}
-                onUploadMultiple={handleFiles}
+                preview={previews}
+                onUploadMultiple={addImage}
                 accept="image/*"
                 multiple
                 havingImagePreview
@@ -98,14 +108,12 @@ export default function RoomsForm() {
             </div>
           </form>
         </section>
-
-        {/* RIGHT: room list */}
         <aside className="space-y-4">
           <div className="bg-white border rounded-lg p-4 shadow-sm">
-            <h3 className="font-medium mb-3">Rooms ({rooms.length})</h3>
+            {/* <h3 className="font-medium mb-3">Rooms ({rooms.length})</h3> */}
 
             <ul className="flex flex-col gap-3">
-              {rooms.map((r) => (
+              {/* {rooms.map((r) => (
                 <li key={r.id} className="flex items-center gap-3">
                   <div className="w-20 h-16 bg-gray-100 rounded-md overflow-hidden flex-shrink-0">
                     {r.images && r.images[0] ? (
@@ -126,8 +134,8 @@ export default function RoomsForm() {
                     </div>
                     <div className="text-xs text-slate-600">{r.capacity} guests</div>
                   </div>
-                </li>
-              ))}
+                </li> */}
+              {/* ))} */}
             </ul>
           </div>
         </aside>

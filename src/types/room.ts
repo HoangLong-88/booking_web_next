@@ -1,21 +1,28 @@
 export interface RoomFormData {
   stayID: string
-  roomID?: string
 
   roomName: string
   roomTypeID: string
 
-  capacity: Number
-  quantity: Number
-  currentPrice: Number
+  capacity: number
+  quantity: number
+  currentPrice: number
   description: string
 
   image: string[]
 }
 
 export interface RoomFormOptions {
-  roomTypes: {
-    roomTypeID: string
-    roomTypeName: string
-  }[]
+  roomTypes: roomTypeOptions[]
+  stays: StayOptions[]
+}
+export interface roomTypeOptions {
+  roomTypeID: string
+  roomTypeName: string
+}
+export interface StayOptions {
+  stayID: string
+  stayName: string
+  address?: string
+  images?: string[]
 }

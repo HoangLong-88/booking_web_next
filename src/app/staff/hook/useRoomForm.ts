@@ -4,49 +4,51 @@ import { useEffect, useRef, useState } from 'react'
 import { roomService } from '@/app/staff/service/room.service'
 import type { RoomFormData, RoomFormOptions } from '@/types/room'
 
-export function useRoomForm(stayID: string) {
+export function useRoomForm() {
   /* ===== options ===== */
   const [options, setOptions] = useState<RoomFormOptions>({
-    roomTypes: []
+    roomTypes: [],
+    stays: []
   })
 
   /* ===== form data ===== */
   const [formData, setFormData] = useState<RoomFormData>({
-    stayID,
-    roomName: '',
+    stayID: '',
     roomTypeID: '',
+
+    roomName: '',
     capacity: 2,
     quantity: 1,
     currentPrice: 0,
     description: '',
     image: []
   })
+   const roomTypeOptions = options.roomTypes.map((r) => ({
+        value: r.roomTypeID,
+        label: r.roomTypeName
+    }))
 
-  /* ===== image preview ===== */
-  const [imagePreviews, setImagePreviews] = useState<string[]>([])
-  const imageFilesRef = useRef<File[]>([])
-  const objectUrlsRef = useRef<string[]>([])
+    const stayOptions = options.stays.map((s) => ({
+        value: s.stayID,
+        label: s.stayName,
+        address: s.address,
+        images: s.images
+    }))
 
-  /* ===== fetch select data ===== */
+
   useEffect(() => {
     roomService.getFormData?.()
       .then(res => {
         if (res?.ok) {
           setOptions({
-            roomTypes: res.data.roomTypes ?? []
+            roomTypes: res.data.roomTypes ?? [],
+            stays: res.data.stays ?? []
           })
         }
       })
       .catch(console.error)
   }, [])
 
-  /* ===== cleanup preview ===== */
-  useEffect(() => {
-    return () => {
-      objectUrlsRef.current.forEach(u => URL.revokeObjectURL(u))
-      objectUrlsRef.current = []
-    }
-  }, [])
 
   /* ===== handlers ===== */
   const onChange = (
@@ -56,24 +58,22 @@ export function useRoomForm(stayID: string) {
     setFormData(prev => ({ ...prev, [name]: value }))
   }
 
-  const setImages = (files: File[]) => {
-    objectUrlsRef.current.forEach(u => URL.revokeObjectURL(u))
-    objectUrlsRef.current = []
-
-    imageFilesRef.current = files
-    const previews = files.map(f => {
-      const url = URL.createObjectURL(f)
-      objectUrlsRef.current.push(url)
-      return url
-    })
-
-    setImagePreviews(previews)
-    setFormData(prev => ({ ...prev, image: files }))
+    const setImages = (images: string[]) => {
+      setFormData(prev => ({
+          ...prev,
+          image: images
+      }))
+    }
+  const addImage = () => {
+    setFormData(prev => ({
+      ...prev,
+      image: [...(prev.image ?? []), '']
+    }))
   }
 
   const clearForm = () => {
     setFormData({
-      stayID,
+      stayID: '',
       roomName: '',
       roomTypeID: '',
       capacity: 2,
@@ -82,14 +82,8 @@ export function useRoomForm(stayID: string) {
       description: '',
       image: []
     })
-
-    imageFilesRef.current = []
-    imagePreviews.forEach(u => URL.revokeObjectURL(u))
-    setImagePreviews([])
-    objectUrlsRef.current = []
   }
 
-  /* ===== submit ===== */
   const submit = async () => {
     const fd = buildRoomFormData({
       ...formData,
@@ -101,21 +95,14 @@ export function useRoomForm(stayID: string) {
     return roomService.createRoom(fd)
   }
 
-  /* ===== select options ===== */
-  const roomTypeOptions = options.roomTypes.map(r => ({
-    value: r.roomTypeID,
-    label: r.roomTypeName
-  }))
-
   return {
     formData,
     options,
+    stayOptions,
     roomTypeOptions,
-
-    imagePreviews,
-
     onChange,
     setImages,
+    addImage,
     clearForm,
     submit
   }
