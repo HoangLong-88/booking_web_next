@@ -1,6 +1,6 @@
+import { CarSearchBar } from "@/component/car/CarSearchBar";
 import { HeroCarPage } from "@/component/layout/Hero";
 import { QAList } from "@/component/ui/Dropdown";
-import { DuelDateSearchBar } from "@/component/custom/searchBar/CustomSearchBar";
 
 export default function CarsPage() {
   const Ads = [
@@ -30,7 +30,7 @@ export default function CarsPage() {
     <>
       <header className="mt-[var(--spacing-top)]">
         <HeroCarPage />
-        <DuelDateSearchBar service={`cars`}/>
+        <CarSearchBar />
       </header>
       <main className="px-20 py-3">
         <p className="text-3xl font-semibold mb-3 mt-5 text-center text-orange-300">Thuê xe với SKYLINK</p>
