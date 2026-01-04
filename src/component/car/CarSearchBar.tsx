@@ -3,13 +3,13 @@ import useSearchParams  from "@/hook/useSearchParams";
 import { DateBarRangePicker } from "../ui/DateBar";
 import { KeySearchBar } from "../search/KeySearchBar";
 
-const CarSearchBar: React.FC = () => {
+export const CarSearchBar: React.FC = () => {
   const { 
     setLocation, 
     handleSearch, 
     setCheckIn, 
     setCheckOut 
-  } = selectSearchParams('cars');
+  } = useSearchParams('cars');
 
   return (
     <div className="relative left-1/2 -translate-x-1/2 bottom-[40px] z-20 w-[92%] md:w-[85%] max-w-6xl">
