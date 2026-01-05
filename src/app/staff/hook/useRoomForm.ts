@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState, useMemo } from 'react'
 import { roomService } from '@/app/staff/service/room.service'
 import type { RoomFormData, RoomFormOptions } from '@/types/room'
 
@@ -23,25 +23,33 @@ export function useRoomForm() {
     description: '',
     image: []
   })
-   const roomTypeOptions = options.roomTypes.map((r) => ({
+   const roomTypeOptions = useMemo(() =>
+      options.roomTypes.map(r => ({
         value: r.roomTypeID,
-        label: r.roomTypeName
-    }))
+        label: r.roomType,
+      })),
+      [options.roomTypes]
+    )
 
-    const stayOptions = options.stays.map((s) => ({
+    const stayOptions = useMemo(() =>
+      options.stays.map(s => ({
         value: s.stayID,
         label: s.stayName,
         address: s.address,
         images: s.images
-    }))
+      })),
+      [options.stays]
+    )
+
 
 
   useEffect(() => {
     roomService.getFormData?.()
       .then(res => {
         if (res?.ok) {
+          console.log(res.data)
           setOptions({
-            roomTypes: res.data.roomTypes ?? [],
+            roomTypes: res.data ?? [],
             stays: res.data.stays ?? []
           })
         }
@@ -84,12 +92,13 @@ export function useRoomForm() {
     })
   }
 
-  const submit = async () => {
+  const submit = async (image?: string[]) => {
     const fd = buildRoomFormData({
       ...formData,
       currentPrice: Number(formData.currentPrice),
       capacity: Number(formData.capacity),
-      quantity: Number(formData.quantity)
+      quantity: Number(formData.quantity),
+      image: image
     })
 
     return roomService.createRoom(fd)

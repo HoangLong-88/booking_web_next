@@ -7,6 +7,7 @@ import FormSelect from '@/component/common/FormSelect'
 import { useStayDetail } from '@/hook/stays/useStayDetails'
 import { ReviewForm } from '@/component/stays/reviewForm'
 import ReviewsSection from '@/component/review/reviewSection'
+import { useRoomsByStay } from '@/app/staff/hook/useRoomsByStay'
 export default function StayDetailPage({
   params,
 }: {

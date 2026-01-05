@@ -7,12 +7,13 @@ import { ServiceType } from "@/types/service";
 interface KeySearchProp<T> {
   onChange?: (value: string) => void;
   service: ServiceType;
-
+  onSelectItem?: (item: T) => void;
   getValue: (item: T) => string;
   renderItem: (item: T) => React.ReactNode;
+  keySuggestClassName?: string;
 }
 
-export function KeySearchBar<T>({ onChange, service, getValue, renderItem }: KeySearchProp<T>) {
+export function KeySearchBar<T>({ onChange, service, getValue, onSelectItem, renderItem, keySuggestClassName }: KeySearchProp<T>) {
   const {
     query,
     suggestions,
@@ -33,6 +34,7 @@ export function KeySearchBar<T>({ onChange, service, getValue, renderItem }: Key
     const value = getValue(item);
     onSelect(value);
     onChange?.(value);
+    onSelectItem?.(item);
   };
 
   return (
@@ -47,11 +49,11 @@ export function KeySearchBar<T>({ onChange, service, getValue, renderItem }: Key
       />
 
       {isOpen && suggestions.length > 0 && (
-        <ul className="
+        <ul className={`
           absolute z-10 bg-white shadow-xl rounded
           min-w-[120%] left-1/2 -translate-x-1/2
-          mt-1 max-h-60 overflow-auto
-        ">
+          ${keySuggestClassName}
+          mt-1 max-h-60 overflow-auto`}>
           {suggestions.map((item, index) => (
             <li
               key={index}

@@ -8,7 +8,7 @@ export const roomService = {
         return {
             ok: res.ok,
             status: res.status,
-            data: json.data
+            data: json.data,
         }
     },
       createRoom: async (formData: FormData) => {

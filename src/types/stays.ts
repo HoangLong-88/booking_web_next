@@ -52,6 +52,13 @@ export interface StayDetail {
   category: string;
   reviews?: Review[];  
 }
+export type StaySuggestion = {
+  stayID: string;
+  stayName: string;
+  address: string;
+  locationName: string;
+  country: string;
+};
 
 export interface StayHome {
   stayID: string;

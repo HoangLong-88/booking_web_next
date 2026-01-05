@@ -47,7 +47,6 @@ export function useFetchLocation() {
     }
   }, []);
 
-  // 2️⃣ useEffect CHỈ GỌI fetchLocations
   useEffect(() => {
     fetchLocations();
   }, [fetchLocations]);
