@@ -6,7 +6,7 @@ export async function POST(req: Request) {
     if (!contact) {
       return NextResponse.json({ success: false, message: "Missing contact" }, { status: 400 });
     }
-    const laravelRes = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/otp/send-otp`, {
+    const laravelRes = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/auth/otp/send`, {
       method: "POST",
       headers: { "Content-Type": "application/json", "Accept": "application/json" },
       body: JSON.stringify({ contact }),

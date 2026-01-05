@@ -1,4 +1,4 @@
-
+'use client'
 import { Card, CardTitle, CardSubTitle } from "@/component/ui/Card";
 import {
   LateEscapeDeal,
@@ -7,9 +7,9 @@ import {
   DisabledDiscount
 } from "@/component/ui/Image";
 import Link from "next/link";
-import { HomeSearchBar } from "@/component/layout/CustomSearchBar";
+import { StaySearchBar } from "@/component/home/StaySearchBar";
 import { HeroHomePage } from "@/component/layout/Hero";
-import { HotelTagsArrowScroll, NoteTags } from "@/component/ui/TagScroll";
+import { StaysTagsArrowScroll, NoteTags } from "@/component/home/StaysTagScroll";
 import { TrendingDestinationsRecommendation } from "@/component/layout/gridLayout";
 
 export default function HomePage() {
@@ -19,7 +19,7 @@ export default function HomePage() {
       <header className="mt-[var(--spacing-top)]">
         {/* background image + dark vignette */}
         <HeroHomePage />
-        <HomeSearchBar />
+        <StaySearchBar />
       </header>
         {/* <SearchBar/> */}
       <div className="min-h-screen p-20 bg-white text-black overflow-hidden">
@@ -99,7 +99,7 @@ export default function HomePage() {
         </div>
         <div className="mb-7 mt-15">
           <p className="text-3xl font-bold">Stay Guest Love</p>
-          <HotelTagsArrowScroll />
+          <StaysTagsArrowScroll />
         </div>
         <div className="mb-7 mt-20">
             <p className="text-2xl font-bold mb-5">Why should be SKYLINK ?</p>

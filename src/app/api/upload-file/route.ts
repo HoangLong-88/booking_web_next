@@ -4,12 +4,14 @@ export async function POST(req: NextRequest) {
   try {
     const formData = await req.formData();
     const file = formData.get("file") as File;
+    const folder = formData.get("folder") as string;
 
     if (!file) {
       return NextResponse.json({ error: "File is required" }, { status: 400 });
     }
     const laravelFormData = new FormData();
     laravelFormData.append("image", file);
+    laravelFormData.append("folder", folder)
     // Forward to Laravel API
     const laravelRes = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/upload`, {
       method: "POST",

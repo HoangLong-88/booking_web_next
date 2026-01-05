@@ -1,6 +1,6 @@
+import { CarSearchBar } from "@/component/car/CarSearchBar";
 import { HeroCarPage } from "@/component/layout/Hero";
 import { QAList } from "@/component/ui/Dropdown";
-import { CarSearchBar } from "@/component/layout/CustomSearchBar";
 
 export default function CarsPage() {
   const Ads = [

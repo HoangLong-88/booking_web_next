@@ -1,11 +1,10 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 
-let lastScrollY = 0
-
-function navbarScroll(navbar: HTMLElement) {
+function navbarScroll(navbar: HTMLElement, onHidden : (hidden: boolean) => void)  {
 
     const mobileBreakpoint = 768;
-
+    let lastScrollY = 0
+    
     function handleScroll() {
         const currentScrollY = window.scrollY;
         const documentHeight = document.documentElement.scrollHeight - window.innerHeight;
@@ -17,11 +16,14 @@ function navbarScroll(navbar: HTMLElement) {
         }
         if (currentScrollY > scrollThreshold && currentScrollY > lastScrollY) {
             navbar.style.transform = 'translateY(-100%)';
+            onHidden(true);
         }
         if (currentScrollY <= scrollThreshold) {
             navbar.style.transform = 'translateY(0)';
+            onHidden(false);
         }
         lastScrollY = currentScrollY;
+        
     }
     window.addEventListener('scroll', handleScroll)
     window.addEventListener('resize', handleScroll)
@@ -31,11 +33,11 @@ function navbarScroll(navbar: HTMLElement) {
         window.removeEventListener('resize', handleScroll)
     };
 }
-function SetUpNavbarScroll(navbar: HTMLElement) {
+function SetUpNavbarScroll(navbar: HTMLElement, onHidden: (hidden: boolean) => void) {
     if (!navbar) {
         return
     }
-    return navbarScroll(navbar)
+    return navbarScroll(navbar, onHidden)
 }
 
 function useLockBodyScroll(lock: boolean, onUnlock?: () => void ) {

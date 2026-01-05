@@ -32,6 +32,7 @@ export function useRegister() {
       } else if (res.data.token) {
         saveToken(res.data.token, keepLoggedIn);
       }
+      window.location.reload();
       router.push("/");
 
       return res;

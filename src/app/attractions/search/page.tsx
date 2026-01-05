@@ -1,6 +1,5 @@
 'use client'
 import { AttractionSearchList } from "@/component/layout/CustomCardsList";
-import { AttractionsSearchBar } from "@/component/layout/CustomSearchBar";
 import { HeroAttractionsPage } from "@/component/layout/Hero";
 
 

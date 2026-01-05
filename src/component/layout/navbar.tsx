@@ -14,6 +14,7 @@ function NavBar({isAuthPage, isAdminPage}:{isAuthPage: boolean, isAdminPage: boo
     const pathname = usePathname()
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
     const navbarRef =  useRef<HTMLElement>(null)
+    const [navbarHidden, setNavbarHidden] = useState(false);
     const { user } = useAuth();
     const { t } = useTranslation();
 
@@ -21,11 +22,19 @@ function NavBar({isAuthPage, isAdminPage}:{isAuthPage: boolean, isAdminPage: boo
     { name: t('nav_item.stays'), href: "/stays" },
     { name: t('nav_item.cars'), href: "/cars" },
     { name: t('nav_item.attractions'), href: "/attractions" },
-    ];
+    ...(user?.role === 'admin'
+        ? [{ name: t('nav_item.admin'), href: "/admin" }]
+        : []),
+
+    ...(user?.role === 'staff' || user?.role === 'admin'
+        ? [{ name: t('nav_item.staff'), href: "/staff" }]
+        : [])
+    ]
+
 
     useEffect(() => {
         if (navbarRef.current) {
-            const cleanup = SetUpNavbarScroll(navbarRef.current)
+            const cleanup = SetUpNavbarScroll(navbarRef.current, setNavbarHidden)
             return cleanup
         }
     }, [])  
@@ -42,7 +51,7 @@ function NavBar({isAuthPage, isAdminPage}:{isAuthPage: boolean, isAdminPage: boo
                     text-4xl sm:text-5xl ` : `text-2xl sm:text-4xl`} text-amber-50`}>
                     <Link href="/">SKYLINK</Link>
                 </div>
-                {!isAuthPage || !isAdminPage && <div className="text-1xl text-amber-50 hidden sm:block">{t("header:logo_subtitle")}</div>} 
+                {!isAuthPage && !isAdminPage && <div className="text-1xl text-amber-50 hidden sm:block">{t("header:logo_subtitle")}</div>} 
             </div>
 
             {/* Menu button (mobile) */}    

@@ -4,6 +4,8 @@ import { I18nextProvider } from "react-i18next";
 import type { i18n as I18nType } from "i18next";
 import { initPageI18n } from "@/libs/i18n";
 import { getLanguageFromCookie } from "@/libs/language";
+import { registerLocale } from "react-datepicker";
+import { datePickerLocales } from "@/locales/datePickerLocales";
 
 export default function I18nProvider({ children }: { children: ReactNode }) {
   const [i18nInstance, setI18nInstance] = useState<I18nType | null>(null);
@@ -12,6 +14,10 @@ export default function I18nProvider({ children }: { children: ReactNode }) {
     (async () => {
       const i18n = await initPageI18n();
       const lang = getLanguageFromCookie() || "en";
+
+      Object.entries(datePickerLocales).forEach(([key, locale]) => {
+        registerLocale(key, locale);
+      });
 
       await i18n.changeLanguage(lang);
       setI18nInstance(i18n);

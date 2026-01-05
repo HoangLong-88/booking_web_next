@@ -1,6 +1,6 @@
 'use client'
 import { StayListSearch } from "@/component/layout/CustomCardsList";
-import { HomeSearchBar } from "@/component/layout/CustomSearchBar";
+import { StaySearchBar } from "@/component/home/StaySearchBar";
 import { HeroHomePage } from "@/component/layout/Hero";
 
 
@@ -9,7 +9,7 @@ export default function SearchStaysPage() {
         <>
             <header className="mt-[var(--spacing-top)]">
                 <HeroHomePage />
-                <HomeSearchBar />
+                <StaySearchBar />
             </header>
             <main className="px-20 py-10">
                 <StayListSearch/>
