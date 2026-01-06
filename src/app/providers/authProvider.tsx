@@ -1,5 +1,5 @@
 'use client'
-import React, { createContext, useState, useEffect, useContext } from "react";
+import React, { createContext, useState, useEffect, useContext, useRef } from "react";
 import { getToken, clearToken } from "@/utils/storeLoginToken";
 import type { User } from "@/types/user";
 import { usePathname } from "next/navigation";
@@ -8,6 +8,7 @@ interface AuthContextType<T = unknown> {
   user: User | null;
   setUser: (user: User | null) => void;
   logout: () => void;
+  loading: boolean;
 }
 
 
@@ -15,11 +16,18 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  const fetchRef = useRef(false); // chống gọi nhiều lần
 
   useEffect(() => {
+    if (fetchRef.current) return;
+    fetchRef.current = true;
+
     const token = getToken();
     if (!token) {
       setUser(null);
+      setLoading(false);
       return;
     }
 
@@ -40,6 +48,13 @@ function AuthProvider({ children }: { children: React.ReactNode }) {
           clearToken();
           setUser(null);
         }
+      })
+      .catch(()=>{
+        clearToken()
+        setUser(null)
+      })
+      .finally(()=>{
+        setLoading(false)
       });
   }, []);
 
@@ -49,7 +64,7 @@ function AuthProvider({ children }: { children: React.ReactNode }) {
   };
 
   return (
-    <AuthContext.Provider value={{ user, setUser, logout }}>
+    <AuthContext.Provider value={{ loading, user, setUser, logout }}>
       {children}
     </AuthContext.Provider>
   );

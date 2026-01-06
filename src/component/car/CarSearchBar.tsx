@@ -1,14 +1,19 @@
-
-import useSearchParams  from "@/hook/useSearchParams";
+import useSearchParams from "@/hook/useSearchParams";
 import { DateBarRangePicker } from "../ui/DateBar";
 import { KeySearchBar } from "../search/KeySearchBar";
 
+type CarSuggestion = {
+  carName: string,
+  checkInDestination: string,
+  country: string,
+}
+
 export const CarSearchBar: React.FC = () => {
-  const { 
-    setLocation, 
-    handleSearch, 
-    setCheckIn, 
-    setCheckOut 
+  const {
+    setLocation,
+    handleSearch,
+    setCheckIn,
+    setCheckOut
   } = useSearchParams('cars');
 
   return (
@@ -19,7 +24,19 @@ export const CarSearchBar: React.FC = () => {
         <div className="flex-1 flex items-center gap-3">
           <div className="flex grow items-center gap-3 px-4 py-3 rounded-lg border border-transparent hover:border-gray-200 w-72 bg-white">
             <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" d="M17 11V6a5 5 0 00-10 0v5M7 11h10v6a2 2 0 01-2 2H9a2 2 0 01-2-2v-6z" /></svg>
-            <KeySearchBar onChange={setLocation} />
+            <KeySearchBar<CarSuggestion>
+              service='cars'
+              onChange={setLocation}
+              getValue={(item) => item.carName}
+              renderItem={(item) => (
+                <>
+                  <div className="font-semibold">{item.carName}</div>
+                  <div className="text-xs text-gray-500">
+                    {item.checkInDestination}, {item.country}
+                  </div>
+                </>
+              )}
+            />
           </div>
 
           <div className="flex grow items-center gap-3 px-4 py-3 rounded-lg border border-transparent hover:border-gray-200 bg-white">
