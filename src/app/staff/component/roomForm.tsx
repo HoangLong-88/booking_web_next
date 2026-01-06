@@ -37,12 +37,14 @@ export default function RoomsForm() {
             setImages(files.map(f => f.path))
         },
     })
+  const [reloadKey, setReloadKey] = useState(0);
 
   const [submitting, setSubmitting] = useState(false)
   const [message, setMessage] = useState<string | null>(null)
   const [selectedStay, setSelectedStay] = useState<StaySuggestion | null>(null);
-  const { rooms = [] , loading, error } = useRoomsByStay(selectedStay?.stayID);
-
+  
+  const { rooms, loading, error } =
+    useRoomsByStay(selectedStay?.stayID, reloadKey);
   useEffect(() => {
 
       if (!navbarRef.current) return; 
@@ -75,7 +77,10 @@ export default function RoomsForm() {
           className='!max-w-3xl'
           formClassName='!bg-gray-800' 
           keySuggestClassName='!bg-gray-800' 
-          onSelectStay={(stay) => setSelectedStay(stay)}
+          onSelectStay={(stay) => {
+            setSelectedStay(stay)
+            setReloadKey(prev => prev + 1)
+          }}
         />
     </div>
     <main className="max-w-6xl mx-auto px-4 py-10">
@@ -99,8 +104,11 @@ export default function RoomsForm() {
             try {
                 const uploaded = await handleUpload('uploads/rooms');
     
+                formData.stayID = selectedStay?.stayID || ''
+
                 await submit(uploaded.map(f => f.path))
-                setMessage('Created stay successfully')
+                setMessage('Created room successfully')
+                setReloadKey(prev => prev + 1)
             } catch (err) {
                 console.error(err)
               setMessage('Failed to create stay')
@@ -121,7 +129,15 @@ export default function RoomsForm() {
               </div>
 
               <div className="relative">
-                <Input name="price" type="number" value={formData.currentPrice} onChange={onChange} placeholder="Price" />
+                <Input 
+                name="currentPrice" 
+                type="number" 
+                min={0}
+                step={1000}
+                value={formData.currentPrice}
+                onChange={onChange} 
+
+                placeholder="Price" />
                 <Label>Price</Label>
               </div>
 
@@ -151,7 +167,7 @@ export default function RoomsForm() {
               <Label className="!relative !mb-1">Images</Label>
               <DragAndDropUpload
                 preview={previews}
-                onUploadMultiple={addImage}
+                onUploadMultiple={createPreviews}
                 accept="image/*"
                 multiple
                 havingImagePreview
@@ -159,7 +175,11 @@ export default function RoomsForm() {
             </div>
 
             <div className="flex items-center gap-3">
-              <CustomButton type="submit" disabled={submitting} className="px-4 py-2 bg-emerald-700 text-white rounded-md">
+              <CustomButton 
+                type="submit" 
+                onClick={addImage}
+                disabled={submitting} 
+                className="px-4 py-2 bg-emerald-700 text-white rounded-md">
                 {submitting ? 'Adding...' : 'Add room'}
               </CustomButton>
               <CustomButton type="button" onClick={clearForm} className="px-4 py-2 border rounded-md">

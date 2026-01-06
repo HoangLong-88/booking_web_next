@@ -1,18 +1,20 @@
 import type { Room } from "@/types/room";
+
 export const roomService = {
   getRoomsByStayID: async (stayID?: string): Promise<Room[]> => {
     if (!stayID) return [];
 
-    const res = await fetch(`/api/stays/${stayID}/rooms`, {
-      method: "GET",
-    });
+    const res = await fetch(`/api/stays/${stayID}/rooms`);
 
     if (!res.ok) {
       throw new Error("Failed to fetch rooms");
     }
 
-    const json: { ok: boolean; data: Room[] } = await res.json();
+    const data: Room[] = await res.json();
 
-    return json.data;
+    return data.map(room => ({
+      ...room
+    }));
   },
 };
+

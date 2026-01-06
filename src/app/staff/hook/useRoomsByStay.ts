@@ -2,12 +2,17 @@ import { roomService } from "@/services/roomService";
 import type { Room } from "@/types/room";
 import { useState, useEffect } from "react";
 
-export function useRoomsByStay(stayID?: string) {
+export function useRoomsByStay(stayID?: string, reloadKey?: number) {
     const [rooms, setRooms] = useState<Room[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
 
     useEffect(() => {
+        if (!stayID) {
+            setRooms([]); 
+            setLoading(false)
+            return;
+        }
         const fetchRooms = async () => {
             setLoading(true);
             setError(null);
@@ -23,7 +28,7 @@ export function useRoomsByStay(stayID?: string) {
         };
 
         fetchRooms();
-    }, [stayID]);
+    }, [stayID, reloadKey]);
 
     return { rooms, loading, error };
 }

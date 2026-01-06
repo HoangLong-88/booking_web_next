@@ -4,9 +4,9 @@ export interface RoomFormData {
   roomName: string
   roomTypeID: string
 
-  capacity: number
-  quantity: number
-  currentPrice: number
+  capacity: string
+  quantity: string
+  currentPrice: string
   description: string
 
   image?: string[]
