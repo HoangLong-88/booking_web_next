@@ -1,3 +1,4 @@
+'use client'
 import DatePicker from "react-datepicker"; 
 import { useState } from "react";
 import { CustomDateInput } from "./CustomDateInput";

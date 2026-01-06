@@ -1,3 +1,4 @@
+'use client'
 import { CarSearchBar } from "@/component/car/CarSearchBar";
 import { HeroCarPage } from "@/component/layout/Hero";
 import { QAList } from "@/component/ui/Dropdown";
