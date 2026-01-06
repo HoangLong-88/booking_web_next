@@ -31,6 +31,7 @@ export interface Room {
   stayID: string
   roomName: string
   roomTypeID: string
+  roomType: string
   capacity: number
   quantity: number
   currentPrice: number

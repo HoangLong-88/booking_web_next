@@ -23,14 +23,14 @@ export async function GET(
       `${process.env.NEXT_PUBLIC_API_URL}/api/stays/${id}/rooms`,
       { method: "GET" }
     );
-
+    
     if (!res.ok) {
       throw new Error("Backend error");
     }
 
     const data = await res.json();
 
-    return NextResponse.json(data.data, { status: 200 });
+    return NextResponse.json(data, { status: 200 });
   } catch (error) {
     console.error("GET rooms error:", error);
 
