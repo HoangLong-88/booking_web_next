@@ -12,9 +12,9 @@ import  { useMultipleFileUpload }  from "@/hook/useMultipleFileUpload"
 import { StaySearchBar } from '@/component/home/StaySearchBar'
 import { SetUpNavbarScroll } from "@/utils/dom/Scroll";
 import type { StaySuggestion } from '@/types/stays'
-import { useRoomsByStay } from '../hook/useRoomsByStay'
+import { useRoomsByStay } from '@/hook/rooms/useRoomsByStay'
 import { Stroke_Loader } from '@/component/ui/Icon'
-import { set } from 'date-fns'
+import { EllipsisVertical, Trash2 } from 'lucide-react';
 
 export default function RoomsForm() {
   const {

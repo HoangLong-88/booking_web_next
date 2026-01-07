@@ -12,8 +12,6 @@ export const roomService = {
 
     const data: Room[] = await res.json();
 
-    console.log(data)
-
     return data.map(room => ({
       ...room,
       roomType: room.roomType

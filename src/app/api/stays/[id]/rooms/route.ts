@@ -30,7 +30,7 @@ export async function GET(
 
     const data = await res.json();
 
-    return NextResponse.json(data, { status: 200 });
+    return NextResponse.json(data.data, { status: 200 });
   } catch (error) {
     console.error("GET rooms error:", error);
 
