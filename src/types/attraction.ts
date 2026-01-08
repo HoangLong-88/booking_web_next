@@ -7,3 +7,10 @@ export interface AttractionObject{
     price: string;
     image: string;
 }
+
+export type AttractionSuggestion = {
+  attractionName: string;
+  categoryName: string;
+  locationName: string;
+  country: string;
+};
