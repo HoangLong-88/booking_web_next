@@ -51,7 +51,7 @@ export default function StayDetailPage({
         flex items-center 
         transition-all duration-300"
           style={{
-            top: navbarHidden ? 400 : 130,
+            top: navbarHidden ? 250 : 130,
             transform: navbarHidden ? 'translateY(-100%)' : 'translateY(0%)',
         }}>
       <HeaderStayContent hook={hook} stay={stay} />
@@ -167,45 +167,5 @@ export default function StayDetailPage({
       </div>
     </main> : null}
     </>
-  )
-}
-
-function HeaderBookingContent({ stay }: { stay?: StayDetail }) {
-  if (!stay) {
-    return (
-      <div className="w-[360px] h-[180px] bg-white border rounded-lg animate-pulse" />
-    )
-  }
-
-  return (  
-    <aside className="w-[360px] space-y-4">
-      <div className="rounded-lg bg-white border p-4 shadow-sm">
-        <div className="flex justify-between items-baseline">
-          <div>
-            <p className="text-xs text-slate-500">From</p>
-            <p className="text-2xl font-semibold">${stay.price}</p>
-            <p className="text-xs text-slate-500">per night</p>
-          </div>
-
-          <div className="text-right">
-            <p className="font-medium">{stay.rating ?? "—"}</p>
-            <p className="text-xs text-slate-500">reviews</p>
-          </div>
-        </div>
-
-        <form className="mt-4 space-y-3">
-          <Input type="date" />
-          <Input type="date" />
-          <button className="w-full bg-emerald-700 text-white py-2 rounded-md">
-            Check availability
-          </button>
-        </form>
-      </div>
-
-      <div className="rounded-lg bg-white border p-4 text-sm shadow-sm">
-        <p className="font-medium mb-2">What this place offers</p>
-        <p>{stay.description}</p>
-      </div>
-    </aside>
   )
 }

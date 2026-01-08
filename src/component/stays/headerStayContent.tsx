@@ -40,10 +40,7 @@ export function HeaderStayContent({ hook, stay }: Props) {
         </form>
       </div>
 
-      <div className="rounded-lg bg-white border p-4 text-sm shadow-sm">
-        <p className="font-medium mb-2">What this place offers</p>
-        <p>{stay.description}</p>
-      </div>
+
     </aside>
   )
 }

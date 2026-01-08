@@ -2,12 +2,22 @@ import Image from "next/image"
 import { Card, CardContent } from "@/component/ui/Card"
 import { CustomButton } from "@/component/ui/Button"
 import { Room } from "@/types/room"
+import { motion, AnimatePresence } from 'framer-motion'
+import { useState, useEffect } from "react"
 
 interface Props {
   room: Room
 }
 
 export default function RoomCard({ room }: Props) {
+  const [currentIndex, setCurrentIndex] = useState(0)
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentIndex((i) => (i + 1) % room.image_urls.length)
+    }, 3000)
+
+    return () => clearInterval(timer)
+  }, [room.image_urls.length])
   return (
     <Card className="bg-neutral-900 text-white border border-neutral-800 rounded-xl overflow-hidden">
       <CardContent     
@@ -20,16 +30,29 @@ export default function RoomCard({ room }: Props) {
         
         {/* LEFT – IMAGE + INFO */}
         <div className="bg-white text-black p-4">
-          <Image
-            src={room.image_urls?.[0] ?? "/placeholder.png"}
-            alt={room.roomName}
-            width={260}
-            height={180}
-            className="rounded-lg object-cover"
-          />
+          <div className="relative w-[260px] h-[180px] overflow-hidden rounded-lg">
+            <AnimatePresence>
+              <motion.div
+                key={currentIndex}
+                initial={{ opacity: 0, scale: 1.03 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.6 }}
+                className="absolute inset-0"
+              >
+                <Image
+                  src={room.image_urls[currentIndex]}
+                  alt={room.roomName}
+                  fill
+                  className="object-cover"
+                />
+              </motion.div>
+            </AnimatePresence>
+          </div>
+
 
           <h3 className="mt-3 font-semibold text-lg">
-            {room.roomName}
+            {room.roomName} - {room.roomType}
           </h3>
 
           <ul className="text-sm text-gray-600 mt-2 space-y-1">
@@ -85,9 +108,9 @@ export default function RoomCard({ room }: Props) {
             Chọn
           </CustomButton>
 
-          {room.quantity <= 5 && (
+          {room.quantity <= 5 && room.availableQuantity && (
             <span className="bg-white text-red-500 text-sm">
-              Chỉ còn {room.availableQuantity} phòng
+              {`Chỉ còn ${room.availableQuantity} phòng`}
             </span>
           )}
         </div>
