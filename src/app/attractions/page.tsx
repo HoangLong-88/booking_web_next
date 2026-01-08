@@ -1,8 +1,9 @@
-import { AttractionsSearchBar } from "@/component/layout/CustomSearchBar";
+'use client'
 import { HeroAttractionsPage } from "@/component/layout/Hero";
 import { DestinationsLoadMore } from "@/component/ui/LoadMorePattern";
 import { ActivitesMenu } from "@/component/ui/ListMenu";
 import { AttractionFeatures } from "@/component/layout/Feature";
+import { AttractionsSearchBar } from "@/component/attraction/AttractionsSearchBar";
 
 export default function AttractionsPage() {
   return (
