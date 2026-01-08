@@ -37,4 +37,5 @@ export interface Room {
   currentPrice: number
   description: string
   image_urls: string[]
+  availableQuantity?: number
 }

@@ -3,12 +3,15 @@ import React, { useState, useRef, useEffect, use } from 'react'
 import Link from 'next/link'
 import { Input } from '@/component/ui/input'
 import { useStayDetail } from '@/hook/stays/useStayDetails'
-import { ReviewForm } from '@/component/stays/reviewForm'
+import { ReviewForm } from '@/component/review/reviewForm'
 import ReviewsSection from '@/component/review/reviewSection'
 import { useRoomsByStay } from '@/hook/rooms/useRoomsByStay'
 import RoomCard from '@/component/room/RoomCard'
 import { SetUpNavbarScroll } from "@/utils/dom/Scroll";
 import type { StayDetail } from '@/types/stays';
+import { HeaderStayContent } from '@/component/stays/headerStayContent'
+import { useRoomAvailability } from '@/hook/rooms/useRoomAvailability'
+
 export default function StayDetailPage({
   params,
 }: {
@@ -16,8 +19,11 @@ export default function StayDetailPage({
 }) {
   const { stayID } = use(params);
   const [refreshKey, setRefreshKey] = useState(0);
-    const { stay, loading, error } = useStayDetail(stayID, refreshKey);
+    const { stay } = useStayDetail(stayID, refreshKey);
   const { rooms, loading: roomsLoading, error: roomsError } = useRoomsByStay(stayID);
+    const hook = useRoomAvailability(stayID, rooms, () => {
+      setRefreshKey((k) => k + 1);
+    });
   const handleReviewSuccess = () => {
     setRefreshKey((prev) => prev + 1); // trigger re-fetch
   };
@@ -48,7 +54,7 @@ export default function StayDetailPage({
             top: navbarHidden ? 400 : 130,
             transform: navbarHidden ? 'translateY(-100%)' : 'translateY(0%)',
         }}>
-      <HeaderBookingContent stay={stay} />
+      <HeaderStayContent hook={hook} stay={stay} />
       </div>
     {stay ? <main className="max-w-6xl mx-auto px-4 py-10 mt-[var(--spacing-top)]">
       {/* Breadcrumbs */}
@@ -94,15 +100,6 @@ export default function StayDetailPage({
           <p className="text-sm text-slate-500">{stay.location}</p>
           <p className="text-lg font-medium">{stay.address}</p>
         </div>
-
-        <div className="flex gap-2">
-          <button className="bg-emerald-700 text-white px-4 py-2 rounded-md">
-            Check availability
-          </button>
-          <button className="border px-3 py-2 rounded-md text-sm">
-            Share
-          </button>
-        </div>
       </div>
     </section>
     <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -123,11 +120,25 @@ export default function StayDetailPage({
             </h2>
 
             <div className="flex flex-col gap-4">
-              {roomsLoading && <p>Loading rooms...</p>}
-              {roomsError && <p>Error loading rooms</p>}
-              {rooms?.map(room => (
-                <RoomCard key={room.id} room={room} />
-              ))}
+              {hook.loading && <p>Loading rooms...</p>}
+              {hook.error && <p>Error loading rooms</p>}
+              {hook.roomsToShow?.map((room) => {
+                const isAvailable =
+                  hook.dates.check_in && hook.dates.check_out
+                    ? (room.availableQuantity ?? 0) > 0
+                    : true;
+
+                return (
+                  <div
+                    key={room.id}
+                    className={`transition ${
+                      !isAvailable ? "opacity-50 pointer-events-none" : ""
+                    }`}
+                  >
+                    <RoomCard room={room} />
+                  </div>
+                );
+              })}
             </div>
           </section>
           <section aria-labelledby="reviews-heading">
@@ -166,7 +177,7 @@ function HeaderBookingContent({ stay }: { stay?: StayDetail }) {
     )
   }
 
-  return (
+  return (  
     <aside className="w-[360px] space-y-4">
       <div className="rounded-lg bg-white border p-4 shadow-sm">
         <div className="flex justify-between items-baseline">

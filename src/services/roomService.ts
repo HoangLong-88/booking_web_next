@@ -17,5 +17,23 @@ export const roomService = {
       roomType: room.roomType
     }));
   },
+  checkRoomAvailability: async (stayID: string, dates: Dates): Promise<Room[] | null> => {
+    const params = new URLSearchParams({
+      check_in: dates.check_in,
+      check_out: dates.check_out,
+    });
+    const res = await fetch(`/api/stays/${stayID}/availability?${params.toString()}`, {
+      method: 'GET',
+      headers: { 'Content-Type': 'application/json' },
+    });
+    if (!res.ok) {
+      throw new Error("Failed to check room availability");
+    }
+
+    const data: Room[] = await res.json();
+      return data.map(room => ({
+      ...room,
+    }));
+  },
 };
 

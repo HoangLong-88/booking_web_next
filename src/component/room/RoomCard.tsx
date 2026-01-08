@@ -48,7 +48,11 @@ export default function RoomCard({ room }: Props) {
 
         {/* GUEST */}
         <div className="p-4 flex bg-white items-start justify-center border-l border-neutral-800">
-          <span className="text-xl">👤👤</span>
+          <div className="flex gap-1">
+            {Array.from({ length: room.capacity }).map((_, i) => (
+              <span key={i} className="text-xl">👤</span>
+            ))}
+          </div>
         </div>
 
         {/* PRICE */}
@@ -83,7 +87,7 @@ export default function RoomCard({ room }: Props) {
 
           {room.quantity <= 5 && (
             <span className="bg-white text-red-500 text-sm">
-              Chỉ còn {room.quantity} phòng
+              Chỉ còn {room.availableQuantity} phòng
             </span>
           )}
         </div>
