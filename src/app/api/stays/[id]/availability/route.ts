@@ -18,11 +18,22 @@ export async function GET(
         { status: 400 }
       );
     }
+    const { searchParams } = new URL(_req.url);
+    const checkIn = searchParams.get("check_in");
+    const checkOut = searchParams.get("check_out");
+
+    if (!checkIn || !checkOut) {
+      return NextResponse.json(
+        { message: "checkIn & checkOut are required" },
+        { status: 400 }
+      );
+    }
 
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/api/stays/${id}/rooms`,
+      `${process.env.NEXT_PUBLIC_API_URL}/api/stays/${id}/rooms/available?check_in=${checkIn}&check_out=${checkOut}`,
       { method: "GET" }
     );
+
     
     if (!res.ok) {
       throw new Error("Backend error");

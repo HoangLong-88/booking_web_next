@@ -12,8 +12,9 @@ import  { useMultipleFileUpload }  from "@/hook/useMultipleFileUpload"
 import { StaySearchBar } from '@/component/home/StaySearchBar'
 import { SetUpNavbarScroll } from "@/utils/dom/Scroll";
 import type { StaySuggestion } from '@/types/stays'
-import { useRoomsByStay } from '../hook/useRoomsByStay'
+import { useRoomsByStay } from '@/hook/rooms/useRoomsByStay'
 import { Stroke_Loader } from '@/component/ui/Icon'
+import { EllipsisVertical, Trash2 } from 'lucide-react';
 
 export default function RoomsForm() {
   const {
@@ -31,18 +32,21 @@ export default function RoomsForm() {
   const {
     previews,
     createPreviews,
+    clear,
     handleUpload,
     } = useMultipleFileUpload ({
         onUploaded: async (files) => {
             setImages(files.map(f => f.path))
         },
     })
+  const [reloadKey, setReloadKey] = useState(0);
 
   const [submitting, setSubmitting] = useState(false)
   const [message, setMessage] = useState<string | null>(null)
   const [selectedStay, setSelectedStay] = useState<StaySuggestion | null>(null);
-  const { rooms = [] , loading, error } = useRoomsByStay(selectedStay?.stayID);
-
+  
+  const { rooms, loading, error } =
+    useRoomsByStay(selectedStay?.stayID, reloadKey);
   useEffect(() => {
 
       if (!navbarRef.current) return; 
@@ -75,10 +79,13 @@ export default function RoomsForm() {
           className='!max-w-3xl'
           formClassName='!bg-gray-800' 
           keySuggestClassName='!bg-gray-800' 
-          onSelectStay={(stay) => setSelectedStay(stay)}
+          onSelectStay={(stay) => {
+            setSelectedStay(stay)
+            setReloadKey(prev => prev + 1)
+          }}
         />
     </div>
-    <main className="max-w-6xl mx-auto px-4 py-10">
+    <main className="max-w-6xl mx-auto px-4 py-10 mt-[3rem]">
       <header className="mb-6 flex items-center justify-between">
         <div>
           <h1 className="text-2xl font-semibold">{selectedStay?.stayName + ' — '} Rooms</h1>
@@ -87,8 +94,8 @@ export default function RoomsForm() {
         <Link href={`/stays/${selectedStay?.stayID}`} className="text-sm text-emerald-700 hover:underline">Back to stay</Link>
       </header>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        <section className="lg:col-span-2 dark:bg- border rounded-lg p-6 shadow-sm">
+      <div className="flex flex-row gap-6">
+        <section className="max-w-[26rem] lg:col-span-2 dark:bg- border rounded-lg p-6 shadow-sm">
           <h2 className="text-lg font-medium mb-4">Add room {'— ' + selectedStay?.stayName}</h2>
 
           <form 
@@ -97,10 +104,18 @@ export default function RoomsForm() {
             setSubmitting(true)
             setMessage(null)
             try {
+                if (!selectedStay) {
+                  setMessage('Please select a stay first')
+                  return
+                } 
+
                 const uploaded = await handleUpload('uploads/rooms');
     
+                formData.stayID = selectedStay?.stayID || ''
+
                 await submit(uploaded.map(f => f.path))
-                setMessage('Created stay successfully')
+                setMessage('Created room successfully')
+                setReloadKey(prev => prev + 1)
             } catch (err) {
                 console.error(err)
               setMessage('Failed to create stay')
@@ -108,20 +123,31 @@ export default function RoomsForm() {
                 setSubmitting(false)
             }
           }} 
-          className="space-y-4">
+          className="space-y-2">
             <div className="relative">
               <Input name="roomName" value={formData.roomName} onChange={onChange} placeholder="Room name" required />
               <Label>Room name</Label>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+            <div className="flex flex-col gap-3">
               <div className="relative">
                 <Input name="capacity" value={formData.capacity} onChange={onChange} placeholder="Capacity" />
                 <Label>Capacity</Label>
               </div>
-
               <div className="relative">
-                <Input name="price" type="number" value={formData.currentPrice} onChange={onChange} placeholder="Price" />
+                <Input name="quantity" value={formData.quantity} onChange={onChange} placeholder="Quantity" />
+                <Label>Quantity</Label>
+              </div>
+              <div className="relative">
+                <Input 
+                name="currentPrice" 
+                type="number" 
+                min={0}
+                step={1000}
+                value={formData.currentPrice}
+                onChange={onChange} 
+
+                placeholder="Price" />
                 <Label>Price</Label>
               </div>
 
@@ -151,7 +177,7 @@ export default function RoomsForm() {
               <Label className="!relative !mb-1">Images</Label>
               <DragAndDropUpload
                 preview={previews}
-                onUploadMultiple={addImage}
+                onUploadMultiple={createPreviews}
                 accept="image/*"
                 multiple
                 havingImagePreview
@@ -159,18 +185,22 @@ export default function RoomsForm() {
             </div>
 
             <div className="flex items-center gap-3">
-              <CustomButton type="submit" disabled={submitting} className="px-4 py-2 bg-emerald-700 text-white rounded-md">
+              <CustomButton 
+                type="submit" 
+                onClick={addImage}
+                disabled={submitting} 
+                className="px-4 py-2 bg-emerald-700 text-white rounded-md">
                 {submitting ? 'Adding...' : 'Add room'}
               </CustomButton>
-              <CustomButton type="button" onClick={clearForm} className="px-4 py-2 border rounded-md">
+              <CustomButton type="button" onClick={() => {clearForm(); clear()}} className="px-4 py-2 border rounded-md">
                 Clear
               </CustomButton>
               {message && <div className="text-sm text-slate-600">{message}</div>}
             </div>
           </form>
         </section>
-        <aside className="space-y-4">
-          <div className="bg-white border rounded-lg p-4 shadow-sm">
+        <aside className="space-y-4 flex-1">
+          <div className="bg-gray-800 border rounded-lg p-4 shadow-sm">
             {loading ? 
               <div className='flex items-center justify-center'>
                 <Stroke_Loader
@@ -179,9 +209,9 @@ export default function RoomsForm() {
             : <>
               <h3 className="font-medium mb-3">Rooms ({rooms.length})</h3>
 
-              <ul className="flex flex-col gap-3">
+              <ul className="flex flex-col gap-3 bg-gray-800">
                 {rooms.map((r) => (
-                  <li key={r.id} className="flex items-center gap-3">
+                  <li key={r.id} className="flex items-start bg-gray-800 gap-3">
                     <div className="w-20 h-16 bg-gray-100 rounded-md overflow-hidden flex-shrink-0">
                       {r.image_urls && r.image_urls[0] ? (
                         <img src={r.image_urls[0]} alt={r.roomName} className="w-full h-full object-cover" />
@@ -193,11 +223,23 @@ export default function RoomsForm() {
                     </div>
 
                     <div className="flex-1">
-                      <div className="flex items-center justify-between">
-                        <div className="font-medium text-sm">{r.roomName ?? 'Untitled'}</div>
-                        <div className="text-sm text-slate-500">${r.currentPrice ?? '__'}</div>
+                      <div className="font-extrabold text-md rounded-lg mb-2">
+                        {r.roomName ?? 'Untitled'}
                       </div>
-                      <div className="text-xs text-slate-600">{r.capacity} guests</div>
+
+                      <div className="flex items-center gap-2">
+                        <div className="text-sm text-white bg-emerald-900 rounded-lg px-2 py-1">
+                          ${r.currentPrice ?? '__'}
+                        </div>
+
+                        <div className="text-xs text-white font-bold bg-slate-700 rounded-lg px-2 py-1">
+                          {r.capacity} guests
+                        </div>
+
+                        <div className="text-xs text-white font-bold bg-slate-700 rounded-lg px-2 py-1">
+                          {r.roomType} 
+                        </div>
+                      </div>
                     </div>
                   </li>
                 ))}

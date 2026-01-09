@@ -30,7 +30,6 @@ export const reviewService = {
         "Authorization": `Bearer ${token}`,
       },
     });
-
     if (!res.ok) {
       const err = await res.json();
       throw new Error(err.message || "Failed to delete review");

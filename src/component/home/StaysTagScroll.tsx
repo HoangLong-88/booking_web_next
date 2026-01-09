@@ -35,7 +35,7 @@ function StaysTagsArrowScroll() {
                 className="object-cover h-45 w-full"
               />
 
-              <div className="mx-3">
+              <div className="flex flex-col mx-3">
                 <CardTitle className="text-lg my-1">
                   {stay.stayName}
 
@@ -44,15 +44,15 @@ function StaysTagsArrowScroll() {
                   </CardSubTitle>
 
                   {/* Rate */}
-                  <div className="flex my-2 items-center">
-                    <p className="text-base mx-1/2">
+                  <div className="inline-flex items-center gap-1 bg-sky-600 text-white rounded-md px-2 py-0.5 my-2 w-fit">
+                    <span className="text-sm font-semibold">
                       {stay.rating ?? "N/A"}
-                    </p>
+                    </span>
 
                     <img
                       src="/icon/tags/blueStar.png"
                       alt="star"
-                      className="w-5 h-5 rounded-sm mx-1"
+                      className="w-4 h-4"
                     />
                   </div>
 

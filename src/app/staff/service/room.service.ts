@@ -13,7 +13,7 @@ export const roomService = {
     },
       createRoom: async (formData: FormData) => {
         const token = getToken();
-        const res = await fetch('/api/staff/rooms/add', {
+        const res = await fetch('/api/staff/rooms', {
             method: 'POST',
             body: formData,
             headers: {"Authorization": `Bearer ${token}`},

@@ -6,6 +6,7 @@ import { useAuth } from "@/app/providers/authProvider";
 import { Popover, PopoverTrigger, PopoverContent } from "@radix-ui/react-popover";
 import { CustomButton } from "../ui/Button";
 import { useDeleteReview } from "@/hook/reviews/useDeleteReview";
+import { formatDateToDMY } from "@/utils/date";
 
 interface ReviewCardProps {
   review: Review;
@@ -68,7 +69,7 @@ export function ReviewCard({ review, onDeleted }: ReviewCardProps) {
         </p>
 
         <p className="mt-2 text-xs text-gray-400">
-          {new Date(review.created_at).toLocaleDateString()}
+          {formatDateToDMY(new Date(review.created_at))}
         </p>
       </div>
     </Card>

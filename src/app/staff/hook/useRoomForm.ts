@@ -2,7 +2,8 @@
 
 import { useEffect, useRef, useState, useMemo } from 'react'
 import { roomService } from '@/app/staff/service/room.service'
-import type { RoomFormData, RoomFormOptions } from '@/types/room'
+import type { RoomFormData, RoomFormOptions, Room } from '@/types/room'
+import type { FormDataInput } from '@/types/form-data'
 
 export function useRoomForm() {
   /* ===== options ===== */
@@ -17,9 +18,9 @@ export function useRoomForm() {
     roomTypeID: '',
 
     roomName: '',
-    capacity: 2,
-    quantity: 1,
-    currentPrice: 0,
+    capacity: '2',
+    quantity: '1',
+    currentPrice: '0',
     description: '',
     image: []
   })
@@ -40,14 +41,13 @@ export function useRoomForm() {
       })),
       [options.stays]
     )
-
+    
 
 
   useEffect(() => {
     roomService.getFormData?.()
       .then(res => {
         if (res?.ok) {
-          console.log(res.data)
           setOptions({
             roomTypes: res.data ?? [],
             stays: res.data.stays ?? []
@@ -84,9 +84,9 @@ export function useRoomForm() {
       stayID: '',
       roomName: '',
       roomTypeID: '',
-      capacity: 2,
-      quantity: 1,
-      currentPrice: 0,
+      capacity: '2',
+      quantity: '1',
+      currentPrice: '0',
       description: '',
       image: []
     })
@@ -98,9 +98,8 @@ export function useRoomForm() {
       currentPrice: Number(formData.currentPrice),
       capacity: Number(formData.capacity),
       quantity: Number(formData.quantity),
-      image: image
+      ...(image ? { image } : {})
     })
-
     return roomService.createRoom(fd)
   }
 
@@ -116,7 +115,7 @@ export function useRoomForm() {
     submit
   }
 }
-function buildRoomFormData(data: RoomFormData): FormData {
+function buildRoomFormData(data: FormDataInput): FormData {
   const fd = new FormData()
 
   Object.entries(data).forEach(([key, value]) => {
@@ -131,7 +130,11 @@ function buildRoomFormData(data: RoomFormData): FormData {
         }
       })
     } else {
-      fd.append(key, String(value))
+      if (value instanceof File) {
+        fd.append(key, value)
+      } else {
+        fd.append(key, String(value))
+      }
     }
   })
 
